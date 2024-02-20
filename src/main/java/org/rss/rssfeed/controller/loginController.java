@@ -103,7 +103,7 @@ public class loginController {
     void loginButtonOnAction(ActionEvent actionEvent) throws SQLException, NoSuchAlgorithmException, IOException {
         String userName = usernameTextField.getText();
         String password = enterPasswordField.getText();
-
+  ///
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
 
