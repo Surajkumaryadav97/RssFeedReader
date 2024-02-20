@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.rss.rssfeed.controller.HomepageController"
+            prefHeight="600.0"
+            prefWidth="800.0">
+
+    <!-- Left side menu -->
+    <left>
+        <VBox spacing="10">
+            <!-- Option 1 -->
+            <Button text="Option 1" />
+            <!-- Option 2 -->
+            <Button text="Option 2" />
+        </VBox>
+    </left>
+
+    <!-- Center content -->
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <Label text="Choose Layout" style="-fx-font-size: 24;" />
+            <!-- Layout selection buttons -->
+            <HBox alignment="CENTER" spacing="20">
+                <Button text="Layout 1" onAction="#showLayout1" />
+                <Button text="Layout 2" onAction="#showLayout2" />
+                <Button text="Layout 3" onAction="#showLayout3" />
+            </HBox>
+            <!-- Placeholder for selected layout -->
+            <VBox fx:id="selectedLayout" alignment="CENTER" />
+        </VBox>
+    </center>
+
+    <!-- Right side news card -->
+    <right>
+        <VBox alignment="CENTER" spacing="20">
+            <Label text="News" style="-fx-font-size: 24;" />
+            <!-- News content placeholder -->
+            <Label fx:id="newsContent" />
+        </VBox>
+    </right>
+
+</BorderPane>

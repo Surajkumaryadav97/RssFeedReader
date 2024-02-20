@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #474F7A;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.registerController">
+    <children>
+        <AnchorPane layoutX="2.0" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: fff; -fx-background-radius: 50;">
+            <children>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="130.0" text="First Name *" />
+                <TextField fx:id="reg_Fname" layoutX="89.0" layoutY="154.0" prefHeight="26.0" prefWidth="200.0" stylesheets="@style.css" />
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="188.0" text="Last Name *" />
+                <TextField fx:id="reg_Lname" layoutX="89.0" layoutY="212.0" prefHeight="26.0" prefWidth="200.0" stylesheets="@style.css" />
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="251.0" text="Email *" />
+                <TextField fx:id="reg_Uname" layoutX="89.0" layoutY="275.0" prefHeight="26.0" prefWidth="200.0" stylesheets="@style.css" />
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="319.0" text="Password *" />
+                <Button fx:id="regButton" alignment="CENTER" layoutX="89.0" layoutY="442.0" mnemonicParsing="false" onAction="#register" prefHeight="36.0" prefWidth="200.0" stylesheets="@style.css" text="Register">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <styleClass>
+                        <String fx:value="registerBtn" />
+                        <String fx:value="animated-button" />
+                    </styleClass>
+                </Button>
+                <PasswordField fx:id="reg_password" layoutX="89.0" layoutY="345.0" prefHeight="26.0" prefWidth="200.0" stylesheets="@style.css" />
+                <Button fx:id="cancelButton" alignment="CENTER" layoutX="89.0" layoutY="490.0" mnemonicParsing="false" onAction="#returnBack" prefHeight="36.0" prefWidth="200.0" stylesheets="@style.css" text="Cancel" textFill="WHITE">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <styleClass>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <String fx:value="cancelBtn" />
+                        <String fx:value="animated-button" />
+                    </styleClass>
+                </Button>
+                <Label layoutX="79.0" layoutY="40.0" prefHeight="64.0" prefWidth="235.0" text="Register Here" textFill="#474f7a">
+                    <font>
+                        <Font name="Impact" size="40.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="400.0" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #474F7A;">
+            <children>
+                <ImageView fx:id="brandingImageView" fitHeight="262.0" fitWidth="259.0" layoutX="63.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../../../images/WMSLoginPageBW.png" />
+                    </image>
+                    <effect>
+                        <Reflection fraction="0.74" topOpacity="0.23" />
+                    </effect>
+                </ImageView>
+                <Label layoutX="111.0" layoutY="364.0" style="-fx-text-fill: fff;" text="SHIP WITH US" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                    <effect>
+                        <Reflection />
+                    </effect>
+                </Label>
+
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

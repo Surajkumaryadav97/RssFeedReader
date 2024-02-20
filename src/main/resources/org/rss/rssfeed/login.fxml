@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #474F7A;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.loginController">
+    <children>
+        <AnchorPane layoutX="406.0" prefHeight="600.0" prefWidth="393.0" style="-fx-background-color: ffffff; -fx-background-radius: 50;">
+            <children>
+                <Label layoutX="75.0" layoutY="174.0" text="Username:">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="usernameTextField" layoutX="140.0" layoutY="171.0" prefHeight="26.0" prefWidth="173.0" promptText="username" stylesheets="@style.css">
+                    <styleClass>
+                        <String fx:value="list-cell" />
+                        <String fx:value="list-view" />
+                    </styleClass>
+                </TextField>
+                <Label layoutX="77.0" layoutY="217.0" text="Password:">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Label>
+                <PasswordField fx:id="enterPasswordField" layoutX="141.0" layoutY="214.0" prefHeight="26.0" prefWidth="173.0" promptText="password" stylesheets="@style.css">
+                    <styleClass>
+                        <String fx:value="list-cell" />
+                        <String fx:value="list-view" />
+                    </styleClass>
+                </PasswordField>
+                <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="278.0" onAction="#loginButtonOnAction" mnemonicParsing="false" prefHeight="32.0" prefWidth="242.0" stylesheets="@style.css" text="Login" textFill="WHITE">
+                    <styleClass>
+                        <String fx:value="animated-button" />
+                        <String fx:value="loginBtn" />
+                    </styleClass>
+                </Button>
+                <Button fx:id="cancelButton" layoutX="75.0" layoutY="320.0" mnemonicParsing="false"  prefHeight="32.0" prefWidth="242.0" stylesheets="@style.css" text="Cancel" textFill="WHITE">
+                    <styleClass>
+                        <String fx:value="cancelBtn" />
+                        <String fx:value="animated-button" />
+                    </styleClass>
+                </Button>
+                <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="76.0" layoutY="247.0" prefHeight="19.0" prefWidth="239.0" textAlignment="CENTER" textFill="RED">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="152.0" layoutY="372.0" text="New user? signup" />
+                <Button fx:id="userSignup" layoutX="170.0" layoutY="392.0" mnemonicParsing="false" stylesheets="@style.css" text="Signup" textFill="WHITE">
+                    <styleClass>
+                        <String fx:value="animated-button" />
+                        <String fx:value="cancelBtn" />
+                        <String fx:value="signupBtn" />
+                    </styleClass>
+                </Button>
+                <Label layoutX="42.0" layoutY="68.0" text="Welcome" textFill="#1f2544">
+                    <font>
+                        <Font name="Impact" size="35.0" />
+                    </font>
+                </Label>
+                <Label layoutX="46.0" layoutY="112.0" prefHeight="26.0" prefWidth="146.0" text="Sign in, to continue" textFill="#514e4e">
+                    <font>
+                        <Font name="Ebrima" size="16.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #474F7A;">
+            <children>
+                <ImageView fx:id="brandingImageView" fitHeight="262.0" fitWidth="259.0" layoutX="63.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../../../images/WMSLoginPage.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="124.0" layoutY="296.0" text="Continue With" textFill="#d9b7ff">
+                    <font>
+                        <Font name="Impact" size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="148.0" layoutY="326.0" text="WMS" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="35.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
