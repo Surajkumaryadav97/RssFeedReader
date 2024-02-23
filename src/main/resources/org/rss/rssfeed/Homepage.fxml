@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.rss.rssfeed.controller.HomepageController"
-            prefHeight="600.0"
-            prefWidth="800.0">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.HomepageController">
 
     <!-- Left side menu -->
-    <left>
+
+
+<!--    &lt;!&ndash; Center content &ndash;&gt;-->
+<!--    <center>-->
+<!--        <VBox alignment="CENTER" spacing="20">-->
+<!--            <Label text="Choose Layout" style="-fx-font-size: 24;" />-->
+<!--            &lt;!&ndash; Layout selection buttons &ndash;&gt;-->
+<!--            <HBox alignment="CENTER" spacing="20">-->
+<!--                <Button text="Layout 1"  />-->
+<!--                <Button text="Layout 2" />-->
+<!--                <Button text="Layout 3" />-->
+<!--            </HBox>-->
+<!--            &lt;!&ndash; Placeholder for selected layout &ndash;&gt;-->
+<!--            <VBox fx:id="selectedLayout" alignment="CENTER" />-->
+<!--        </VBox>-->
+<!--    </center>-->
+    <center>
         <VBox spacing="10">
             <!-- Option 1 -->
-            <Button text="Option 1" />
+            <Button onAction="#handleTechnologyButtonClick" text="TechnologyNews" />
             <!-- Option 2 -->
-            <Button text="Option 2" />
-        </VBox>
-    </left>
+            <Button onAction="#handleHealthButtonClick" text="HealthNews" />
 
-    <!-- Center content -->
-    <center>
-        <VBox alignment="CENTER" spacing="20">
-            <Label text="Choose Layout" style="-fx-font-size: 24;" />
-            <!-- Layout selection buttons -->
-            <HBox alignment="CENTER" spacing="20">
-                <Button text="Layout 1" onAction="#showLayout1" />
-                <Button text="Layout 2" onAction="#showLayout2" />
-                <Button text="Layout 3" onAction="#showLayout3" />
-            </HBox>
-            <!-- Placeholder for selected layout -->
-            <VBox fx:id="selectedLayout" alignment="CENTER" />
         </VBox>
     </center>
 
+
     <!-- Right side news card -->
-    <right>
-        <VBox alignment="CENTER" spacing="20">
-            <Label text="News" style="-fx-font-size: 24;" />
-            <!-- News content placeholder -->
-            <Label fx:id="newsContent" />
-        </VBox>
-    </right>
+<!--    <right>-->
+<!--        <VBox alignment="CENTER" spacing="20">-->
+<!--            <Label text="News" style="-fx-font-size: 24;" />-->
+<!--            &lt;!&ndash; News content placeholder &ndash;&gt;-->
+<!--            <Label fx:id="newsContent" />-->
+<!--        </VBox>-->
+<!--    </right>-->
 
 </BorderPane>

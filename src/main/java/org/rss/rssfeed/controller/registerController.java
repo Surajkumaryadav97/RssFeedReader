@@ -65,6 +65,7 @@ public class registerController {
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
+//                regisMessageLabel.setText("Login successful");
                 System.out.println("User registered successfully!");
             } else {
                 System.out.println("Failed to register user.");

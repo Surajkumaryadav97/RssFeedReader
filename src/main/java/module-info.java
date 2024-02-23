@@ -3,6 +3,8 @@ module org.rss.rssfeed {
     requires javafx.fxml;
     requires java.sql;
     requires jbcrypt;
+    requires com.google.gson;
+    requires javafx.web;
 
 
     opens org.rss.rssfeed to javafx.fxml;

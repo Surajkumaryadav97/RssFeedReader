@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #474F7A;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.registerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color:
+#2D9596;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.registerController">
     <children>
         <AnchorPane layoutX="2.0" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: fff; -fx-background-radius: 50;">
             <children>
@@ -32,36 +33,7 @@
                     <font>
                         <Font size="16.0" />
                     </font>
-                    <styleClass>.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    <styleClass>
                         <String fx:value="cancelBtn" />
                         <String fx:value="animated-button" />
                     </styleClass>
@@ -73,17 +45,17 @@
                 </Label>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="400.0" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #474F7A;">
+        <AnchorPane layoutX="400.0" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #2D9596;">
             <children>
                 <ImageView fx:id="brandingImageView" fitHeight="262.0" fitWidth="259.0" layoutX="63.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../../../../images/WMSLoginPageBW.png" />
+                        <Image url="@../../../../../../images/login-removebg-preview.png" />
                     </image>
                     <effect>
-                        <Reflection fraction="0.74" topOpacity="0.23" />
+                        <Reflection fraction="0.74" topOpacity="0.30" />
                     </effect>
                 </ImageView>
-                <Label layoutX="111.0" layoutY="364.0" style="-fx-text-fill: fff;" text="SHIP WITH US" textFill="WHITE">
+                <Label layoutX="111.0" layoutY="364.0" style="-fx-text-fill: fff;" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>

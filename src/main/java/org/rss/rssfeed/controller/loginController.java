@@ -53,7 +53,8 @@ public class loginController {
         // Stage stage = (Stage) cancelButton.getScene().getWindow();
         // stage.close();
     }
-    public void start(Stage stage) throws IOException {
+    public void start() throws IOException {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         stage.setTitle("Hello!");
