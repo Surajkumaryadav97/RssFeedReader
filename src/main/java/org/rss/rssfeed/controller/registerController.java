@@ -1,5 +1,8 @@
 package org.rss.rssfeed.controller;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -80,10 +83,18 @@ public class registerController {
     }
 
     @FXML
-    public void returnBack() throws IOException {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-        helloApplication.start(new Stage());
+    public void returnBack(ActionEvent event) throws IOException {
+
+        try {
+            Stage stage = (Stage) cancelButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+
     }
 
     private String hashPassword(String password) {

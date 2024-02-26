@@ -29,6 +29,8 @@
             <!-- Option 2 -->
             <Button onAction="#handleHealthButtonClick" text="HealthNews" />
 
+            <Button fx:id="cancel" onAction="#cancel" text="cancel" />
+
         </VBox>
     </center>
 

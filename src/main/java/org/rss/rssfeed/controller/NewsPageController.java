@@ -136,11 +136,14 @@ package org.rss.rssfeed.controller;
 //    }
 //}
 
+
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Hyperlink;
@@ -149,6 +152,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import com.google.gson.JsonArray;
@@ -156,6 +160,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.stage.Stage;
+import org.rss.rssfeed.HelloApplication;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -166,6 +171,9 @@ public class NewsPageController extends Application implements Initializable {
 
     @FXML
     private GridPane newsGrid;
+
+    @FXML
+    private Button cancel;
 
     @FXML
     private Button cancelButton;
@@ -378,9 +386,18 @@ public class NewsPageController extends Application implements Initializable {
 
     }
 
-    public void cancelLayout(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+    public void cancelLayoutButton(ActionEvent event) throws IOException {
+
+        try {
+            Stage stage = (Stage) cancel.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+
     }
 
 //    public void handleLayoutSelection(ActionEvent actionEvent) {

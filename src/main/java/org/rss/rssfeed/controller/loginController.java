@@ -54,12 +54,18 @@ public class loginController {
 
 
     @FXML
-    void cancel(ActionEvent event) {
-        // Add logic to close the login window
-        // This can be achieved by getting the reference to the current stage and closing it
-        // For example:
-         Stage stage = (Stage) cancelButton.getScene().getWindow();
-         stage.close();
+    public void cancel(ActionEvent event) throws IOException {
+
+        try {
+            Stage stage = (Stage) cancelButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+
     }
     public void start() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
@@ -90,8 +96,15 @@ public class loginController {
 
     @FXML
     void signup(ActionEvent event) {
-        // Add logic to handle user signup
-        // This can involve opening a new window for user registration
+        try {
+            Stage stage = (Stage) userSignup.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 
     @FXML

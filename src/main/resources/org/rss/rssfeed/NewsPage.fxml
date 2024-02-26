@@ -11,11 +11,11 @@
             <!-- News items will be added dynamically here -->
         </GridPane>
 
-        <HBox alignment="CENTER" spacing="10">
-            <Button text="Masonry View" onAction="#showMasonryView"/>
-            <Button text="Tile View" onAction="#showTileView"/>
-            <Button text="compact View" onAction="#showCompactView"/>
-            <Button text="cancelLayout" onAction="#cancelLayout"/>
+        <HBox fx:id="newsbuttons" alignment="CENTER" spacing="10">
+            <Button fx:id="masonryview" text="Masonry View" onAction="#showMasonryView"/>
+            <Button fx:id="tileview" text="Tile View" onAction="#showTileView"/>
+            <Button fx:id="compactview" text="compact View" onAction="#showCompactView"/>
+            <Button fx:id="cancel" text="cancel" onAction="#cancelLayoutButton"/>
 
         </HBox>
     </VBox>

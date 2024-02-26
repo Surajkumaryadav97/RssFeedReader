@@ -55,7 +55,7 @@
                     </font>
                 </Label>
                 <Label layoutX="152.0" layoutY="372.0" text="New user? signup" />
-                <Button fx:id="userSignup" layoutX="170.0" layoutY="392.0" mnemonicParsing="false" stylesheets="@style.css" text="Signup" textFill="WHITE">
+                <Button fx:id="userSignup" layoutX="170.0" layoutY="392.0" mnemonicParsing="false" onAction="#signup" stylesheets="@style.css" text="Signup" textFill="WHITE">
                     <styleClass>
                         <String fx:value="animated-button" />
                         <String fx:value="cancelBtn" />

@@ -21,6 +21,9 @@ public class HomepageController {
     @FXML
     private VBox buttonnews;
 
+    @FXML
+    private Button cancel;
+
 
     @FXML
     private ChoiceBox<String> layoutChoiceBox;
@@ -31,6 +34,8 @@ public class HomepageController {
 //    public void initialize(URL location, ResourceBundle resources) {
 //        // Initialize method
 //    }
+
+
     @FXML
     private Label newsContent;
 //
@@ -102,7 +107,19 @@ public void setStage(Stage stage) {
     }
 
 
+    public void cancel(ActionEvent event) throws IOException {
 
+        try {
+            Stage stage = (Stage) cancel.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+
+    }
 }
     // Other methods and logic for fetching and displaying data
 
