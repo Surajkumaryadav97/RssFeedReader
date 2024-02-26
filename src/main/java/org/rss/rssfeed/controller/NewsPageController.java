@@ -141,6 +141,7 @@ import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -165,6 +166,9 @@ public class NewsPageController extends Application implements Initializable {
 
     @FXML
     private GridPane newsGrid;
+
+    @FXML
+    private Button cancelButton;
 
     @FXML
     private VBox selectedLayoutContainer;
@@ -372,6 +376,11 @@ public class NewsPageController extends Application implements Initializable {
         compact="Compact View";
         fetchCategory(Ctgry, compact);
 
+    }
+
+    public void cancelLayout(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 
 //    public void handleLayoutSelection(ActionEvent actionEvent) {

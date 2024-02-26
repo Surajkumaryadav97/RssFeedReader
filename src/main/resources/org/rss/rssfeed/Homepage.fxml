@@ -23,7 +23,7 @@
 <!--        </VBox>-->
 <!--    </center>-->
     <center>
-        <VBox spacing="10">
+        <VBox fx:id="buttonnews" spacing="10">
             <!-- Option 1 -->
             <Button onAction="#handleTechnologyButtonClick" text="TechnologyNews" />
             <!-- Option 2 -->

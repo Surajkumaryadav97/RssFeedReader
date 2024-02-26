@@ -15,6 +15,8 @@
             <Button text="Masonry View" onAction="#showMasonryView"/>
             <Button text="Tile View" onAction="#showTileView"/>
             <Button text="compact View" onAction="#showCompactView"/>
+            <Button text="cancelLayout" onAction="#cancelLayout"/>
+
         </HBox>
     </VBox>
 

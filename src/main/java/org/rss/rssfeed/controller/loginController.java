@@ -2,6 +2,7 @@ package org.rss.rssfeed.controller;
 
 
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.mindrot.jbcrypt.BCrypt;
 import org.rss.rssfeed.HelloApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
@@ -24,6 +26,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
+
+
 
 public class loginController {
 
@@ -45,38 +49,28 @@ public class loginController {
     @FXML
     private Button userSignup;
 
+
+
+
+
     @FXML
     void cancel(ActionEvent event) {
         // Add logic to close the login window
         // This can be achieved by getting the reference to the current stage and closing it
         // For example:
-        // Stage stage = (Stage) cancelButton.getScene().getWindow();
-        // stage.close();
+         Stage stage = (Stage) cancelButton.getScene().getWindow();
+         stage.close();
     }
     public void start() throws IOException {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+       switchScene(new Scene(fxmlLoader.load()));
     }
 
-//    public void switchScene(Scene newScene) {
-//        Stage stage = (Stage) cancelButton.getScene().getWindow();
-//        FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5), stage.getScene().getRoot());
-//        fadeOut.setFromValue(1);
-//        fadeOut.setToValue(0);
-//        fadeOut.setOnFinished(event -> {
-//            stage.setScene(newScene);
-//            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.5), stage.getScene().getRoot());
-//            fadeIn.setFromValue(0);
-//            fadeIn.setToValue(1);
-//            fadeIn.play();
-//        });
-//        fadeOut.play();
-////        logger.debug("Switching scene");
-//    }
+    public void switchScene(Scene newScene) {
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        stage.setScene(newScene);
+//        logger.debug("Switching scene");
+    }
     @FXML
     void login(ActionEvent event) {
         String username = usernameTextField.getText();
@@ -121,7 +115,8 @@ public class loginController {
                     if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
                         // Authentication successful
                         loginMessageLabel.setText("Login successful");
-                        start(new Stage());
+//                        start(new Stage());
+                          start();
 
                         // Proceed with further actions (e.g., navigating to another scene)
                     } else {

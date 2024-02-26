@@ -43,7 +43,7 @@
                         <String fx:value="loginBtn" />
                     </styleClass>
                 </Button>
-                <Button fx:id="cancelButton" layoutX="75.0" layoutY="320.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="242.0" stylesheets="@style.css" text="Cancel" textFill="WHITE">
+                <Button fx:id="cancelButton" layoutX="75.0" layoutY="320.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="242.0" stylesheets="@style.css" text="Cancel" textFill="WHITE">
                     <styleClass>
                         <String fx:value="cancelBtn" />
                         <String fx:value="animated-button" />
