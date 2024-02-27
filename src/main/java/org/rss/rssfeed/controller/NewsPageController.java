@@ -179,7 +179,7 @@ public class NewsPageController extends Application implements Initializable {
     private Button cancelButton;
 
     @FXML
-    private VBox selectedLayoutContainer;
+    private VBox newsbuttons;
 
 //    @FXML
 //    private ChoiceBox<String> layoutChoiceBox;
@@ -274,7 +274,7 @@ public class NewsPageController extends Application implements Initializable {
             JsonObject sourceObject = sourceElement.getAsJsonObject();
 
             String name = sourceObject.get("name").getAsString();
-            String description = sourceObject.get("description").getAsString();
+//            String description = sourceObject.get("description").getAsString();
             String urlLink = sourceObject.get("url").getAsString();
 
             Hyperlink link = new Hyperlink(name);
@@ -283,11 +283,12 @@ public class NewsPageController extends Application implements Initializable {
                 webViewSample.loadURL(urlLink);
             });
 
-            Label descLabel = new Label(description);
+//            Label descLabel = new Label(description);
 
+            link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
             // Add each item to the grid in a tile view format
             newsGrid.add(link, col, row);
-            newsGrid.add(descLabel, col, row + 1);
+//            newsGrid.add( descLabel,col, row + 1);
 
             // Adjust column and row for the next item
             col += 2;
@@ -320,11 +321,12 @@ public class NewsPageController extends Application implements Initializable {
                 webViewSample.loadURL(urlLink);
             });
 
-            Label descLabel = new Label(description);
+//            Label descLabel = new Label(description);
 
             VBox itemBox = new VBox(5); // Adjust spacing as needed
-            itemBox.getChildren().addAll(link, descLabel);
+            itemBox.getChildren().addAll(link);
 
+            link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
             newsGrid.add(itemBox, col, row);
             row++;
             if (row >= 2) {
@@ -344,7 +346,7 @@ public class NewsPageController extends Application implements Initializable {
             JsonObject sourceObject = sourceElement.getAsJsonObject();
 
             String name = sourceObject.get("name").getAsString();
-            String description = sourceObject.get("description").getAsString();
+//            String description = sourceObject.get("description").getAsString();
             String urlLink = sourceObject.get("url").getAsString();
 
             Hyperlink link = new Hyperlink(name);
@@ -353,11 +355,15 @@ public class NewsPageController extends Application implements Initializable {
                 webViewSample.loadURL(urlLink);
             });
 
-            Label descLabel = new Label(description);
+//            Label descLabel = new Label(description);
 
             VBox itemBox = new VBox(5); // Adjust spacing as needed
-            itemBox.getChildren().addAll(link, descLabel);
+            itemBox.getChildren().add(link);
 
+            // Set layout properties for VBox
+            link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
+
+            // Add VBox to GridPane
             newsGrid.add(itemBox, 0, row++);
         }
     }

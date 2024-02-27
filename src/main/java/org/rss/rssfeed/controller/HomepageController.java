@@ -11,9 +11,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.rss.rssfeed.HelloApplication;
+import org.rss.rssfeed.db.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
 public class HomepageController {
@@ -25,6 +27,8 @@ public class HomepageController {
     private Button cancel;
 
 
+    @FXML
+    private Label usernameLabel;
     @FXML
     private ChoiceBox<String> layoutChoiceBox;
     private NewsPageController newsPageController;
@@ -87,6 +91,17 @@ public void setStage(Stage stage) {
     }
 
     @FXML
+    private static String firstName="";
+    public void getUserName(String username){
+        firstName=username;
+    }
+
+    @FXML
+    public void initialize(){
+        usernameLabel.setText(firstName);
+
+    }
+    @FXML
     private void showLayout3() {
         // Implement layout 3
         buttonnews.getChildren().clear();
@@ -99,6 +114,8 @@ public void setStage(Stage stage) {
 //              newsPageController.fetchNewsData("technology");
         start("technology");
     }
+
+
 
     //
     @FXML
@@ -121,6 +138,6 @@ public void setStage(Stage stage) {
 
     }
 }
-    // Other methods and logic for fetching and displaying data
+
 
 

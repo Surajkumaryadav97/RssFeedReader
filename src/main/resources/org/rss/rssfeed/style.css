@@ -61,15 +61,15 @@
 }
 /* Login Button Hover Effect */
 .loginBtn{
-    -fx-background-color: #81689D;
+    -fx-background-color:  #76ff03;
     -fx-text-fill: #FFF;
     -fx-background-radius: 5px;
 }
 .loginBtn:hover{
     -fx-background-color:transparent;
     -fx-background-radius: 5px;
-    -fx-text-fill:  #81689D;
-    -fx-border-color:  #81689D;
+    -fx-text-fill:   #76ff03;
+    -fx-border-color:   #76ff03;
     -fx-border-width: 1px;
     -fx-border-style: solid;
     -fx-border-radius: 5px;
@@ -103,15 +103,15 @@
      -fx-border-radius: 5px;
 }
 .registerBtn{
-    -fx-background-color:  #1F2544;
+    -fx-background-color:   #76ff03;
     -fx-text-fill: #FFF;
     -fx-background-radius: 5px;
 }
 .registerBtn:hover{
     -fx-background-color:transparent;
     -fx-background-radius: 5px;
-    -fx-text-fill:  #1F2544;
-    -fx-border-color:  #1F2544;
+    -fx-text-fill:   #76ff03;
+    -fx-border-color:   #76ff03;
     -fx-border-width: 1px;
     -fx-border-style: solid;
     -fx-border-radius: 5px;

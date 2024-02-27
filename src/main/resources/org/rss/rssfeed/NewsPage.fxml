@@ -1,23 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<ScrollPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.NewsPageController">
-
-    <VBox alignment="TOP_CENTER" spacing="10">
-
-        <GridPane fx:id="newsGrid" alignment="TOP_LEFT" hgap="10" vgap="10">
-            <!-- News items will be added dynamically here -->
-        </GridPane>
-
-        <HBox fx:id="newsbuttons" alignment="CENTER" spacing="10">
-            <Button fx:id="masonryview" text="Masonry View" onAction="#showMasonryView"/>
-            <Button fx:id="tileview" text="Tile View" onAction="#showTileView"/>
-            <Button fx:id="compactview" text="compact View" onAction="#showCompactView"/>
-            <Button fx:id="cancel" text="cancel" onAction="#cancelLayoutButton"/>
-
-        </HBox>
-    </VBox>
-
-</ScrollPane>
+<?import javafx.scene.layout.GridPane?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.NewsPageController">
+   <top>
+      <AnchorPane prefHeight="100.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="103.0" prefWidth="358.0">
+               <children>
+                  <ImageView fitHeight="103.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../images/logo_.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="103.0" prefWidth="254.0" text="RSS Feed Reader" textFill="#0b7bb7">
+                     <font>
+                        <Font name="Tahoma" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="671.0" layoutY="8.0" prefHeight="92.0" prefWidth="170.0">
+               <children>
+                  <Label prefHeight="100.0" prefWidth="110.0" text="Ravi">
+                     <font>
+                        <Font name="Tahoma" size="22.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../images/User.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <VBox fx:id="newsbuttons" prefHeight="547.0" prefWidth="858.0" style="-fx-background-color: #638889;" BorderPane.alignment="CENTER">
+         <GridPane fx:id="newsGrid" />
+         <children>
+            <Label prefHeight="58.0" prefWidth="197.0" text="  Choose Layout !" textFill="#faf6f6">
+               <font>
+                  <Font name="Tahoma" size="20.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#showMasonryView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #002B5B;" text="Masonry View" textFill="#fcf8f8" />
+            <Button mnemonicParsing="false" onAction="#showTileView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #1F8A70;" text="Tile View" textFill="#efe8e8" />
+            <Button mnemonicParsing="false" onAction="#showCompactView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #607274;" text="Compact View" textFill="#faf3f3" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>

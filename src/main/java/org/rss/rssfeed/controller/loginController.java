@@ -6,18 +6,23 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.mindrot.jbcrypt.BCrypt;
 import org.rss.rssfeed.HelloApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,10 +31,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
+import java.util.ResourceBundle;
 
 
-
-public class loginController {
+public class loginController implements Initializable {
 
     @FXML
     private TextField usernameTextField;
@@ -50,8 +55,22 @@ public class loginController {
     private Button userSignup;
 
 
+    @FXML
+    private ImageView loginImageVeiw;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            File brandingFile = new File("../../../images/login-removebg-preview.png");
+            Image branding = new Image(brandingFile.toURI().toString());
+            loginImageVeiw.setImage(branding);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
+    HomepageController hg = new HomepageController();
 
     @FXML
     public void cancel(ActionEvent event) throws IOException {
@@ -111,21 +130,28 @@ public class loginController {
     void loginButtonOnAction(ActionEvent actionEvent) throws SQLException, NoSuchAlgorithmException, IOException {
         String userName = usernameTextField.getText();
         String password = enterPasswordField.getText();
+
+        if(userName.isEmpty() || password.isEmpty()){
+            loginMessageLabel.setText("Enter username or password");
+            return;
+        }
   ///
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
 
         // Prepare SQL statement to retrieve hashed password for the given username
-        String sql = "SELECT Password FROM user WHERE userName = ?";
+        String sql = "SELECT Password,firstName FROM user WHERE userName = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, userName);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     String hashedPasswordFromDB = resultSet.getString("Password");
-
+                    String username= resultSet.getString("firstName");
+                    hg.getUserName(username);
                     // Verify the entered password against the hashed password from the database
                     if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
+
                         // Authentication successful
                         loginMessageLabel.setText("Login successful");
 //                        start(new Stage());

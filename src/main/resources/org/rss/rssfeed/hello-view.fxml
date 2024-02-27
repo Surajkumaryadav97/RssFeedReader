@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.HelloController">
+<BorderPane prefHeight="650.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.HelloController">
 
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="50.0" style="-fx-background-color:#265073;" BorderPane.alignment="CENTER_RIGHT">
-            <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="128.0" BorderPane.alignment="CENTER_RIGHT">
-                <padding>
-                    <Insets right="10" />
-                </padding>
-                <children>
-                    <Label prefHeight="35.0" prefWidth="193.0" style="-fx-font-size: 24px;" text="RFR" textFill="WHITE">
-                        <padding>
-                            <Insets left="10" />
-                        </padding>
-                    </Label>
-                </children>
-            </HBox>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0" />
-
-                <VBox fx:id="loginandregister" spacing="10">
-                    <Button fx:id="loginbtn" onAction="#login" prefHeight="25.0" prefWidth="68.0" stylesheets="@style.css" text="Login" textFill="BLACK">
-                        <styleClass>
-                            <String fx:value="animated-button" />
-                            <String fx:value="loginBtn" />
-                        </styleClass>
-                    </Button>
-                    <Button fx:id="regbtn" onAction="#register" prefHeight="26.0" prefWidth="64.0" stylesheets="@style.css" text="Signup" textFill="BLACK">
-                        <styleClass>
-                            <String fx:value="cancelBtn" />
-                            <String fx:value="animated-button" />
-                        </styleClass>
-                    </Button>
-                </VBox>
+        <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="850.0" style="-fx-background-color: #20262E;" BorderPane.alignment="CENTER_RIGHT">
+            <children>
+                <HBox prefHeight="79.0" prefWidth="682.0">
+                    <children>
+                        <ImageView fx:id="logoImageView" fitHeight="79.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../../../images/logo_.png" />
+                            </image></ImageView>
+                        <Label prefHeight="82.0" prefWidth="250.0" text="RSS Feed Reader" textFill="#fcfafa">
+                            <font>
+                                <Font name="Tahoma" size="31.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <Button fx:id="loginbtn" onAction="#login" prefHeight="25.0" prefWidth="68.0" stylesheets="@style.css" text="Login" textFill="BLACK">
+                    <styleClass>
+                        <String fx:value="animated-button" />
+                        <String fx:value="loginBtn" />
+                    </styleClass>
+                </Button>
+                <Button fx:id="regbtn" onAction="#register" prefHeight="26.0" prefWidth="64.0" stylesheets="@style.css" text="Signup" textFill="BLACK">
+                    <styleClass>
+                        <String fx:value="cancelBtn" />
+                        <String fx:value="animated-button" />
+                    </styleClass>
+                </Button>
+            </children>
 
         </HBox>
     </top>
+    <center>
+
+        <HBox prefHeight="410.0" prefWidth="678.0" spacing="10" BorderPane.alignment="CENTER" />
+    </center>
 
 </BorderPane>
