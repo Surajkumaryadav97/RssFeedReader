@@ -31,16 +31,30 @@ public class HelloController implements Initializable {
     @FXML
     private ImageView logoImageView;
 
+
+
+    @FXML
+    private ImageView homeImageView;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            File brandingFile = new File("../../../images/logo_.png");
-            Image branding = new Image(brandingFile.toURI().toString());
-            logoImageView.setImage(branding);
+            File brandingFile = new File("images/home.png");
+            Image branding1 = new Image(brandingFile.toURI().toString());
+            homeImageView.setImage(branding1);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        try {
+            File brandingFile = new File("images/logo_.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            logoImageView.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML

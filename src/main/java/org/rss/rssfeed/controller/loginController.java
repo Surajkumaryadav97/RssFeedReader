@@ -2,7 +2,6 @@ package org.rss.rssfeed.controller;
 
 
 
-import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,26 +14,28 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.mindrot.jbcrypt.BCrypt;
+import org.rss.rssfeed.Exceptions.sqlException;
+import org.rss.rssfeed.Exceptions.switchSceneException;
+import org.rss.rssfeed.Exceptions.userNotFoundException;
 import org.rss.rssfeed.HelloApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Base64;
 import java.util.ResourceBundle;
 
 
 public class loginController implements Initializable {
+
+
+
 
     @FXML
     private TextField usernameTextField;
@@ -57,15 +58,17 @@ public class loginController implements Initializable {
 
     @FXML
     private ImageView loginImageVeiw;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            File brandingFile = new File("../../../images/login-removebg-preview.png");
+            File brandingFile = new File("images/login.png");
             Image branding = new Image(brandingFile.toURI().toString());
             loginImageVeiw.setImage(branding);
+            loggerController.logger.info("Image loading");
 
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerController.logger.error("Image loading error" + e);
         }
     }
 
@@ -73,7 +76,7 @@ public class loginController implements Initializable {
     HomepageController hg = new HomepageController();
 
     @FXML
-    public void cancel(ActionEvent event) throws IOException {
+    public void cancel(ActionEvent event) throws switchSceneException {
 
         try {
             Stage stage = (Stage) cancelButton.getScene().getWindow();
@@ -81,61 +84,57 @@ public class loginController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
-        } catch (IOException ex) {
+            loggerController.logger.debug("Switching to hello-view");
+        } catch (Exception ex) {
             System.out.println(ex);
+            loggerController.logger.error("Error in login is" + ex);
+            throw new switchSceneException("error in loginController cancel switch to hello-view", ex);
         }
 
     }
-    public void start() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
-       switchScene(new Scene(fxmlLoader.load()));
+
+    public void start() throws switchSceneException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
+            switchScene(new Scene(fxmlLoader.load()));
+        }
+        catch(Exception ex){
+            throw new switchSceneException("Error in loginController start method switch to Homepage", ex);
+        }
     }
 
     public void switchScene(Scene newScene) {
         Stage stage = (Stage) loginButton.getScene().getWindow();
         stage.setScene(newScene);
-//        logger.debug("Switching scene");
-    }
-    @FXML
-    void login(ActionEvent event) {
-        String username = usernameTextField.getText();
-        String password = enterPasswordField.getText();
-
-        // Add logic to authenticate the user
-        // This can involve querying the database to check if the username and password match
-
-        // For demonstration purposes, let's assume a simple authentication logic
-        if ("ADMIN".equals(username) && "ADMIN".equals(password)) {
-            loginMessageLabel.setText("Login successful");
-
-        } else {
-            loginMessageLabel.setText("Invalid username or password");
-        }
+        loggerController.logger.debug("Switching scene");
     }
 
     @FXML
-    void signup(ActionEvent event) {
+    void signup(ActionEvent event) throws switchSceneException {
         try {
             Stage stage = (Stage) userSignup.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
-        } catch (IOException ex) {
+            loggerController.logger.debug("Switching to register");
+        } catch (Exception ex) {
             System.out.println(ex);
+            loggerController.logger.error(ex);
+            throw new switchSceneException("Error in switching to register from loginController signup", ex);
         }
     }
 
     @FXML
-    void loginButtonOnAction(ActionEvent actionEvent) throws SQLException, NoSuchAlgorithmException, IOException {
+    void loginButtonOnAction(ActionEvent actionEvent) throws sqlException, userNotFoundException {
         String userName = usernameTextField.getText();
         String password = enterPasswordField.getText();
 
-        if(userName.isEmpty() || password.isEmpty()){
+        if (userName.isEmpty() || password.isEmpty()) {
             loginMessageLabel.setText("Enter username or password");
             return;
         }
-  ///
+
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
 
@@ -147,15 +146,16 @@ public class loginController implements Initializable {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     String hashedPasswordFromDB = resultSet.getString("Password");
-                    String username= resultSet.getString("firstName");
+                    String username = resultSet.getString("firstName");
+                    System.out.println(username);
                     hg.getUserName(username);
                     // Verify the entered password against the hashed password from the database
                     if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
 
                         // Authentication successful
                         loginMessageLabel.setText("Login successful");
-//                        start(new Stage());
-                          start();
+
+                        start();
 
                         // Proceed with further actions (e.g., navigating to another scene)
                     } else {
@@ -167,26 +167,36 @@ public class loginController implements Initializable {
                     loginMessageLabel.setText("Invalid username or password");
                 }
             }
-        } catch (SQLException e) {
+            catch(Exception e){
+                loggerController.logger.error(e);
+                throw new sqlException("Error in executing database Query", e);
+            }
+        } catch (Exception e) {
             // Handle database errors
-            e.printStackTrace();
+            loggerController.logger.error(e);
+            throw new userNotFoundException("No User Found", e);
         } finally {
             // Close connection
-            connection.close();
+            try {
+                connection.close();
+            }catch(Exception e){
+                throw new sqlException("Error in closing the database connection", e);
+            }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

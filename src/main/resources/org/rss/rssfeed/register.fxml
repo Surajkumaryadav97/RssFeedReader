@@ -11,17 +11,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #784B7;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.registerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F0EDCF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.registerController">
     <children>
-        <AnchorPane layoutX="40.0" layoutY="21.0" prefHeight="508.0" prefWidth="365.0" style="-fx-background-color: #002B5B; -fx-background-radius: 50;">
+        <AnchorPane layoutX="40.0" layoutY="21.0" prefHeight="508.0" prefWidth="365.0" style="-fx-background-color: #000000; -fx-background-radius: 50;">
             <children>
-                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="130.0" text="First Name *" textFill="#fcf9f9" />
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="130.0" text="First Name *" textFill="#fcf7f7" />
                 <TextField fx:id="reg_Fname" layoutX="89.0" layoutY="154.0" prefHeight="26.0" prefWidth="200.0" promptText="John" stylesheets="@style.css" />
-                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="188.0" text="Last Name *" textFill="#fcfafa" />
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="188.0" text="Last Name *" textFill="#f5efef" />
                 <TextField fx:id="reg_Lname" layoutX="89.0" layoutY="212.0" prefHeight="26.0" prefWidth="200.0" promptText="David" stylesheets="@style.css" />
-                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="251.0" text="Email *" textFill="#fcfbfb" />
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="251.0" text="Email *" textFill="#f5efef" />
                 <TextField fx:id="reg_Uname" layoutX="89.0" layoutY="275.0" prefHeight="26.0" prefWidth="200.0" promptText="John@" stylesheets="@style.css" />
-                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="92.0" layoutY="313.0" text="Password *" textFill="#f4f0f0" />
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="92.0" layoutY="313.0" text="Password *" textFill="#f2ebeb" />
                 <Button fx:id="regButton" alignment="CENTER" layoutX="89.0" layoutY="381.0" mnemonicParsing="false" onAction="#register" prefHeight="37.0" prefWidth="97.0" stylesheets="@style.css" text="Register">
                     <font>
                         <Font size="16.0" />
@@ -51,11 +51,11 @@
 
         </AnchorPane>
 
-        <AnchorPane layoutX="400.0" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #784B7;">
+        <AnchorPane layoutX="400.0" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #F0EDCF;">
             <children>
                 <ImageView fx:id="registerImageView" fitHeight="262.0" fitWidth="259.0" layoutX="63.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../../../../images/login-removebg-preview.png" />
+                        <Image url="@../../../../../../images/register.png" />
                     </image>
                     <effect>
                         <Reflection fraction="0.74" topOpacity="0.30" />

@@ -5,6 +5,7 @@ module org.rss.rssfeed {
     requires jbcrypt;
     requires com.google.gson;
     requires javafx.web;
+    requires org.apache.logging.log4j;
 
 
     opens org.rss.rssfeed to javafx.fxml;

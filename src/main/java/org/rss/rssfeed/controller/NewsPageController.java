@@ -1,142 +1,4 @@
 package org.rss.rssfeed.controller;
-
-//
-//import javafx.application.Application;
-//import javafx.application.HostServices;
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.fxml.Initializable;
-//import javafx.scene.control.ChoiceBox;
-//import javafx.scene.control.Hyperlink;
-//import javafx.scene.control.Label;
-//import javafx.scene.layout.GridPane;
-//import java.net.URL;
-//import java.util.ResourceBundle;
-//import com.google.gson.JsonArray;
-//import com.google.gson.JsonElement;
-//import com.google.gson.JsonObject;
-//import com.google.gson.JsonParser;
-//import javafx.stage.Stage;
-//
-//import java.io.BufferedReader;
-//import java.io.InputStreamReader;
-//import java.net.HttpURLConnection;
-//
-//public class NewsPageController extends Application implements Initializable {
-//    private HostServices hostServices;
-//    @FXML
-//    private ChoiceBox<String> layoutChoiceBox;
-//
-//    @FXML
-//    private GridPane newsGrid;
-//
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        // Initialize the hostServices
-//        this.hostServices = getHostServices();
-//        // You can now use hostServices to interact with the host environment
-//    }
-//
-//
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//
-//    }
-//
-//    void fetchNewsData(String category) {
-//        String apikey="d9a3f37be02a41f7af241478654d7ba8";
-//        try {
-////            String encodedCategory = URLEncoder.encode(category, StandardCharsets.UTF_8);
-//            URL url = new URL("https://newsapi.org/v2/top-headlines/sources?category=" + category + "&apiKey=" + apikey);
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("GET");
-//            connection.connect();
-////d9a3f37be02a41f7af241478654d7ba8
-//            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-//                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//                StringBuilder response = new StringBuilder();
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    response.append(line);
-//                }
-//                reader.close();
-//                JsonParser jsonParser = new JsonParser();
-//                JsonObject rootObject = jsonParser.parse(response.toString()).getAsJsonObject();
-//                JsonArray sourcesArray = rootObject.getAsJsonArray("sources");
-//
-//                int row = 0;
-//
-//                for (JsonElement sourceElement : sourcesArray) {
-//                    JsonObject sourceObject = sourceElement.getAsJsonObject();
-//
-//                    String name = sourceObject.get("name").getAsString();
-//                    String description = sourceObject.get("description").getAsString();
-//                    String urlLink = sourceObject.get("url").getAsString();
-//                    System.out.println(urlLink);
-//                    Hyperlink link = new Hyperlink(name);
-//                    link.setOnAction(event -> {
-//                        WebViewSample webViewSample = new WebViewSample();
-//                        webViewSample.loadURL(urlLink);
-//                    });
-//
-//                    Label descLabel = new Label(description);
-//
-//                    newsGrid.addRow(row, link, descLabel);
-//                    row++;
-//                }
-//            } else {
-//                System.out.println("HTTP Error: " + connection.getResponseCode() + " " + connection.getResponseMessage());
-//            }
-//            connection.disconnect();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//
-//
-//    public void handleLayoutSelection(ActionEvent actionEvent) {
-//        String selectedLayout = layoutChoiceBox.getValue();
-//        if (selectedLayout != null) {
-//            switch (selectedLayout) {
-//                case "List View":
-//                    // Call method to display data in list view
-//                    displayInListView();
-//                    break;
-//                case "Grid View":
-//                    // Call method to display data in grid view
-//                    displayInGridView();
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//    }
-//
-//    private void displayInListView() {
-//        // Implement the logic to display data in list view
-//        // Clear existing data
-//        newsGrid.getChildren().clear();
-//        // Add new data in list view format
-//        // Example:
-//
-//        Label label = new Label("List View");
-//        newsGrid.add(label, 0, 0);
-//    }
-//
-//    private void displayInGridView() {
-//        // Implement the logic to display data in grid view
-//        // Clear existing data
-//        newsGrid.getChildren().clear();
-//        // Add new data in grid view format
-//        // Example:
-//        Label label = new Label("Grid View");
-//        newsGrid.add(label, 0, 0);
-//
-//    }
-//}
-
-
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
@@ -148,10 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -160,11 +25,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.stage.Stage;
+import org.rss.rssfeed.Exceptions.NewsNotFetchedExceptions;
+import org.rss.rssfeed.Exceptions.switchSceneException;
 import org.rss.rssfeed.HelloApplication;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+
+
 
 public class NewsPageController extends Application implements Initializable {
     private HostServices hostServices;
@@ -181,8 +50,11 @@ public class NewsPageController extends Application implements Initializable {
     @FXML
     private VBox newsbuttons;
 
-//    @FXML
-//    private ChoiceBox<String> layoutChoiceBox;
+    @FXML
+    private ImageView userImageView1;
+
+    @FXML
+    private ImageView logoImageView1;
 
 
     private String currentLayout;
@@ -191,28 +63,45 @@ public class NewsPageController extends Application implements Initializable {
     public void start(Stage primaryStage) throws Exception {
         // Initialize the hostServices
         this.hostServices = getHostServices();
-        // You can now use hostServices to interact with the host environment
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Initialize layout choice box
+        try {
+            File brandingFile = new File("images/logo_.png");
+            Image branding = new Image(brandingFile.toURI().toString());
+            logoImageView1.setImage(branding);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/User.png");
+            Image branding = new Image(brandingFile.toURI().toString());
+            userImageView1.setImage(branding);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+
     String Ctgry;
     String grid;
     String list;
     String compact;
-    void fetchCategory(String category, String adapt){
-        Ctgry=category;
+
+    void fetchCategory(String category, String adapt) throws NewsNotFetchedExceptions {
+        Ctgry = category;
         System.out.println(Ctgry);
         fetchNewsData(Ctgry, adapt);
         System.out.println(Ctgry);
     }
 
-    void fetchNewsData(String category, String adapt) {
+    void fetchNewsData(String category, String adapt) throws NewsNotFetchedExceptions {
         String apikey = "d9a3f37be02a41f7af241478654d7ba8";
-//        String selectedLayout = value;
+
         try {
             URL url = new URL("https://newsapi.org/v2/top-headlines/sources?category=" + category + "&apiKey=" + apikey);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -232,18 +121,15 @@ public class NewsPageController extends Application implements Initializable {
                 JsonObject rootObject = jsonParser.parse(response.toString()).getAsJsonObject();
                 JsonArray sourcesArray = rootObject.getAsJsonArray("sources");
 
-//                // Clear existing data in the news grid
-//                newsGrid.getChildren().clear();
 
-                // Display data in the selected layout
-//                currentLayout=value;
                 displayDataInLayout(adapt, sourcesArray);
             } else {
                 System.out.println("HTTP Error: " + connection.getResponseCode() + " " + connection.getResponseMessage());
             }
             connection.disconnect();
         } catch (Exception e) {
-            e.printStackTrace();
+            loggerController.logger.error("Error in fetchNewsData is" + e);
+            throw new NewsNotFetchedExceptions("News Not Fetched Error", e);
         }
     }
 
@@ -274,36 +160,36 @@ public class NewsPageController extends Application implements Initializable {
             JsonObject sourceObject = sourceElement.getAsJsonObject();
 
             String name = sourceObject.get("name").getAsString();
-//            String description = sourceObject.get("description").getAsString();
             String urlLink = sourceObject.get("url").getAsString();
 
+            // Create a Hyperlink with the name
             Hyperlink link = new Hyperlink(name);
             link.setOnAction(event -> {
-                WebViewSample webViewSample = new WebViewSample();
+                Webview webViewSample = new Webview();
                 webViewSample.loadURL(urlLink);
             });
 
-//            Label descLabel = new Label(description);
-
+            // Customize the style of the Hyperlink
             link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
-            // Add each item to the grid in a tile view format
-            newsGrid.add(link, col, row);
-//            newsGrid.add( descLabel,col, row + 1);
+
+            // Create a VBox to hold the Hyperlink
+            VBox card = new VBox(link);
+            card.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10px; -fx-background-color: #f0f0f0;");
+
+            // Add the VBox to the grid
+            newsGrid.add(card, col, row);
 
             // Adjust column and row for the next item
-            col += 2;
-            if (col >= 4) {
+            col++;
+            if (col >= 3) {
                 col = 0;
-                row += 2;
+                row++;
             }
         }
     }
 
     private void displayInMasonryView(JsonArray sourcesArray) {
-
-            // Clear existing data
-
-            // Clear existing data
+        // Clear existing data
         newsGrid.getChildren().clear();
 
         int col = 0;
@@ -312,30 +198,35 @@ public class NewsPageController extends Application implements Initializable {
             JsonObject sourceObject = sourceElement.getAsJsonObject();
 
             String name = sourceObject.get("name").getAsString();
-            String description = sourceObject.get("description").getAsString();
             String urlLink = sourceObject.get("url").getAsString();
 
+            // Create a Hyperlink with the name
             Hyperlink link = new Hyperlink(name);
             link.setOnAction(event -> {
-                WebViewSample webViewSample = new WebViewSample();
+                Webview webViewSample = new Webview();
                 webViewSample.loadURL(urlLink);
             });
 
-//            Label descLabel = new Label(description);
-
-            VBox itemBox = new VBox(5); // Adjust spacing as needed
-            itemBox.getChildren().addAll(link);
-
+            // Customize the style of the Hyperlink
             link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
+
+            // Create a VBox to hold the Hyperlink
+            VBox itemBox = new VBox(5); // Adjust spacing as needed
+            itemBox.getChildren().add(link);
+
+            // Set layout properties for VBox
+            itemBox.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10px;-fx-background-color: #f0f0f0;");
+
+            // Add the VBox to the GridPane
             newsGrid.add(itemBox, col, row);
+
+            // Adjust row and column for the next item
             row++;
             if (row >= 2) {
                 row = 0;
                 col++;
             }
         }
-
-
     }
     private void displayInCompactView(JsonArray sourcesArray) {
         // Clear existing data
@@ -351,7 +242,7 @@ public class NewsPageController extends Application implements Initializable {
 
             Hyperlink link = new Hyperlink(name);
             link.setOnAction(event -> {
-                WebViewSample webViewSample = new WebViewSample();
+                Webview webViewSample = new Webview();
                 webViewSample.loadURL(urlLink);
             });
 
@@ -369,30 +260,24 @@ public class NewsPageController extends Application implements Initializable {
     }
 
 
-
-
-//    public void handleLayoutSelection(ActionEvent actionEvent) {
-//         fetchCategory(Ctgry);
-//    }
-
-    public void showMasonryView(ActionEvent actionEvent) {
+    public void showMasonryView(ActionEvent actionEvent) throws NewsNotFetchedExceptions {
         grid = "Masonry View";
         fetchCategory(Ctgry, grid);
 
     }
 
-    public void showTileView(ActionEvent actionEvent) {
+    public void showTileView(ActionEvent actionEvent) throws NewsNotFetchedExceptions {
         list = "Tile View";
         fetchCategory(Ctgry, list);
     }
 
-    public void showCompactView(ActionEvent actionEvent) {
-        compact="Compact View";
+    public void showCompactView(ActionEvent actionEvent) throws NewsNotFetchedExceptions {
+        compact = "Compact View";
         fetchCategory(Ctgry, compact);
 
     }
 
-    public void cancelLayoutButton(ActionEvent event) throws IOException {
+    public void cancelLayoutButton(ActionEvent event) throws switchSceneException {
 
         try {
             Stage stage = (Stage) cancel.getScene().getWindow();
@@ -400,16 +285,16 @@ public class NewsPageController extends Application implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
+            loggerController.logger.info("Switching to Homepage");
         } catch (IOException ex) {
             System.out.println(ex);
+            loggerController.logger.error("Error in switching homepage" + ex);
+            throw new switchSceneException("Error in NewspageContoller switching to Homepage in cancellayoutButton",ex);
         }
 
     }
-
-//    public void handleLayoutSelection(ActionEvent actionEvent) {
-//        displayDataInLayout("List View",);
-//    }
 }
+
 
 
 

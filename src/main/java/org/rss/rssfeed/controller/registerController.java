@@ -2,28 +2,37 @@ package org.rss.rssfeed.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 import org.rss.rssfeed.HelloApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class registerController {
+public class registerController implements Initializable {
 
     @FXML
     private TextField reg_Fname;
 
     @FXML
     private TextField reg_Lname;
+
+    @FXML
+    private ImageView registerImageView;
 
     @FXML
     private TextField reg_Uname;
@@ -68,8 +77,9 @@ public class registerController {
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-//                regisMessageLabel.setText("Login successful");
+              //check user has registered successfully
                 System.out.println("User registered successfully!");
+
             } else {
                 System.out.println("Failed to register user.");
             }
@@ -91,8 +101,10 @@ public class registerController {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
+            loggerController.logger.info("Switching to hello-view");
         } catch (IOException ex) {
             System.out.println(ex);
+            loggerController.logger.error("Error in register cancel is" + ex);
         }
 
     }
@@ -100,5 +112,18 @@ public class registerController {
     private String hashPassword(String password) {
         // Hash the password using bcrypt
         return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        try {
+            File brandingFile = new File("images/register.png");
+            Image branding = new Image(brandingFile.toURI().toString());
+            registerImageView.setImage(branding);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

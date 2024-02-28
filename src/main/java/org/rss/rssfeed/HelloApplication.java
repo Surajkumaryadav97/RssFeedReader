@@ -25,10 +25,11 @@ public class HelloApplication extends Application  {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 850, 650);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("RFR");
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         // Pass the stage instance to the controller

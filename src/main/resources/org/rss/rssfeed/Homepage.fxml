@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -20,12 +21,12 @@
                      <children>
                         <HBox layoutX="610.0" layoutY="14.0" prefHeight="75.0" prefWidth="159.0">
                            <children>
-                              <Label fx:id="usernameLabel" prefHeight="74.0" prefWidth="85.0" text="Ravi">
+                              <Label fx:id="usernameLabel" prefHeight="74.0" prefWidth="85.0" text="">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <ImageView fitHeight="61.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="userImageView" fitHeight="61.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../../../../images/User.png" />
                                  </image>
@@ -40,7 +41,7 @@
                   </HBox>
                   <HBox prefHeight="107.0" prefWidth="399.0">
                      <children>
-                        <ImageView fitHeight="117.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="logoImageView" fitHeight="117.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../images/logo_.png" />
                            </image>
@@ -71,7 +72,92 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="542.0" prefWidth="671.0" />
+                  <AnchorPane prefHeight="542.0" prefWidth="671.0">
+                     <children>
+                        <HBox layoutY="14.0" prefHeight="198.0" prefWidth="670.0">
+                           <children>
+                              <VBox prefHeight="198.0" prefWidth="323.0">
+                                 <children>
+                                    <ImageView fx:id="health1ImageView" fitHeight="163.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../images/health1.png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets left="50.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="36.0" prefWidth="326.0" text="                 Regulatory Update ....">
+                                       <font>
+                                          <Font name="Tahoma" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="198.0" prefWidth="349.0">
+                                 <children>
+                                    <ImageView fx:id="health2ImageView" fitHeight="150.0" fitWidth="345.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../images/health3.png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets left="50.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                    <Label text="Hospital growth in india.">
+                                       <padding>
+                                          <Insets left="50.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="Tahoma" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="2.0" layoutY="278.0" prefHeight="262.0" prefWidth="665.0">
+                           <children>
+                              <VBox prefHeight="262.0" prefWidth="306.0">
+                                 <children>
+                                    <ImageView fx:id="tech1ImageView" fitHeight="161.0" fitWidth="302.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../images/tech3.png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets left="40.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="38.0" prefWidth="306.0" text="OpenAI claims the Times cheated to get ChatGPT to regurgitate articles">
+                                       <font>
+                                          <Font name="Tahoma" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children></VBox>
+                              <VBox prefHeight="262.0" prefWidth="298.0">
+                                 <children>
+                                    <ImageView fx:id="tech2ImageView" fitHeight="168.0" fitWidth="305.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../images/tech4.png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets left="60.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="30.0" prefWidth="298.0" text="Samsung Galaxy Ring's AI, Smart Home Integrations Tease at MWC">
+                                       <font>
+                                          <Font name="Tahoma" size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                 </children></VBox>
+                           </children>
+                        </HBox>
+                     </children></AnchorPane>
                </children>
             </AnchorPane>
          </center>

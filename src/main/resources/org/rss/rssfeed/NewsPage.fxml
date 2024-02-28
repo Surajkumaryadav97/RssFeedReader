@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.NewsPageController">
    <top>
-      <AnchorPane prefHeight="100.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="100.0" prefWidth="850.0" style="-fx-background-color: #FEFBF6;" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="103.0" prefWidth="358.0">
                <children>
-                  <ImageView fitHeight="103.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="logoImageView1" fitHeight="103.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../images/logo_.png" />
                      </image>
@@ -36,7 +36,7 @@
                         <Font name="Tahoma" size="22.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="userImageView1" fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../images/User.png" />
                      </image>
@@ -47,8 +47,7 @@
       </AnchorPane>
    </top>
    <left>
-      <VBox fx:id="newsbuttons" prefHeight="547.0" prefWidth="858.0" style="-fx-background-color: #638889;" BorderPane.alignment="CENTER">
-         <GridPane fx:id="newsGrid" />
+      <VBox fx:id="newsbuttons" prefHeight="547.0" prefWidth="200.0" style="-fx-background-color: #638889;" BorderPane.alignment="CENTER">
          <children>
             <Label prefHeight="58.0" prefWidth="197.0" text="  Choose Layout !" textFill="#faf6f6">
                <font>
@@ -58,7 +57,15 @@
             <Button mnemonicParsing="false" onAction="#showMasonryView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #002B5B;" text="Masonry View" textFill="#fcf8f8" />
             <Button mnemonicParsing="false" onAction="#showTileView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #1F8A70;" text="Tile View" textFill="#efe8e8" />
             <Button mnemonicParsing="false" onAction="#showCompactView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #607274;" text="Compact View" textFill="#faf3f3" />
+            <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelLayoutButton" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color:  #820000;" text="Back" textFill="#faf3f3" />
          </children>
       </VBox>
    </left>
+   <center>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <!-- Add your content here -->
+         <!-- For example, you can add a GridPane -->
+         <GridPane fx:id="newsGrid" />
+      </AnchorPane>
+   </center>
 </BorderPane>
