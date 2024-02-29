@@ -30,7 +30,7 @@ public class Webview extends Application {
 
     public void loadURL(String url) {
 
-//        set the url
+        //set the url
         Url=url;
         start(new Stage());
 

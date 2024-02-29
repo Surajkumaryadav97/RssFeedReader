@@ -4,14 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
+import org.rss.rssfeed.Exceptions.sqlException;
+import org.rss.rssfeed.Exceptions.switchSceneException;
 import org.rss.rssfeed.HelloApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
 
@@ -25,8 +24,12 @@ import java.util.ResourceBundle;
 
 public class registerController implements Initializable {
 
+    public Label registerMessageLabel;
     @FXML
     private TextField reg_Fname;
+
+    @FXML
+    private Button login;
 
     @FXML
     private TextField reg_Lname;
@@ -52,12 +55,20 @@ public class registerController implements Initializable {
     private final HelloApplication helloApplication = new HelloApplication();
 
     @FXML
-    public void register() {
+    public void register() throws sqlException {
         String firstName = reg_Fname.getText();
         String lastName = reg_Lname.getText();
         String userName = reg_Uname.getText();
         String password = reg_password.getText();
         String role = "NORMAL";
+
+
+        if(firstName.isEmpty() || lastName.isEmpty() || userName.isEmpty()
+        || password.isEmpty()) {
+            registerMessageLabel.setText("All Fields are Required");
+            loggerController.logger.debug("Something missing in registering User");
+            return;
+        }
 
         // Hash the password using bcrypt
         String Password = hashPassword(password);
@@ -86,8 +97,17 @@ public class registerController implements Initializable {
 
             preparedStatement.close();
             connection.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Error registering user: " + e.getMessage());
+            throw new sqlException("Error in registering user", e);
+        }
+        finally{
+            try {
+                connection.close();
+            }
+            catch(Exception ex){
+                throw new sqlException("Error in closing the DB connection", ex);
+            }
         }
 
     }
@@ -124,6 +144,21 @@ public class registerController implements Initializable {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void Login(ActionEvent event) throws switchSceneException {
+        try {
+            Stage stage = (Stage) login.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+            loggerController.logger.info("Switching to Homepage");
+        } catch (IOException ex) {
+            System.out.println(ex);
+            loggerController.logger.error("Error in switching homepage" + ex);
+            throw new switchSceneException("Error in NewspageContoller switching to Homepage in cancellayoutButton",ex);
         }
     }
 }

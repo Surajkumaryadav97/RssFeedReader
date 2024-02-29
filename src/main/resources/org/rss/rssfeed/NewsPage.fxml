@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.Button?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.NewsPageController">
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="850.0" style="-fx-background-color: #FEFBF6;" BorderPane.alignment="CENTER">
@@ -29,43 +30,65 @@
                   </Label>
                </children>
             </HBox>
-            <HBox layoutX="671.0" layoutY="8.0" prefHeight="92.0" prefWidth="170.0">
+            <HBox layoutX="641.0" layoutY="6.0" prefHeight="92.0" prefWidth="136.0">
                <children>
-                  <Label prefHeight="100.0" prefWidth="110.0" text="Ravi">
+                  <Label prefHeight="92.0" prefWidth="66.0" text="Ravi">
                      <font>
                         <Font name="Tahoma" size="22.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="userImageView1" fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="userImageView1" fitHeight="68.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../images/User.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
                   </ImageView>
                </children>
             </HBox>
+            <Button fx:id="logout" layoutX="777.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #820000;" onAction="#Logout" text="Logout" textFill="#eeebeb">
+               <font>
+                  <Font name="Tahoma" size="12.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </top>
    <left>
-      <VBox fx:id="newsbuttons" prefHeight="547.0" prefWidth="200.0" style="-fx-background-color: #638889;" BorderPane.alignment="CENTER">
+      <VBox fx:id="newsbuttons" prefHeight="547.0" prefWidth="193.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="58.0" prefWidth="197.0" text="  Choose Layout !" textFill="#faf6f6">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="197.0" text="  Choose Layout !" textFill="#faf6f6">
                <font>
                   <Font name="Tahoma" size="20.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#showMasonryView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #002B5B;" text="Masonry View" textFill="#fcf8f8" />
-            <Button mnemonicParsing="false" onAction="#showTileView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #1F8A70;" text="Tile View" textFill="#efe8e8" />
-            <Button mnemonicParsing="false" onAction="#showCompactView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #607274;" text="Compact View" textFill="#faf3f3" />
-            <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelLayoutButton" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color:  #820000;" text="Back" textFill="#faf3f3" />
+            <Button fx:id="masbtn" mnemonicParsing="false" onAction="#showMasonryView" prefHeight="32.0" prefWidth="314.0" style="-fx-background-color: #0B60B0;" styleClass="masBtn" stylesheets="@style.css" text="Masonry View" textFill="#fcf8f8">
+               <VBox.margin>
+                  <Insets left="2.0" right="2.0" />
+               </VBox.margin></Button>
+            <Button fx:id="tilebtn" mnemonicParsing="false" onAction="#showTileView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #0B60B0;" styleClass="tileBtn" stylesheets="@style.css" text="Tile View" textFill="#efe8e8">
+               <VBox.margin>
+                  <Insets left="2.0" right="2.0" top="5.0" />
+               </VBox.margin></Button>
+            <Button fx:id="compbtn" mnemonicParsing="false" onAction="#showCompactView" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #0B60B0;" styleClass="compBtn" stylesheets="@style.css" text="Compact View" textFill="#faf3f3">
+               <VBox.margin>
+                  <Insets left="2.0" right="2.0" top="5.0" />
+               </VBox.margin></Button>
+            <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelLayoutButton" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color:  #EB6440;" text="Back" textFill="#faf3f3">
+               <VBox.margin>
+                  <Insets left="2.0" right="2.0" top="5.0" />
+               </VBox.margin></Button>
          </children>
       </VBox>
    </left>
    <center>
-      <AnchorPane BorderPane.alignment="CENTER">
-         <!-- Add your content here -->
-         <!-- For example, you can add a GridPane -->
+      <AnchorPane style="-fx-background-color: #F0EDCF;" BorderPane.alignment="CENTER">
+
          <GridPane fx:id="newsGrid" />
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </AnchorPane>
    </center>
 </BorderPane>

@@ -31,6 +31,27 @@ public class HelloController implements Initializable {
     @FXML
     private ImageView logoImageView;
 
+    @FXML
+    private ImageView image1View;
+
+    @FXML
+    private ImageView image2View;
+
+    @FXML
+    private ImageView image3View;
+
+    @FXML
+    private ImageView image4View;
+
+    @FXML
+    private ImageView image5View;
+
+    @FXML
+    private ImageView image6View;
+    @FXML
+    private ImageView image7View;
+    @FXML
+    private ImageView image8View;
 
 
     @FXML
@@ -50,6 +71,70 @@ public class HelloController implements Initializable {
             File brandingFile = new File("images/logo_.png");
             Image branding2 = new Image(brandingFile.toURI().toString());
             logoImageView.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/image1.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            image1View.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/image10.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            image2View.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/image11.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            image3View.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/image3.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            image4View.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/image8.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            image5View.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/image6.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            image6View.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/image5.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            image7View.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/image7.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            image8View.setImage(branding2);
 
         } catch (Exception e) {
             e.printStackTrace();

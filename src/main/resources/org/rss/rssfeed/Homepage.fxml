@@ -57,22 +57,28 @@
             </AnchorPane>
          </top>
          <left>
-            <VBox fx:id="buttonnews" prefHeight="543.0" prefWidth="179.0" style="-fx-background-color: #638889;" BorderPane.alignment="CENTER">
+            <VBox fx:id="buttonnews" prefHeight="543.0" prefWidth="179.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
                <children>
                   <Label prefHeight="66.0" prefWidth="179.0" text="  Choose Your Feed!" textFill="#f3f4f4">
                      <font>
                         <Font name="Tahoma" size="18.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#handleTechnologyButtonClick" prefHeight="37.0" prefWidth="184.0" style="-fx-background-color: #002B5B;" text="Technology Feed" textFill="#f1f4f7" />
-                  <Button mnemonicParsing="false" onAction="#handleHealthButtonClick" prefHeight="37.0" prefWidth="184.0" style="-fx-background-color: #1F8A70;" text="Health Feed" textFill="#f7eeee" />
+                  <Button fx:id="techbtn" mnemonicParsing="false" onAction="#handleTechnologyButtonClick" prefHeight="37.0" prefWidth="179.0" style="-fx-background-color: #002B5B;" styleClass="techBtn" stylesheets="@style.css" text="Technology Feed" textFill="#f1f4f7">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Button>
+                  <Button fx:id="healthbtn" mnemonicParsing="false" onAction="#handleHealthButtonClick" prefHeight="37.0" prefWidth="184.0" style="-fx-background-color: #1F8A70;" styleClass="healthBtn" stylesheets="@style.css" text="Health Feed" textFill="#f7eeee">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin></Button>
                </children>
             </VBox>
          </left>
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="542.0" prefWidth="671.0">
+                  <AnchorPane prefHeight="542.0" prefWidth="671.0" style="-fx-background-color: #F0EDCF;">
                      <children>
                         <HBox layoutY="14.0" prefHeight="198.0" prefWidth="670.0">
                            <children>

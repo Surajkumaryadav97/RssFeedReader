@@ -35,11 +35,7 @@ public class HomepageController implements Initializable {
 
     @FXML
     private Label usernameLabel;
-    @FXML
-    private ChoiceBox<String> layoutChoiceBox;
-    private NewsPageController newsPageController;
-    @FXML
-    private Label newsContent;
+
     private Stage stage;
 
     @FXML

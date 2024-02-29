@@ -78,17 +78,17 @@
         </AnchorPane>
         <AnchorPane prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #F0EDCF;">
             <children>
-                <ImageView fx:id="loginImageVeiw" fitHeight="187.0" fitWidth="215.0" layoutX="104.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="loginImageVeiw" fitHeight="360.0" fitWidth="308.0" layoutX="43.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
 
                     <Image url="@../../../../../../images/login.png" />
                 </ImageView>
-                <Label layoutX="115.0" layoutY="326.0" text="RSS Feed Reader" textFill="#33040d">
+                <Label layoutX="115.0" layoutY="360.0" text="RSS Feed Reader" textFill="#33040d">
                     <font>
                         <Font name="Impact" size="24.0" />
                     </font>
 
                 </Label>
-                <Label layoutX="151.0" layoutY="356.0" text="RFR" textFill="#0d36e0">
+                <Label layoutX="149.0" layoutY="389.0" text="RFR" textFill="#0d36e0">
                     <font>
                         <Font name="System Bold" size="35.0" />
                     </font>

@@ -1,13 +1,14 @@
 package org.rss.rssfeed.controller;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -25,6 +26,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.rss.rssfeed.Exceptions.NewsNotFetchedExceptions;
 import org.rss.rssfeed.Exceptions.switchSceneException;
 import org.rss.rssfeed.HelloApplication;
@@ -36,6 +38,7 @@ import java.net.HttpURLConnection;
 
 
 public class NewsPageController extends Application implements Initializable {
+    public Button logout;
     private HostServices hostServices;
 
     @FXML
@@ -56,6 +59,8 @@ public class NewsPageController extends Application implements Initializable {
     @FXML
     private ImageView logoImageView1;
 
+    @FXML
+    private ImageView feedImageView;
 
     private String currentLayout;
 
@@ -80,6 +85,14 @@ public class NewsPageController extends Application implements Initializable {
             File brandingFile = new File("images/User.png");
             Image branding = new Image(brandingFile.toURI().toString());
             userImageView1.setImage(branding);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/images.png");
+            Image branding = new Image(brandingFile.toURI().toString());
+            feedImageView.setImage(branding);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -146,10 +159,66 @@ public class NewsPageController extends Application implements Initializable {
 
             case "Compact View":
                 displayInCompactView(sourcesArray);
-            default:
+                break;
+
+                default:
+                    displayInCardView(sourcesArray);
                 break;
         }
     }
+    private void displayInCardView(JsonArray sourcesArray) {
+        // Clear existing data
+        newsGrid.getChildren().clear();
+
+        int col = 0;
+        int row = 0;
+        for (JsonElement sourceElement : sourcesArray) {
+            JsonObject sourceObject = sourceElement.getAsJsonObject();
+
+            String name = sourceObject.get("name").getAsString();
+            String urlLink = sourceObject.get("url").getAsString();
+
+            // Create a Hyperlink with the name
+            Hyperlink link = new Hyperlink(name);
+            link.setOnAction(event -> {
+                Webview webViewSample = new Webview();
+                webViewSample.loadURL(urlLink);
+            });
+
+            // Customize the style of the Hyperlink
+            link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
+
+            // Create a VBox to hold the Hyperlink
+            VBox card = new VBox(link);
+            card.setStyle("-fx-background-color: #ffffff;" +
+                    "-fx-background-radius: 6px; " +
+                    "-fx-border-color: black; " +
+                    "-fx-border-width: 1px; " +
+                    "-fx-border-radius: 10px; " +
+                    "-fx-padding: 6px; " +
+                    "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);");
+
+            card.setPrefWidth(200); // Adjust the width as needed
+            card.setAlignment(Pos.CENTER);
+            // Mouse enter animation
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(300), card);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.setCycleCount(1);
+
+            card.setOnMouseEntered(e -> {
+                fadeIn.playFromStart();
+            });
+
+
+
+            // Add the VBox to the grid
+            newsGrid.add(card, row/14, row++);
+
+        }
+    }
+
+
 
     private void displayInTileView(JsonArray sourcesArray) {
         newsGrid.getChildren().clear();
@@ -174,7 +243,26 @@ public class NewsPageController extends Application implements Initializable {
 
             // Create a VBox to hold the Hyperlink
             VBox card = new VBox(link);
-            card.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10px; -fx-background-color: #f0f0f0;");
+            card.setStyle("-fx-background-color: #ffffff; " +
+                    "-fx-background-radius: 10px; " +
+                    "-fx-border-color: black; " +
+                    "-fx-border-width: 1px; " +
+                    "-fx-border-radius: 10px; " +
+                    "-fx-padding: 10px; " +
+                    "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);");
+
+            card.setPrefWidth(200); // Adjust the width as needed
+            card.setAlignment(Pos.CENTER);
+
+            // Mouse enter animation
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(300), card);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.setCycleCount(1);
+
+            card.setOnMouseEntered(e -> {
+                fadeIn.playFromStart();
+            });
 
             // Add the VBox to the grid
             newsGrid.add(card, col, row);
@@ -215,17 +303,34 @@ public class NewsPageController extends Application implements Initializable {
             itemBox.getChildren().add(link);
 
             // Set layout properties for VBox
-            itemBox.setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-padding: 10px;-fx-background-color: #f0f0f0;");
+            itemBox.setStyle("-fx-background-color: #ffffff; " +
+                    "-fx-background-radius: 10px; " +
+                    "-fx-border-color: black; " +
+                    "-fx-border-width: 1px; " +
+                    "-fx-border-radius: 10px; " +
+                    "-fx-padding: 10px; " +
+                    "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);");
 
+            // Mouse enter animation
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(300), itemBox);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.setCycleCount(1);
+
+            itemBox.setOnMouseEntered(e -> {
+                fadeIn.playFromStart();
+            });
             // Add the VBox to the GridPane
             newsGrid.add(itemBox, col, row);
 
             // Adjust row and column for the next item
             row++;
-            if (row >= 2) {
-                row = 0;
-                col++;
+            if (row >= 4) {
+                row = 2;
+                col+=1;
+
             }
+
         }
     }
     private void displayInCompactView(JsonArray sourcesArray) {
@@ -233,11 +338,12 @@ public class NewsPageController extends Application implements Initializable {
         newsGrid.getChildren().clear();
 
         int row = 0;
+        int col=0;
         for (JsonElement sourceElement : sourcesArray) {
             JsonObject sourceObject = sourceElement.getAsJsonObject();
 
             String name = sourceObject.get("name").getAsString();
-//            String description = sourceObject.get("description").getAsString();
+            //String description = sourceObject.get("description").getAsString();
             String urlLink = sourceObject.get("url").getAsString();
 
             Hyperlink link = new Hyperlink(name);
@@ -246,16 +352,35 @@ public class NewsPageController extends Application implements Initializable {
                 webViewSample.loadURL(urlLink);
             });
 
-//            Label descLabel = new Label(description);
+            //Label descLabel = new Label(description);
 
             VBox itemBox = new VBox(5); // Adjust spacing as needed
             itemBox.getChildren().add(link);
 
             // Set layout properties for VBox
-            link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
+            itemBox.setStyle("-fx-background-color: #ffffff; " +
+                    "-fx-background-radius: 6px; " +
+                    "-fx-border-color: blue; " +
+                    "-fx-border-width: 1px; " +
+                    "-fx-border-radius: 10px; " +
+                    "-fx-padding: 6px; " +
+                    "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0);");
+
+            itemBox.setPrefWidth(200); // Adjust the width as needed
+            itemBox.setAlignment(Pos.CENTER);
+
+            // Mouse enter animation
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(300), itemBox);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.setCycleCount(1);
+
+            itemBox.setOnMouseEntered(e -> {
+                fadeIn.playFromStart();
+            });
 
             // Add VBox to GridPane
-            newsGrid.add(itemBox, 0, row++);
+            newsGrid.add(itemBox, 0, ++row);
         }
     }
 
@@ -292,6 +417,21 @@ public class NewsPageController extends Application implements Initializable {
             throw new switchSceneException("Error in NewspageContoller switching to Homepage in cancellayoutButton",ex);
         }
 
+    }
+
+    public void Logout(ActionEvent event) throws switchSceneException {
+        try {
+            Stage stage = (Stage) logout.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+            loggerController.logger.info("Switching to Homepage");
+        } catch (IOException ex) {
+            System.out.println(ex);
+            loggerController.logger.error("Error in switching homepage" + ex);
+            throw new switchSceneException("Error in NewspageContoller switching to Homepage in cancellayoutButton",ex);
+        }
     }
 }
 

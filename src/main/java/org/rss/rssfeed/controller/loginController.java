@@ -162,9 +162,6 @@ public class loginController implements Initializable {
                         // Authentication failed
                         loginMessageLabel.setText("Invalid username or password");
                     }
-                } else {
-                    // Username not found
-                    loginMessageLabel.setText("Invalid username or password");
                 }
             }
             catch(Exception e){
