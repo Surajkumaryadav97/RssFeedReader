@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -47,7 +48,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Button fx:id="logout" layoutX="777.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #820000;" onAction="#Logout" text="Logout" textFill="#eeebeb">
+            <Button fx:id="logout" layoutX="777.0" layoutY="40.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: #820000;" text="Logout" textFill="#eeebeb">
                <font>
                   <Font name="Tahoma" size="12.0" />
                </font>
@@ -85,7 +86,18 @@
    <center>
       <AnchorPane style="-fx-background-color: #F0EDCF;" BorderPane.alignment="CENTER">
 
-         <GridPane fx:id="newsGrid" />
+
+         <StackPane layoutX="6.0" prefHeight="561.0" prefWidth="653.0">
+
+            <children>
+               <ImageView fx:id="dashboard" fitHeight="497.0" fitWidth="509.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../../../../images/dashboard.png" />
+                  </image>
+               </ImageView>
+               <GridPane fx:id="newsGrid" />
+            </children>
+         </StackPane>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

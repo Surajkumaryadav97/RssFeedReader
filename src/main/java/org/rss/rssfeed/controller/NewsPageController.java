@@ -60,6 +60,10 @@ public class NewsPageController extends Application implements Initializable {
     private ImageView logoImageView1;
 
     @FXML
+    private ImageView dashboard;
+
+
+    @FXML
     private ImageView feedImageView;
 
     private String currentLayout;
@@ -89,10 +93,19 @@ public class NewsPageController extends Application implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+//        try {
+//            File brandingFile = new File("images/images.png");
+//            Image branding = new Image(brandingFile.toURI().toString());
+//            feedImageView.setImage(branding);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
         try {
-            File brandingFile = new File("images/images.png");
+            File brandingFile = new File("images/dashboard.png");
             Image branding = new Image(brandingFile.toURI().toString());
-            feedImageView.setImage(branding);
+            dashboard.setImage(branding);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -186,16 +199,17 @@ public class NewsPageController extends Application implements Initializable {
             });
 
             // Customize the style of the Hyperlink
-            link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
+            link.setStyle("-fx-text-fill:#FFF4E0 ; -fx-font-weight: bold;");
 
             // Create a VBox to hold the Hyperlink
             VBox card = new VBox(link);
-            card.setStyle("-fx-background-color: #ffffff;" +
+            card.setStyle("-fx-background-color: #4D4D4D;" +
                     "-fx-background-radius: 6px; " +
-                    "-fx-border-color: black; " +
+                    "-fx-border-color: #FFF4E0; " +
                     "-fx-border-width: 1px; " +
                     "-fx-border-radius: 10px; " +
                     "-fx-padding: 6px; " +
+                    "-fx-text-fill: #FFF4E0;"+
                     "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);");
 
             card.setPrefWidth(200); // Adjust the width as needed
@@ -239,16 +253,17 @@ public class NewsPageController extends Application implements Initializable {
             });
 
             // Customize the style of the Hyperlink
-            link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
+            link.setStyle("-fx-text-fill: #FFF4E0; -fx-font-weight: bold;");
 
             // Create a VBox to hold the Hyperlink
             VBox card = new VBox(link);
-            card.setStyle("-fx-background-color: #ffffff; " +
+            card.setStyle("-fx-background-color: #4D4D4D; " +
                     "-fx-background-radius: 10px; " +
-                    "-fx-border-color: black; " +
+                    "-fx-border-color: #FFF4E0; " +
                     "-fx-border-width: 1px; " +
                     "-fx-border-radius: 10px; " +
                     "-fx-padding: 10px; " +
+                    "-fx-text-fill: #FFF4E0;"+
                     "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);");
 
             card.setPrefWidth(200); // Adjust the width as needed
@@ -296,19 +311,20 @@ public class NewsPageController extends Application implements Initializable {
             });
 
             // Customize the style of the Hyperlink
-            link.setStyle("-fx-text-fill: blue; -fx-font-weight: bold;");
+            link.setStyle("-fx-text-fill: #FFF4E0; -fx-font-weight: bold;");
 
             // Create a VBox to hold the Hyperlink
             VBox itemBox = new VBox(5); // Adjust spacing as needed
             itemBox.getChildren().add(link);
 
             // Set layout properties for VBox
-            itemBox.setStyle("-fx-background-color: #ffffff; " +
+            itemBox.setStyle("-fx-background-color: #4D4D4D; " +
                     "-fx-background-radius: 10px; " +
-                    "-fx-border-color: black; " +
+                    "-fx-border-color: #FFF4E0; " +
                     "-fx-border-width: 1px; " +
                     "-fx-border-radius: 10px; " +
                     "-fx-padding: 10px; " +
+                    "-fx-text-fill: #FFF4E0;"+
                     "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);");
 
             // Mouse enter animation
@@ -352,18 +368,21 @@ public class NewsPageController extends Application implements Initializable {
                 webViewSample.loadURL(urlLink);
             });
 
+            link.setStyle("-fx-text-fill: #FFF4E0; -fx-font-weight: bold;");
             //Label descLabel = new Label(description);
 
             VBox itemBox = new VBox(5); // Adjust spacing as needed
             itemBox.getChildren().add(link);
 
             // Set layout properties for VBox
-            itemBox.setStyle("-fx-background-color: #ffffff; " +
+            itemBox.setStyle("-fx-background-color: #4D4D4D; " +
                     "-fx-background-radius: 6px; " +
-                    "-fx-border-color: blue; " +
+                    "-fx-border-color: #FFF4E0; " +
                     "-fx-border-width: 1px; " +
                     "-fx-border-radius: 10px; " +
                     "-fx-padding: 6px; " +
+
+                                    "-fx-text-fill: #FFF4E0;"+
                     "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0);");
 
             itemBox.setPrefWidth(200); // Adjust the width as needed
