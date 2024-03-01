@@ -61,11 +61,7 @@ public void setStage(Stage stage) {
     this.stage = stage;
 }
 
-
-
-
-
-
+//it is used to switchscreen btw two stage
 public void start (String category) throws switchSceneException {
 
     try {

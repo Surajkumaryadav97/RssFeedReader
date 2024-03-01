@@ -70,6 +70,12 @@ public class registerController implements Initializable {
             return;
         }
 
+        if (userName.contains("@")) {
+            registerMessageLabel.setText("Username cannot contain '@'");
+            loggerController.logger.debug("Invalid username format");
+            return;
+        }
+
         // Hash the password using bcrypt
         String Password = hashPassword(password);
 
@@ -90,6 +96,11 @@ public class registerController implements Initializable {
             if (rowsAffected > 0) {
               //check user has registered successfully
                 System.out.println("User registered successfully!");
+                reg_Fname.clear();
+                reg_Lname.clear();
+                reg_Uname.clear();
+                reg_password.clear();
+                registerMessageLabel.setText("User registered successfully!");
 
             } else {
                 System.out.println("Failed to register user.");
@@ -99,6 +110,11 @@ public class registerController implements Initializable {
             connection.close();
         } catch (Exception e) {
             System.out.println("Error registering user: " + e.getMessage());
+            registerMessageLabel.setText("UserName is already exist!!");
+            reg_Fname.clear();
+            reg_Lname.clear();
+            reg_Uname.clear();
+            reg_password.clear();
             throw new sqlException("Error in registering user", e);
         }
         finally{

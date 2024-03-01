@@ -32,7 +32,7 @@ public class HelloApplication extends Application  {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        // Pass the stage instance to the controller
+
 
 
     }

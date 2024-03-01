@@ -62,6 +62,17 @@ public class NewsPageController extends Application implements Initializable {
     @FXML
     private ImageView dashboard;
 
+    @FXML
+    String Ctgry;
+
+    @FXML
+    String grid;
+
+    @FXML
+    String list;
+
+    @FXML
+    String compact;
 
     @FXML
     private ImageView feedImageView;
@@ -93,14 +104,6 @@ public class NewsPageController extends Application implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        try {
-//            File brandingFile = new File("images/images.png");
-//            Image branding = new Image(brandingFile.toURI().toString());
-//            feedImageView.setImage(branding);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
         try {
             File brandingFile = new File("images/dashboard.png");
@@ -113,10 +116,7 @@ public class NewsPageController extends Application implements Initializable {
     }
 
 
-    String Ctgry;
-    String grid;
-    String list;
-    String compact;
+
 
     void fetchCategory(String category, String adapt) throws NewsNotFetchedExceptions {
         Ctgry = category;
@@ -135,7 +135,7 @@ public class NewsPageController extends Application implements Initializable {
             connection.connect();
 
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+              BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -191,17 +191,17 @@ public class NewsPageController extends Application implements Initializable {
             String name = sourceObject.get("name").getAsString();
             String urlLink = sourceObject.get("url").getAsString();
 
-            // Create a Hyperlink with the name
+
             Hyperlink link = new Hyperlink(name);
             link.setOnAction(event -> {
                 Webview webViewSample = new Webview();
                 webViewSample.loadURL(urlLink);
             });
 
-            // Customize the style of the Hyperlink
+            //  styling  the link
             link.setStyle("-fx-text-fill:#FFF4E0 ; -fx-font-weight: bold;");
 
-            // Create a VBox to hold the Hyperlink
+            // Create a card to display link
             VBox card = new VBox(link);
             card.setStyle("-fx-background-color: #4D4D4D;" +
                     "-fx-background-radius: 6px; " +
@@ -226,7 +226,7 @@ public class NewsPageController extends Application implements Initializable {
 
 
 
-            // Add the VBox to the grid
+            // Adding the VBox to the grid
             newsGrid.add(card, row/14, row++);
 
         }
@@ -252,10 +252,10 @@ public class NewsPageController extends Application implements Initializable {
                 webViewSample.loadURL(urlLink);
             });
 
-            // Customize the style of the Hyperlink
+            // Styling th link
             link.setStyle("-fx-text-fill: #FFF4E0; -fx-font-weight: bold;");
 
-            // Create a VBox to hold the Hyperlink
+            // Create a card to display link
             VBox card = new VBox(link);
             card.setStyle("-fx-background-color: #4D4D4D; " +
                     "-fx-background-radius: 10px; " +
@@ -282,9 +282,8 @@ public class NewsPageController extends Application implements Initializable {
             // Add the VBox to the grid
             newsGrid.add(card, col, row);
 
-            // Adjust column and row for the next item
             col++;
-            if (col >= 3) {
+            if (col >= 4) {
                 col = 0;
                 row++;
             }
@@ -303,21 +302,21 @@ public class NewsPageController extends Application implements Initializable {
             String name = sourceObject.get("name").getAsString();
             String urlLink = sourceObject.get("url").getAsString();
 
-            // Create a Hyperlink with the name
+
             Hyperlink link = new Hyperlink(name);
             link.setOnAction(event -> {
                 Webview webViewSample = new Webview();
                 webViewSample.loadURL(urlLink);
             });
 
-            // Customize the style of the Hyperlink
+            // Styling the link
             link.setStyle("-fx-text-fill: #FFF4E0; -fx-font-weight: bold;");
 
-            // Create a VBox to hold the Hyperlink
+            // Create a card to display link
             VBox itemBox = new VBox(5); // Adjust spacing as needed
             itemBox.getChildren().add(link);
 
-            // Set layout properties for VBox
+            // Set layout properties for styling
             itemBox.setStyle("-fx-background-color: #4D4D4D; " +
                     "-fx-background-radius: 10px; " +
                     "-fx-border-color: #FFF4E0; " +
@@ -374,7 +373,7 @@ public class NewsPageController extends Application implements Initializable {
             VBox itemBox = new VBox(5); // Adjust spacing as needed
             itemBox.getChildren().add(link);
 
-            // Set layout properties for VBox
+            // Set layout properties for styling
             itemBox.setStyle("-fx-background-color: #4D4D4D; " +
                     "-fx-background-radius: 6px; " +
                     "-fx-border-color: #FFF4E0; " +

@@ -35,8 +35,6 @@ import java.util.ResourceBundle;
 public class loginController implements Initializable {
 
 
-
-
     @FXML
     private TextField usernameTextField;
 
