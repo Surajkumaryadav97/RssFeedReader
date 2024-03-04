@@ -48,7 +48,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Button fx:id="logout" layoutX="777.0" layoutY="40.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: #820000;" text="Logout" textFill="#eeebeb">
+            <Button fx:id="logout" layoutX="777.0" layoutY="40.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: #820000;" styleClass="cancel" stylesheets="@style.css" text="Logout" textFill="#eeebeb">
                <font>
                   <Font name="Tahoma" size="12.0" />
                </font>

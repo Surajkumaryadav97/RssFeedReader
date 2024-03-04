@@ -1,0 +1,26 @@
+09:46:30.920 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+10:59:06.255 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+12:06:02.952 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.switchSceneException: Error in loginController start method switch to Homepage
+12:06:02.960 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.sqlException: Error in executing database Query
+12:42:35.201 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.switchSceneException: Error in loginController start method switch to Homepage
+12:42:35.221 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.sqlException: Error in executing database Query
+14:51:34.562 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - java.lang.NullPointerException: Cannot invoke "javafx.scene.control.Label.setText(String)" because "this.loginMessageLabel" is null
+14:51:34.572 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.sqlException: Error in executing database Query
+14:52:31.645 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - java.lang.NullPointerException: Cannot invoke "javafx.scene.control.Label.setText(String)" because "this.loginMessageLabel" is null
+14:52:31.654 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.sqlException: Error in executing database Query
+14:54:07.746 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - java.lang.NullPointerException: Cannot invoke "javafx.scene.control.Label.setText(String)" because "this.loginMessageLabel" is null
+14:54:07.755 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.sqlException: Error in executing database Query
+15:01:22.684 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+15:01:42.902 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+15:01:42.928 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+15:01:47.084 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+15:01:47.114 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.registerController - Switching to Homepage
+15:01:53.043 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.registerController - Switching to hello-view
+15:01:56.394 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+15:01:56.423 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.registerController - Switching to Homepage
+16:56:10.845 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+16:56:36.687 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+16:56:58.747 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+16:57:15.287 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+16:57:19.801 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+16:57:19.829 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage

@@ -58,14 +58,6 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        try {
-//            File brandingFile = new File("images/home.png");
-//            Image branding1 = new Image(brandingFile.toURI().toString());
-//            homeImageView.setImage(branding1);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
         try {
             File brandingFile = new File("images/logo_.png");
             Image branding2 = new Image(brandingFile.toURI().toString());

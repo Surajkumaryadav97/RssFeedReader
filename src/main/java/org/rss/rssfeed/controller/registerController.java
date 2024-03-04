@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 import org.rss.rssfeed.Exceptions.sqlException;
 import org.rss.rssfeed.Exceptions.switchSceneException;
@@ -23,7 +25,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class registerController implements Initializable {
-
+    public final Logger logger = LogManager.getLogger(registerController.class);
     public Label registerMessageLabel;
     @FXML
     private TextField reg_Fname;
@@ -66,13 +68,13 @@ public class registerController implements Initializable {
         if(firstName.isEmpty() || lastName.isEmpty() || userName.isEmpty()
         || password.isEmpty()) {
             registerMessageLabel.setText("All Fields are Required");
-            loggerController.logger.debug("Something missing in registering User");
+            logger.debug("Something missing in registering User");
             return;
         }
 
         if (userName.contains("@")) {
             registerMessageLabel.setText("Username cannot contain '@'");
-            loggerController.logger.debug("Invalid username format");
+            logger.debug("Invalid username format");
             return;
         }
 
@@ -137,10 +139,10 @@ public class registerController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
-            loggerController.logger.info("Switching to hello-view");
+            logger.info("Switching to hello-view");
         } catch (IOException ex) {
             System.out.println(ex);
-            loggerController.logger.error("Error in register cancel is" + ex);
+            logger.error("Error in register cancel is" + ex);
         }
 
     }
@@ -170,10 +172,10 @@ public class registerController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
-            loggerController.logger.info("Switching to Homepage");
+           logger.info("Switching to Homepage");
         } catch (IOException ex) {
             System.out.println(ex);
-            loggerController.logger.error("Error in switching homepage" + ex);
+            logger.error("Error in switching homepage" + ex);
             throw new switchSceneException("Error in NewspageContoller switching to Homepage in cancellayoutButton",ex);
         }
     }

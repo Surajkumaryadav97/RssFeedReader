@@ -9,17 +9,21 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import java.awt.*;
+import java.net.URI;
+
 public class Browsers extends Region {
     final WebView browser = new WebView();
     final WebEngine webEngine = browser.getEngine();
 
-    public Browsers(){
+    public Browsers() {
         this(Webview.Url);
         System.out.println(Webview.Url);
     }
 
     public Browsers(String url) {
         // Apply the styles
+
         getStyleClass().add("browser");
 
         // Load the URL
@@ -29,9 +33,7 @@ public class Browsers extends Region {
         getChildren().add(browser);
 
 
-
     }
-
 
 
     private Node createSpacer() {

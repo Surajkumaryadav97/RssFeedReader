@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -16,8 +19,8 @@ import java.util.ResourceBundle;
 
 public class HelloApplication extends Application  {
 
-//
 
+public static final Logger logger = LogManager.getLogger(HelloApplication.class);
 
     @FXML
     private ImageView logoImageView;
@@ -31,14 +34,15 @@ public class HelloApplication extends Application  {
         primaryStage.setTitle("RFR");
         primaryStage.setResizable(false);
         primaryStage.show();
-
+       logger.debug("Scene switching");
 
 
 
     }
 
     public static void main(String[] args) {
-        launch(args);
+        System.setProperty("log4j.configurationFile", "src/main/resources/log4j2.xml");
+        launch();
     }
 
 

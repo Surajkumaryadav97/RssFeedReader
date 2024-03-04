@@ -14,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 import org.rss.rssfeed.Exceptions.sqlException;
 import org.rss.rssfeed.Exceptions.switchSceneException;
@@ -34,6 +36,7 @@ import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
 
+    public final Logger logger = LogManager.getLogger(loginController.class);
 
     @FXML
     private TextField usernameTextField;
@@ -63,15 +66,15 @@ public class loginController implements Initializable {
             File brandingFile = new File("images/login.png");
             Image branding = new Image(brandingFile.toURI().toString());
             loginImageVeiw.setImage(branding);
-            loggerController.logger.info("Image loading");
+            logger.info("Image loading");
 
         } catch (Exception e) {
-            loggerController.logger.error("Image loading error" + e);
+           logger.error("Image loading error" + e);
         }
     }
 
 
-    HomepageController hg = new HomepageController();
+
 
     @FXML
     public void cancel(ActionEvent event) throws switchSceneException {
@@ -82,10 +85,10 @@ public class loginController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
-            loggerController.logger.debug("Switching to hello-view");
+           logger.debug("Switching to hello-view");
         } catch (Exception ex) {
             System.out.println(ex);
-            loggerController.logger.error("Error in login is" + ex);
+            logger.error("Error in login is" + ex);
             throw new switchSceneException("error in loginController cancel switch to hello-view", ex);
         }
 
@@ -104,7 +107,7 @@ public class loginController implements Initializable {
     public void switchScene(Scene newScene) {
         Stage stage = (Stage) loginButton.getScene().getWindow();
         stage.setScene(newScene);
-        loggerController.logger.debug("Switching scene");
+      logger.debug("Switching scene");
     }
 
     @FXML
@@ -115,10 +118,10 @@ public class loginController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
-            loggerController.logger.debug("Switching to register");
+            logger.debug("Switching to register");
         } catch (Exception ex) {
             System.out.println(ex);
-            loggerController.logger.error(ex);
+            logger.error(ex);
             throw new switchSceneException("Error in switching to register from loginController signup", ex);
         }
     }
@@ -129,6 +132,7 @@ public class loginController implements Initializable {
         String password = enterPasswordField.getText();
 
         if (userName.isEmpty() || password.isEmpty()) {
+            logger.debug("Some fields are Empty");
             loginMessageLabel.setText("Enter username or password");
             return;
         }
@@ -146,7 +150,7 @@ public class loginController implements Initializable {
                     String hashedPasswordFromDB = resultSet.getString("Password");
                     String username = resultSet.getString("firstName");
                     System.out.println(username);
-                    hg.getUserName(username);
+
                     // Verify the entered password against the hashed password from the database
                     if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
 
@@ -158,17 +162,18 @@ public class loginController implements Initializable {
                         // Proceed with further actions (e.g., navigating to another scene)
                     } else {
                         // Authentication failed
+                        logger.debug("Invalid User");
                         loginMessageLabel.setText("Invalid username or password");
                     }
                 }
             }
             catch(Exception e){
-                loggerController.logger.error(e);
+               logger.error(e);
                 throw new sqlException("Error in executing database Query", e);
             }
         } catch (Exception e) {
             // Handle database errors
-            loggerController.logger.error(e);
+            logger.error(e);
             throw new userNotFoundException("No User Found", e);
         } finally {
             // Close connection

@@ -187,6 +187,13 @@
 -fx-background-radius: 30px;
 -fx-border-style: solid;
 -fx-border-color: #748CF1;
+ transition: all 0.3s ease; /* Smooth transition effect */
+}
+
+.pane_1:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }
 
 .image_1{
@@ -203,22 +210,31 @@
 -fx-background-radius: 30px;
 -fx-border-style: solid;
 -fx-border-color: #FFF7F1;
+ transition: all 0.3s ease; /* Smooth transition effect */
 
 }
-
-.pane_12121{
-
--fx-background-color: #B4B4B8;
--fx-border-width: 2px 2px 2px 2px;
-
--fx-border-radius: 30px;
--fx-background-radius: 30px;
--fx-border-style: solid;
--fx-border-color: #3C3633;
-
-
-
+.pane_122:hover {
+    -fx-background-color: #ff0000; /* Change background color on hover */
+    -fx-border-color: #ffffff; /* Change border color on hover */
 }
+.pane_12121 {
+    /* Define initial styles */
+    -fx-background-color: #B4B4B8;
+    -fx-border-width: 2px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-border-style: solid;
+    -fx-border-color: #3C3633;
+    transition: all 0.3s ease; /* Smooth transition effect */
+}
+
+.pane_12121:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+
 .pane2001{
 -fx-background-color: #86A789;
 -fx-border-width: 2px 2px 2px 2px;
@@ -227,7 +243,12 @@
 -fx-background-radius: 30px;
 -fx-border-style: solid;
 -fx-border-color: #3C3633;
-
+  transition: all 0.3s ease; /* Smooth transition effect */
+}
+.pane2001:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }
 .pane_1212{
 
@@ -238,8 +259,13 @@
 -fx-background-radius: 30px;
 -fx-border-style: solid;
 -fx-border-color: #3C3633;
+  transition: all 0.3s ease; /* Smooth transition effect */
 
-
+}
+.pane_1212:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }
 .pane_1211{
 fx-background-color: #B4B4B8;
@@ -249,8 +275,13 @@ fx-background-color: #B4B4B8;
 -fx-background-radius: 30px;
 -fx-border-style: solid;
 -fx-border-color: #3C3633;
+  transition: all 0.3s ease; /* Smooth transition effect */
 
-
+}
+.pane_1211:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }
 
 .image_1{
@@ -266,5 +297,110 @@ fx-background-color: #820300;
 -fx-background-radius: 30px;
 -fx-border-style: solid;
 -fx-border-color: #3C3633;
+transition: all 0.3s ease; /* Smooth transition effect */
+}
+.pane_12:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
 
+
+.pane1{
+fx-background-color: #820300;
+-fx-border-width: 2px 2px 2px 2px;
+
+-fx-border-radius: 30px;
+-fx-background-radius: 30px;
+-fx-border-style: solid;
+-fx-border-color: #3C3633;
+ transition: all 0.3s ease; /* Smooth transition effect */
+
+}
+.pane1:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+
+.pane2{
+fx-background-color: #820300;
+-fx-border-width: 2px 2px 2px 2px;
+
+-fx-border-radius: 30px;
+-fx-background-radius: 30px;
+-fx-border-style: solid;
+-fx-border-color: #3C3633;
+ transition: all 0.3s ease; /* Smooth transition effect */
+
+}
+.pane2:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+.pane3{
+fx-background-color: #820300;
+-fx-border-width: 2px 2px 2px 2px;
+
+-fx-border-radius: 30px;
+-fx-background-radius: 30px;
+-fx-border-style: solid;
+-fx-border-color: #3C3633;
+ transition: all 0.3s ease; /* Smooth transition effect */
+
+}
+.pane3:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+.pane4 {
+    -fx-background-color: #820300;
+    -fx-border-width: 2px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-border-style: solid;
+    -fx-border-color: #3C3633;
+    transition: all 0.3s ease; /* Smooth transition effect */
+}
+
+.pane4:hover {
+    /* Zoom in effect on hover */
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+.tech2ImageView {
+    /* Set initial transition properties */
+    -fx-transition-duration: 0.5s;
+    -fx-transition-property: fit-width, fit-height;
+
+    /* Set initial fit size */
+    -fx-fit-width: 100;
+    -fx-fit-height: 100;
+}
+
+.tech2ImageView:hover {
+    /* Enlarge image on hover */
+    -fx-fit-width: 150;
+    -fx-fit-height: 150;
+}
+
+.cancel {
+    /* Define initial styles */
+    -fx-background-color: #FF0000; /* Red background color */
+    -fx-text-fill: #FFFFFF; /* White text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 8px 16px; /* Padding */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-border-color: #FF0000; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    transition: all 0.3s ease; /* Smooth transition effect */
+}
+
+.cancel:hover {
+    /* Change background color and text color on hover */
+    -fx-background-color: #FFFFFF; /* White background color */
+    -fx-text-fill: #FF0000; /* Red text color */
 }
