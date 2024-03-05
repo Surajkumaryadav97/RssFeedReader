@@ -8,6 +8,7 @@ module org.rss.rssfeed {
     requires javafx.web;
     requires org.apache.logging.log4j;
     requires java.desktop;
+    requires org.jsoup;
 
 
     opens org.rss.rssfeed to javafx.fxml;

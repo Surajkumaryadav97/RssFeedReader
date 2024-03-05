@@ -95,7 +95,7 @@
                                                 <Image url="@../../../../../../images/health1.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="151.0" layoutY="58.0" prefHeight="17.0" prefWidth="163.0" text="A study from Healthline " />
+                                          <Label fx:id="label1" layoutX="151.0" layoutY="58.0" prefHeight="17.0" prefWidth="163.0" text="A study from Healthline " />
                                           <Label layoutX="151.0" layoutY="91.0" prefHeight="17.0" prefWidth="163.0" text="the Atlantic diet......" />
                                           <Label layoutX="151.0" layoutY="75.0" prefHeight="17.0" prefWidth="163.0" text="found that people on" />
                                        </children>

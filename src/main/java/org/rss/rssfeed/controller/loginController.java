@@ -96,7 +96,7 @@ public class loginController implements Initializable {
 
     public void start() throws switchSceneException {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Homepage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
             switchScene(new Scene(fxmlLoader.load()));
         }
         catch(Exception ex){
