@@ -159,9 +159,9 @@ public class loginController implements Initializable {
 
                         start();
 
-                        // Proceed with further actions (e.g., navigating to another scene)
+
                     } else {
-                        // Authentication failed
+
                         logger.debug("Invalid User");
                         loginMessageLabel.setText("Invalid username or password");
                     }
@@ -172,11 +172,11 @@ public class loginController implements Initializable {
                 throw new sqlException("Error in executing database Query", e);
             }
         } catch (Exception e) {
-            // Handle database errors
+
             logger.error(e);
             throw new userNotFoundException("No User Found", e);
         } finally {
-            // Close connection
+            // Close the DB connection
             try {
                 connection.close();
             }catch(Exception e){

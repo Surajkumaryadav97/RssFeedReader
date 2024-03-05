@@ -148,7 +148,7 @@ public class registerController implements Initializable {
     }
 
     private String hashPassword(String password) {
-        // Hash the password using bcrypt
+
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 

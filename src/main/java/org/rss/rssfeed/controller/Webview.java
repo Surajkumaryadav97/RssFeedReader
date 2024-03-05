@@ -12,7 +12,7 @@ public class Webview extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Create the scene
+
         stage.setTitle("Web View");
 
         scene = new Scene(new Browsers(), 850, 650, Color.web("#666970"));
@@ -23,7 +23,7 @@ public class Webview extends Application {
 
     public void loadURL(String url) {
 
-        //set the url
+
         Url=url;
         start(new Stage());
 

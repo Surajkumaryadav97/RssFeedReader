@@ -24,3 +24,61 @@
 16:57:15.287 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
 16:57:19.801 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
 16:57:19.829 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+17:09:50.564 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+17:24:42.237 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+17:29:29.238 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+17:41:10.213 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+18:03:48.872 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+18:06:53.388 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+18:06:53.444 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+19:31:04.928 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+19:36:56.771 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+19:40:29.790 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+19:40:45.796 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+19:41:02.416 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+19:41:02.446 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+19:45:12.251 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+19:53:14.701 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+19:57:06.302 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+20:00:13.145 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+20:06:33.442 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+20:08:06.294 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+20:25:19.885 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+20:30:53.182 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+20:35:14.412 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+20:38:41.241 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:06:37.474 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:14:15.693 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:15:45.788 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+09:16:01.581 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+09:16:07.372 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:21:38.439 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:23:20.923 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:25:47.153 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:31:27.685 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:35:23.310 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:36:31.627 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:38:05.488 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:39:13.369 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:41:04.459 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:41:32.059 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:44:50.527 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+09:45:32.936 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+10:34:16.073 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+11:45:40.616 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+12:09:09.449 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.registerController - Switching to hello-view
+12:09:15.546 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.registerController - Switching to hello-view
+12:12:11.250 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+12:18:06.796 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+12:25:18.497 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+12:25:23.095 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+12:25:41.163 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+12:26:21.672 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+12:27:49.248 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+12:28:14.826 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+13:05:53.522 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+13:06:28.743 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+13:07:14.074 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage
+13:13:29.104 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+13:14:56.334 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+13:16:22.389 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.NewsPageController - Switching to Homepage

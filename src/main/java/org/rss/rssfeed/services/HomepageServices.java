@@ -9,11 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.rss.rssfeed.Exceptions.NewsNotFetchedExceptions;
-import org.rss.rssfeed.Exceptions.switchSceneException;
-import org.rss.rssfeed.HelloApplication;
-import org.rss.rssfeed.controller.HomepageController;
-import org.rss.rssfeed.controller.NewsPageController;
 
 import java.io.File;
 import java.io.IOException;

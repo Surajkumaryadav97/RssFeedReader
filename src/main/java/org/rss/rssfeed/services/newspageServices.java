@@ -85,7 +85,7 @@ public class newspageServices {
     }
 
     private void displayInCardView(JsonArray sourcesArray, GridPane newsGrid) {
-        // Implement card view layout logic
+
         newsGrid.getChildren().clear();
 
         int col = 0;
@@ -103,10 +103,9 @@ public class newspageServices {
                 webViewSample.loadURL(urlLink);
             });
 
-            //  styling  the link
             link.setStyle("-fx-text-fill:#FFF4E0 ; -fx-font-weight: bold;");
 
-            // Create a card to display link
+
             VBox card = new VBox(link);
             card.setStyle("-fx-background-color: #4D4D4D;" +
                     "-fx-background-radius: 6px; " +
@@ -117,9 +116,9 @@ public class newspageServices {
                     "-fx-text-fill: #FFF4E0;"+
                     "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);");
 
-            card.setPrefWidth(200); // Adjust the width as needed
+            card.setPrefWidth(200);
             card.setAlignment(Pos.CENTER);
-            // Mouse enter animation
+
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), card);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
@@ -131,7 +130,7 @@ public class newspageServices {
 
 
 
-            // Adding the VBox to the grid
+
             newsGrid.add(card, row/14, row++);
 
         }
@@ -156,10 +155,10 @@ public class newspageServices {
                 webViewSample.loadURL(urlLink);
             });
 
-            // Styling th link
+
             link.setStyle("-fx-text-fill: #FFF4E0; -fx-font-weight: bold;");
 
-            // Create a card to display link
+
             VBox card = new VBox(link);
             card.setStyle("-fx-background-color: #4D4D4D; " +
                     "-fx-background-radius: 10px; " +
@@ -170,10 +169,10 @@ public class newspageServices {
                     "-fx-text-fill: #FFF4E0;"+
                     "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);");
 
-            card.setPrefWidth(200); // Adjust the width as needed
+            card.setPrefWidth(200);
             card.setAlignment(Pos.CENTER);
 
-            // Mouse enter animation
+
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), card);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
@@ -183,7 +182,6 @@ public class newspageServices {
                 fadeIn.playFromStart();
             });
 
-            // Add the VBox to the grid
             newsGrid.add(card, col, row);
 
             col++;
@@ -213,14 +211,14 @@ public class newspageServices {
                 webViewSample.loadURL(urlLink);
             });
 
-            // Styling the link
+
             link.setStyle("-fx-text-fill: #FFF4E0; -fx-font-weight: bold;");
 
-            // Create a card to display link
-            VBox itemBox = new VBox(5); // Adjust spacing as needed
+
+            VBox itemBox = new VBox(5);
             itemBox.getChildren().add(link);
 
-            // Set layout properties for styling
+
             itemBox.setStyle("-fx-background-color: #4D4D4D; " +
                     "-fx-background-radius: 10px; " +
                     "-fx-border-color: #FFF4E0; " +
@@ -230,7 +228,7 @@ public class newspageServices {
                     "-fx-text-fill: #FFF4E0;"+
                     "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);");
 
-            // Mouse enter animation
+
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), itemBox);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
@@ -239,10 +237,10 @@ public class newspageServices {
             itemBox.setOnMouseEntered(e -> {
                 fadeIn.playFromStart();
             });
-            // Add the VBox to the GridPane
+
             newsGrid.add(itemBox, col, row);
 
-            // Adjust row and column for the next item
+
             row++;
             if (row >= 4) {
                 row = 2;
@@ -278,7 +276,7 @@ public class newspageServices {
             VBox itemBox = new VBox(5); // Adjust spacing as needed
             itemBox.getChildren().add(link);
 
-            // Set layout properties for styling
+
             itemBox.setStyle("-fx-background-color: #4D4D4D; " +
                     "-fx-background-radius: 6px; " +
                     "-fx-border-color: #FFF4E0; " +
@@ -292,7 +290,7 @@ public class newspageServices {
             itemBox.setPrefWidth(200); // Adjust the width as needed
             itemBox.setAlignment(Pos.CENTER);
 
-            // Mouse enter animation
+
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), itemBox);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
@@ -302,7 +300,7 @@ public class newspageServices {
                 fadeIn.playFromStart();
             });
 
-            // Add VBox to GridPane
+
             newsGrid.add(itemBox, 0, ++row);
         }
     }

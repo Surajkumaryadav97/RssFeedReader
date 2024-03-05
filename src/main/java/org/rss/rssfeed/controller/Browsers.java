@@ -1,20 +1,18 @@
 package org.rss.rssfeed.controller;
 
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.scene.control.Button;
 
-import java.awt.*;
-import java.net.URI;
-
-public class Browsers extends Region {
+public class Browsers extends BorderPane {
     final WebView browser = new WebView();
     final WebEngine webEngine = browser.getEngine();
+    final Button backButton = new Button("Back");
+    final Button reloadButton = new Button("Reload");
 
     public Browsers() {
         this(Webview.Url);
@@ -22,31 +20,73 @@ public class Browsers extends Region {
     }
 
     public Browsers(String url) {
-        // Apply the styles
 
         getStyleClass().add("browser");
 
-        // Load the URL
+
         webEngine.load(url);
 
-        // Add browser so that it opens
-        getChildren().add(browser);
+
+        backButton.getStyleClass().add("navigation-button");
+        reloadButton.getStyleClass().add("reload-button");
+
+        HBox buttonsContainer = new HBox(10);
+        buttonsContainer.getChildren().addAll(backButton,  reloadButton);
+        buttonsContainer.setAlignment(Pos.CENTER_RIGHT);
+        setTop(buttonsContainer);
+        setCenter(browser);
 
 
-    }
+        backButton.setStyle("-fx-background-color:  #0B60B0; " +
+                "-fx-text-fill: white; " +
+                "-fx-border-radius: 5px; " +
+                "-fx-border-color: #388E3C;");
+
+        backButton.setOnMouseEntered(event -> {
+            backButton.setStyle("-fx-background-color: #07588A; " +
+                    "-fx-text-fill: white; " +
+                    "-fx-border-radius: 5px; " +
+                    "-fx-border-color: #07588A;");
+        });
+
+        backButton.setOnMouseExited(event -> {
+            backButton.setStyle("-fx-background-color: #0B60B0; " +
+                    "-fx-text-fill: white; " +
+                    "-fx-border-radius: 5px; " +
+                    "-fx-border-color: #388E3C;");
+        });
+
+        reloadButton.setStyle("-fx-background-color: #4CAF50 ; " +
+                "-fx-text-fill: white; " +
+                "-fx-border-radius: 5px; " +
+                "-fx-border-color: #0077A3;");
+
+        reloadButton.setOnMouseEntered(event -> {
+            reloadButton.setStyle("-fx-background-color: #45a049; " +
+                    "-fx-text-fill: white; " +
+                    "-fx-border-radius: 5px; " +
+                    "-fx-border-color: #45a049;");
+        });
+
+        reloadButton.setOnMouseExited(event -> {
+            reloadButton.setStyle("-fx-background-color: #4CAF50; " +
+                    "-fx-text-fill: white; " +
+                    "-fx-border-radius: 5px; " +
+                    "-fx-border-color: #0077A3;");
+        });
 
 
-    private Node createSpacer() {
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-        return spacer;
-    }
 
-    @Override
-    protected void layoutChildren() {
-        double w = getWidth();
-        double h = getHeight();
-        layoutInArea(browser, 0, 0, w, h, 0, HPos.CENTER, VPos.CENTER);
+
+        backButton.setOnAction(event -> {
+            if (webEngine.getHistory().getCurrentIndex() > 0) {
+                webEngine.getHistory().go(-1);
+            }
+        });
+
+        reloadButton.setOnAction(event -> {
+            webEngine.reload();
+        });
     }
 
     @Override
