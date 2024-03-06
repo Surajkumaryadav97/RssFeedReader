@@ -24,6 +24,10 @@ public class HelloController implements Initializable {
     @FXML
     private Button loginbtn;
 
+
+    @FXML
+    private Button explore;
+
     @FXML
     private Button regbtn;
 
@@ -151,4 +155,11 @@ public class HelloController implements Initializable {
         stage.show();
     }
 
+    public void explore(ActionEvent event) throws IOException {
+        Stage stage = (Stage) explore.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
 }

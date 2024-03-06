@@ -87,12 +87,7 @@
                                         <Font size="15.0" />
                                     </font>
                                 </Label>
-                                <Button layoutX="275.0" layoutY="235.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" stylesheets="@style.css" text="Explore">
-                                    <styleClass>
-                                        <String fx:value="loginBtn" />
-                                        <String fx:value="animated-button" />
-                                    </styleClass>
-                                </Button>
+                                <Button fx:id="explore" layoutX="275.0" layoutY="235.0" mnemonicParsing="false" onAction="#explore" prefHeight="25.0" prefWidth="97.0" styleClass="healthBtn" stylesheets="@style.css" text="Explore" />
                             </children>
                         </Pane>
                     </children>

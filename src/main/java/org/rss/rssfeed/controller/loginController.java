@@ -149,7 +149,7 @@ public class loginController implements Initializable {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
 
-        // Prepare SQL statement to retrieve hashed password for the given username
+
         String sql = "SELECT Password,firstName,userName,techFeed,healthFeed FROM user WHERE userName = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, userName);
@@ -164,16 +164,19 @@ public class loginController implements Initializable {
                      healthFeed=resultSet.getString("healthFeed");
 
                     System.out.println(userName1);
+//                    UserInfoController userInfoController=new UserInfoController();
+//                    userInfoController.initializeUserInfo(userName1);
 
 //                    System.out.println(feeds);
 
                     // Verify the entered password against the hashed password from the database
                     if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
 
-                        // Authentication successful
+                        // Authentication of user has done successfully
                         loginMessageLabel.setText("Login successful");
-
-
+                        UserInfoController userInfoController=new UserInfoController();
+                        System.out.println(userName1);
+                   userInfoController.initializeUserInfo(userName1,username,techFeed,healthFeed);
                         start(userName1,techFeed,healthFeed);
 
 
@@ -193,7 +196,7 @@ public class loginController implements Initializable {
             logger.error(e);
             throw new userNotFoundException("No User Found", e);
         } finally {
-            // Close the DB connection
+            // Close the DB connection ,it is good practice
             try {
                 connection.close();
             }catch(Exception e){
