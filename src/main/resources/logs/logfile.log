@@ -110,3 +110,17 @@
 21:37:46.874 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
 21:52:51.555 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
 21:59:11.992 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+22:29:56.369 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+22:50:48.997 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+23:11:43.981 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+23:11:54.488 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.switchSceneException: Error in loginController start method switch to Homepage
+23:11:54.490 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.sqlException: Error in executing database Query
+23:11:57.810 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.switchSceneException: Error in loginController start method switch to Homepage
+23:11:57.810 [JavaFX Application Thread] ERROR org.rss.rssfeed.controller.loginController - org.rss.rssfeed.Exceptions.sqlException: Error in executing database Query
+23:15:40.908 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+23:19:00.835 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+23:26:57.330 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+23:29:04.310 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+23:29:49.882 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+23:33:55.678 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading
+08:44:58.622 [JavaFX Application Thread] INFO  org.rss.rssfeed.controller.loginController - Image loading

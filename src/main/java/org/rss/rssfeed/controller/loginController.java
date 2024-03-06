@@ -94,10 +94,13 @@ public class loginController implements Initializable {
 
     }
 
-    public void start() throws switchSceneException {
+    public void start(String feed) throws switchSceneException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
-            switchScene(new Scene(fxmlLoader.load()));
+            Scene newScene = new Scene(fxmlLoader.load());
+            HtmlContent htmlContent = fxmlLoader.getController();
+            htmlContent.initialize(feed);
+            switchScene(newScene);
         }
         catch(Exception ex){
             throw new switchSceneException("Error in loginController start method switch to Homepage", ex);
@@ -141,7 +144,7 @@ public class loginController implements Initializable {
         Connection connection = databaseConnection.getConnection();
 
         // Prepare SQL statement to retrieve hashed password for the given username
-        String sql = "SELECT Password,firstName FROM user WHERE userName = ?";
+        String sql = "SELECT Password,firstName,feed FROM user WHERE userName = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, userName);
 
@@ -149,7 +152,8 @@ public class loginController implements Initializable {
                 if (resultSet.next()) {
                     String hashedPasswordFromDB = resultSet.getString("Password");
                     String username = resultSet.getString("firstName");
-                    System.out.println(username);
+                    String feeds= resultSet.getString("feed");
+                    System.out.println(feeds);
 
                     // Verify the entered password against the hashed password from the database
                     if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
@@ -157,7 +161,7 @@ public class loginController implements Initializable {
                         // Authentication successful
                         loginMessageLabel.setText("Login successful");
 
-                        start();
+                        start(feeds);
 
 
                     } else {

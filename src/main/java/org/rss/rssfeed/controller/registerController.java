@@ -63,6 +63,7 @@ public class registerController implements Initializable {
         String userName = reg_Uname.getText();
         String password = reg_password.getText();
         String role = "NORMAL";
+        String tech = "technology";
 
 
         if(firstName.isEmpty() || lastName.isEmpty() || userName.isEmpty()
@@ -84,7 +85,7 @@ public class registerController implements Initializable {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
 
-        String sql = "INSERT INTO user (firstName, lastName, userName, Password, role) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (firstName, lastName, userName, Password, role, feed) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, firstName);
@@ -92,6 +93,7 @@ public class registerController implements Initializable {
             preparedStatement.setString(3, userName);
             preparedStatement.setString(4, Password);
             preparedStatement.setString(5, role);
+            preparedStatement.setString(6, tech);
 
             int rowsAffected = preparedStatement.executeUpdate();
 

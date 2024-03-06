@@ -139,40 +139,117 @@ public class HtmlContent {
     private TableColumn<ArticleData, String> descriptionColumn;
 
     private HashMap<String, String> h = new HashMap<>();
-    int cnt=0;
+    int cnt = 0;
 
-    public void initialize() {
+    public void initialize(String feed) {
+        System.out.println(feed + "feedhtml");
         // Load HTML content from the main page
-        String urlTech = "https://arstechnica.com";
-        String urlHlth = "http://www.medicalnewstoday.com";
-        try {
-            Document doc = Jsoup.connect(urlTech).get();
-
-            // Extract links to articles
-            Elements articles = doc.select("li.tease.article");
-            if (articles != null) {
-                for (Element article : articles) {
-                    Elements header = article.select("header");
-                    for (Element headers : header) {
-                        cnt++;
-                        Elements anch = headers.select("h2 a"); // Extract article title
-                        String articleLink = anch.attr("href");
-                        fetchArticleData(articleLink);
-                    }
-                    if(cnt==4) break;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        switch (feed) {
+            case "technology":
+                displayTechnews("https://arstechnica.com");
+                break;
+            case "Medi":
+                displayMedinews("http://www.medicalnewstoday.com");
+                break;
+            default:
+                break;
         }
-        int cntHealth=0;
+
+//        String urlTech = "https://arstechnica.com";
+//        String urlHlth = "http://www.medicalnewstoday.com";
+//        try {
+//            Document doc = Jsoup.connect(urlTech).get();
+//
+//            // Extract links to articles
+//            Elements articles = doc.select("li.tease.article");
+//            if (articles != null) {
+//                for (Element article : articles) {
+//                    Elements header = article.select("header");
+//                    for (Element headers : header) {
+//                        cnt++;
+//                        Elements anch = headers.select("h2 a"); // Extract article title
+//                        String articleLink = anch.attr("href");
+//                        fetchArticleData(articleLink);
+//                    }
+//                    if(cnt==4) break;
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        int cntHealth=0;
+//        try {
+//            Document doc = Jsoup.connect(urlHlth).get();
+//            Elements listItems = doc.select("div.__chrome ul li a");
+//
+//            for (Element listItem : listItems) {
+//                cntHealth++;
+//                if(cntHealth==4) break;
+//                String anchorText = listItem.text();
+//                String href = listItem.attr("href");
+//                System.out.println("Anchor Text: " + anchorText);
+//                System.out.println("URL: " + href);
+//                System.out.println();
+//                h.put(anchorText, href);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+//        // Set up columns
+//        titleColumn.setCellValueFactory(data -> data.getValue().titleProperty());
+//        descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
+//
+//        // Set up custom cell factory for title column
+//        titleColumn.setCellFactory(col -> {
+//            TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
+//                @Override
+//                protected void updateItem(String item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    if (item != null) {
+//                        setText(item);
+//                    }
+//                }
+//            };
+//
+//            // Add mouse click event handler
+//            cell.setOnMouseClicked(event -> {
+//                if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
+//                    String desc = cell.getItem();
+//                    String ogUrl=h.get(desc);
+//                    if (ogUrl != null && !ogUrl.isEmpty()) {
+//                        Webview webViewSample = new Webview();
+//                        webViewSample.loadURL(ogUrl);
+//                    }
+//                }
+//            });
+//
+//            return cell;
+//        });
+//
+//        // Add data to table
+//
+//        // Add data to table
+//        ObservableList<ArticleData> articleList = FXCollections.observableArrayList();
+//        h.forEach((title, description) -> {
+//
+//            articleList.add(new ArticleData(title, description));
+//        });
+//        tableView.setItems(articleList);
+    }
+
+//    private void displayRandomnews() {
+//
+//    }
+
+    private void displayMedinews(String url) {
+
         try {
-            Document doc = Jsoup.connect(urlHlth).get();
+            Document doc = Jsoup.connect(url).get();
             Elements listItems = doc.select("div.__chrome ul li a");
 
             for (Element listItem : listItems) {
-                cntHealth++;
-                if(cntHealth==4) break;
+
                 String anchorText = listItem.text();
                 String href = listItem.attr("href");
                 System.out.println("Anchor Text: " + anchorText);
@@ -183,8 +260,6 @@ public class HtmlContent {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Set up columns
         titleColumn.setCellValueFactory(data -> data.getValue().titleProperty());
         descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
 
@@ -204,7 +279,7 @@ public class HtmlContent {
             cell.setOnMouseClicked(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     String desc = cell.getItem();
-                    String ogUrl=h.get(desc);
+                    String ogUrl = h.get(desc);
                     if (ogUrl != null && !ogUrl.isEmpty()) {
                         Webview webViewSample = new Webview();
                         webViewSample.loadURL(ogUrl);
@@ -225,6 +300,73 @@ public class HtmlContent {
         });
         tableView.setItems(articleList);
     }
+
+
+    private void displayTechnews(String url) {
+        int cnt=0;
+        try {
+            Document doc = Jsoup.connect(url).get();
+
+            // Extract links to articles
+            Elements articles = doc.select("li.tease.article");
+            if (articles != null) {
+                for (Element article : articles) {
+                    Elements header = article.select("header");
+                    for (Element headers : header) {
+                        cnt++;
+
+                        Elements anch = headers.select("h2 a"); // Extract article title
+                        String articleLink = anch.attr("href");
+                        fetchArticleData(articleLink);
+                    }
+                    if(cnt==5) break;
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        titleColumn.setCellValueFactory(data -> data.getValue().titleProperty());
+        descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
+
+
+        titleColumn.setCellFactory(col -> {
+            TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null) {
+                        setText(item);
+                    }
+                }
+            };
+
+            // Add mouse click event handler
+            cell.setOnMouseClicked(event -> {
+                if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
+                    String desc = cell.getItem();
+                    String ogUrl = h.get(desc);
+                    if (ogUrl != null && !ogUrl.isEmpty()) {
+                        Webview webViewSample = new Webview();
+                        webViewSample.loadURL(ogUrl);
+                    }
+                }
+            });
+
+            return cell;
+        });
+
+        // Add data to table
+
+        // Add data to table
+        ObservableList<ArticleData> articleList = FXCollections.observableArrayList();
+        h.forEach((title, description) -> {
+
+            articleList.add(new ArticleData(title, description));
+        });
+        tableView.setItems(articleList);
+    }
+
 
     private void fetchArticleData(String url) {
         try {
@@ -250,11 +392,13 @@ public class HtmlContent {
                 ogurl = twitterurl;
             }
 
-            h.put(ogDescription,ogurl);
+            h.put(ogDescription, ogurl);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
+
+
 
