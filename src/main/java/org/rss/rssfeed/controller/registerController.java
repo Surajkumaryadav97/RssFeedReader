@@ -85,7 +85,7 @@ public class registerController implements Initializable {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
 
-        String sql = "INSERT INTO user (firstName, lastName, userName, Password, role, feed) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (firstName, lastName, userName, Password, role) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, firstName);
@@ -93,7 +93,7 @@ public class registerController implements Initializable {
             preparedStatement.setString(3, userName);
             preparedStatement.setString(4, Password);
             preparedStatement.setString(5, role);
-            preparedStatement.setString(6, tech);
+//            preparedStatement.setString(6, tech);
 
             int rowsAffected = preparedStatement.executeUpdate();
 

@@ -55,138 +55,46 @@
             <children>
                 <AnchorPane prefHeight="571.0" prefWidth="849.0" style="-fx-border-radius: 30; -fx-background-color: #F0EDCF;" stylesheets="@style.css">
                     <children>
-                        <Label layoutX="14.0" prefHeight="98.0" prefWidth="152.0" text="EXPLORE !">
-                            <font>
-                                <Font name="Tahoma" size="30.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="20.0" layoutY="57.0" prefHeight="48.0" prefWidth="436.0" text="Never Put of till tomorrow what can be done today!." textFill="#e41010">
-                            <font>
-                                <Font name="Tahoma" size="13.0" />
-                            </font>
-                        </Label>
-                        <Pane fx:id="pane_1" layoutX="20.0" layoutY="133.0" prefHeight="200.0" prefWidth="140.0" styleClass="pane_1" stylesheets="@style.css">
+                        <Pane fx:id="pane_12" layoutX="75.0" layoutY="136.0" prefHeight="313.0" prefWidth="674.0" style="-fx-background-color: #ffffff;" styleClass="pane_12" stylesheets="@style.css">
                             <children>
-                                <ImageView fx:id="image1View" fitHeight="145.0" fitWidth="142.0" layoutX="-1.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" styleClass="image_1">
-                                    <image>
-                                        <Image url="@../../../../../../images/image1.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </Pane>
-                        <Pane fx:id="pane2001" layoutX="187.0" layoutY="133.0" prefHeight="200.0" prefWidth="140.0" style="-fx-background-color: #86A789;" styleClass="pane_1" stylesheets="@style.css">
-                            <children>
-                                <ImageView fx:id="image2View" fitHeight="151.0" fitWidth="176.0" layoutX="-17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../../../images/image10.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </Pane>
-                        <Pane fx:id="pane_12" layoutX="363.0" layoutY="133.0" prefHeight="200.0" prefWidth="140.0" style="-fx-background-color: #ffffff;" styleClass="pane_12" stylesheets="@style.css">
-                            <children>
-                                <ImageView fx:id="image3View" fitHeight="133.0" fitWidth="144.0" layoutX="5.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../../../images/image11.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </Pane>
-                        <Pane fx:id="pane_13" layoutX="533.0" layoutY="133.0" prefHeight="200.0" prefWidth="292.0" style="-fx-background-color: #2D3250;" styleClass="pane_1" stylesheets="@style.css">
-                            <children>
-                                <ImageView fx:id="image4View" fitHeight="210.0" fitWidth="178.0" layoutX="-25.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../../../images/image3.png" />
-                                    </image>
-                                </ImageView>
-                                <Label alignment="CENTER" layoutX="104.0" layoutY="63.0" prefHeight="46.0" prefWidth="190.0" text="Artificial intelligence (AI) robots" textFill="#ece3e3">
+                                <Label layoutX="29.0" layoutY="-3.0" prefHeight="98.0" prefWidth="185.0" text="EXPLORE !">
                                     <font>
-                                        <Font name="Tahoma" size="12.0" />
+                                        <Font name="Tahoma" size="37.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" layoutX="98.0" layoutY="77.0" prefHeight="46.0" prefWidth="191.0" text="are artificial agents that act " textFill="#ece3e3">
+                                <Label layoutX="214.0" layoutY="14.0" prefHeight="77.0" prefWidth="295.0" text="Choose Your Own Feed">
                                     <font>
-                                        <Font name="Tahoma" size="12.0" />
+                                        <Font name="Tahoma" size="28.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" layoutX="84.0" layoutY="93.0" prefHeight="46.0" prefWidth="174.0" text="n the real world......" textFill="#ece3e3">
-                                    <font>
-                                        <Font name="Tahoma" size="12.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </Pane>
-                        <Pane fx:id="pane_1211" layoutX="41.0" layoutY="475.0" prefHeight="50.0" prefWidth="269.0" style="-fx-background-color: #ffffff;" styleClass="pane_1211" stylesheets="@style.css">
-                            <children>
-                                <ImageView fx:id="image8View" fitHeight="43.0" fitWidth="45.0" layoutX="6.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../../../images/image7.png" />
-                                    </image>
-                                </ImageView>
-                                <Label alignment="CENTER" layoutX="59.0" layoutY="2.0" prefHeight="46.0" prefWidth="174.0" text="Rss.feed@gmail.com" textFill="#280303">
-                                    <font>
-                                        <Font name="Tahoma" size="14.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </Pane>
-                        <Pane fx:id="pane_1212" layoutX="41.0" layoutY="415.0" prefHeight="50.0" prefWidth="269.0" style="-fx-background-color: #ffffff;" styleClass="pane_12121" stylesheets="@style.css">
-                            <children>
-                                <ImageView fx:id="image7View" fitHeight="49.0" fitWidth="58.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../../../images/image5.png" />
-                                    </image>
-                                </ImageView>
-                                <Label alignment="CENTER" layoutX="48.0" layoutY="2.0" prefHeight="46.0" prefWidth="174.0" text="twitter.com/rsr.@1" textFill="#280303">
-                                    <font>
-                                        <Font name="Tahoma" size="14.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </Pane>
-                        <Pane fx:id="pane_122" layoutX="369.0" layoutY="356.0" prefHeight="184.0" prefWidth="457.0" style="-fx-background-color: #ffffff;" styleClass="pane_122" stylesheets="@style.css">
-                            <children>
-                                <ImageView fx:id="image5View" fitHeight="189.0" fitWidth="242.0" layoutX="243.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../../../images/image8.png" />
-                                    </image>
-                                </ImageView>
-                                <Label layoutX="14.0" layoutY="85.0" prefHeight="48.0" prefWidth="214.0" text="he world, which led me to..... " textFill="#e41010">
+                                <Label layoutX="29.0" layoutY="53.0" prefHeight="48.0" prefWidth="436.0" text="Never Put of till tomorrow what can be done today!." textFill="#e41010">
                                     <font>
                                         <Font name="Tahoma" size="13.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="14.0" layoutY="37.0" prefHeight="48.0" prefWidth="249.0" text="CES 2024 was dominated by a wide" textFill="#e41010">
+                                <Label layoutX="47.0" layoutY="157.0" prefHeight="21.0" prefWidth="594.0" text="With Rss Feed Reader, information comes straight to you the minute it's available. Choose">
                                     <font>
-                                        <Font name="Tahoma" size="13.0" />
+                                        <Font size="15.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="14.0" layoutY="61.0" prefHeight="48.0" prefWidth="214.0" text="variety of automobiles from around" textFill="#e41010">
+                                <Label layoutX="47.0" layoutY="199.0" prefHeight="21.0" prefWidth="540.0" text="from across the web. Filter out the noise and make the most of your time online.">
                                     <font>
-                                        <Font name="Tahoma" size="13.0" />
+                                        <Font size="15.0" />
                                     </font>
                                 </Label>
+                                <Label layoutX="50.0" layoutY="178.0" prefHeight="21.0" prefWidth="548.0" text="your favorite websites and creators, collect articles, and discover inspiring content">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <Button layoutX="275.0" layoutY="235.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" stylesheets="@style.css" text="Explore">
+                                    <styleClass>
+                                        <String fx:value="loginBtn" />
+                                        <String fx:value="animated-button" />
+                                    </styleClass>
+                                </Button>
                             </children>
                         </Pane>
-                        <Pane fx:id="pane_12121" layoutX="41.0" layoutY="356.0" prefHeight="50.0" prefWidth="269.0" style="-fx-background-color: #ffffff;" styleClass="pane_12121" stylesheets="@style.css">
-                            <children>
-                                <ImageView fx:id="image6View" fitHeight="42.0" fitWidth="44.0" layoutX="7.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../../../../images/image6.png" />
-                                    </image>
-                                </ImageView>
-                                <Label alignment="CENTER" layoutX="49.0" layoutY="3.0" prefHeight="46.0" prefWidth="174.0" text="Contact Me" textFill="#280303">
-                                    <font>
-                                        <Font name="Tahoma" size="16.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </Pane>
-                        <Label layoutX="163.0" layoutY="10.0" prefHeight="77.0" prefWidth="295.0" text="Choose Your Own Feed">
-                            <font>
-                                <Font name="Tahoma" size="24.0" />
-                            </font>
-                        </Label>
                     </children>
                 </AnchorPane>
             </children></HBox>

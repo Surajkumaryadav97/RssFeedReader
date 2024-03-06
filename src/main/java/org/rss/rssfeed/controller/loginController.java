@@ -94,12 +94,12 @@ public class loginController implements Initializable {
 
     }
 
-    public void start(String feed) throws switchSceneException {
+    public void start(String userName1,String techfeed, String healthfeed) throws switchSceneException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
             Scene newScene = new Scene(fxmlLoader.load());
             HtmlContent htmlContent = fxmlLoader.getController();
-            htmlContent.initialize(feed);
+            htmlContent.initialize(userName1,techfeed,healthfeed);
             switchScene(newScene);
         }
         catch(Exception ex){
@@ -129,6 +129,12 @@ public class loginController implements Initializable {
         }
     }
 
+   static String userName1;
+
+    static String techFeed;
+    static String healthFeed;
+
+
     @FXML
     void loginButtonOnAction(ActionEvent actionEvent) throws sqlException, userNotFoundException {
         String userName = usernameTextField.getText();
@@ -144,7 +150,7 @@ public class loginController implements Initializable {
         Connection connection = databaseConnection.getConnection();
 
         // Prepare SQL statement to retrieve hashed password for the given username
-        String sql = "SELECT Password,firstName,feed FROM user WHERE userName = ?";
+        String sql = "SELECT Password,firstName,userName,techFeed,healthFeed FROM user WHERE userName = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, userName);
 
@@ -152,8 +158,14 @@ public class loginController implements Initializable {
                 if (resultSet.next()) {
                     String hashedPasswordFromDB = resultSet.getString("Password");
                     String username = resultSet.getString("firstName");
-                    String feeds= resultSet.getString("feed");
-                    System.out.println(feeds);
+//                    String feeds= resultSet.getString("feed");
+                     userName1 =resultSet.getString("userName");
+                     techFeed=resultSet.getString("techFeed");
+                     healthFeed=resultSet.getString("healthFeed");
+
+                    System.out.println(userName1);
+
+//                    System.out.println(feeds);
 
                     // Verify the entered password against the hashed password from the database
                     if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
@@ -161,7 +173,8 @@ public class loginController implements Initializable {
                         // Authentication successful
                         loginMessageLabel.setText("Login successful");
 
-                        start(feeds);
+
+                        start(userName1,techFeed,healthFeed);
 
 
                     } else {
@@ -188,6 +201,7 @@ public class loginController implements Initializable {
             }
         }
     }
+
 }
 
 
