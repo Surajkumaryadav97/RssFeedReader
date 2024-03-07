@@ -158,18 +158,13 @@ public class loginController implements Initializable {
                 if (resultSet.next()) {
                     String hashedPasswordFromDB = resultSet.getString("Password");
                     String username = resultSet.getString("firstName");
-//                    String feeds= resultSet.getString("feed");
                      userName1 =resultSet.getString("userName");
                      techFeed=resultSet.getString("techFeed");
                      healthFeed=resultSet.getString("healthFeed");
 
                     System.out.println(userName1);
-//                    UserInfoController userInfoController=new UserInfoController();
-//                    userInfoController.initializeUserInfo(userName1);
 
-//                    System.out.println(feeds);
-
-                    // Verify the entered password against the hashed password from the database
+                    // Verify the entered password with the hashed password from the database
                     if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
 
                         // Authentication of user has done successfully
@@ -205,6 +200,9 @@ public class loginController implements Initializable {
         }
     }
 
+    public String getUsername() {
+        return userName1;
+    }
 }
 
 

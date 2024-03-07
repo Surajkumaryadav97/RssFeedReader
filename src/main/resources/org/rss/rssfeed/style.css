@@ -404,3 +404,13 @@ fx-background-color: #820300;
     -fx-background-color: #FFFFFF; /* White background color */
     -fx-text-fill: #FF0000; /* Red text color */
 }
+.pane123{
+fx-background-color: #820300;
+-fx-border-width: 2px 2px 2px 2px;
+
+-fx-border-radius: 30px;
+-fx-background-radius: 30px;
+-fx-border-style: solid;
+-fx-border-color: #3C3633;
+ transition: all 0.3s ease; /* Smooth transition effect */
+}

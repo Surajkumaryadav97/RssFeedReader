@@ -1,15 +1,16 @@
 package org.rss.rssfeed.controller;
 
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.scene.control.Button;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Browsers extends BorderPane {
     final WebView browser = new WebView();
+
     final WebEngine webEngine = browser.getEngine();
     final Button backButton = new Button("Back");
     final Button reloadButton = new Button("Reload");
@@ -21,8 +22,8 @@ public class Browsers extends BorderPane {
 
     public Browsers(String url) {
 
-        getStyleClass().add("browser");
 
+        getStyleClass().add("browser");
 
         webEngine.load(url);
 

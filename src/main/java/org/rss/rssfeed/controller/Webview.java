@@ -1,6 +1,7 @@
 package org.rss.rssfeed.controller;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -18,7 +19,9 @@ public class Webview extends Application {
         scene = new Scene(new Browsers(), 850, 650, Color.web("#666970"));
         stage.setScene(scene);
         scene.getStylesheets().add("webviewsample/BrowserToolbar.css");
+        Platform.setImplicitExit(false);
         stage.show();
+
     }
 
     public void loadURL(String url) {
@@ -27,6 +30,9 @@ public class Webview extends Application {
         Url=url;
         start(new Stage());
 
+    }
+    public static void main(String[] args) {
+        launch(args);
     }
 
 

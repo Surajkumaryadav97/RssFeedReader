@@ -1,25 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.UserInfoController">
+<AnchorPane prefHeight="650.0" prefWidth="850.0" style="-fx-background-color: #F0EDCF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.UserInfoController">
     <children>
-        <Label layoutX="50.0" layoutY="243.0" prefHeight="17.0" prefWidth="270.0" text="First Name:" />
-        <Label layoutX="47.0" layoutY="364.0" text="Last Name:" />
-        <Label layoutX="52.0" layoutY="337.0" text="Username:" />
-        <Label layoutX="53.0" layoutY="308.0" text="Tech Feed:" />
-        <Label layoutX="47.0" layoutY="277.0" prefHeight="17.0" prefWidth="473.0" text="Health Feed:" />
-        <Label fx:id="firstNameLabel" layoutX="172.0" layoutY="34.0" text="Ravi" />
-        <Label fx:id="lastNameLabel" layoutX="172.0" layoutY="79.0" />
-        <Label fx:id="usernameLabel" layoutX="172.0" layoutY="124.0" />
-        <Label fx:id="techFeedLabel" layoutX="172.0" layoutY="169.0" />
-        <Label fx:id="healthFeedLabel" layoutX="172.0" layoutY="214.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="26.0" prefHeight="47.0" prefWidth="284.0" text="Profile">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
+        <Label layoutX="172.0" layoutY="79.0" />
+        <Label layoutX="172.0" layoutY="124.0" />
+        <Label layoutX="172.0" layoutY="169.0" />
+        <Label layoutX="172.0" layoutY="214.0" />
+        <AnchorPane layoutX="-2.0" prefHeight="82.0" prefWidth="858.0" style="-fx-background-color: #000000;">
+            <children>
+                <ImageView fx:id="logoImageView" fitHeight="82.0" fitWidth="100.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../../../images/logo_.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="86.0" layoutY="21.0" prefHeight="45.0" prefWidth="177.0" text="RSS Feed Reader" textFill="#0c8ffa">
+                    <font>
+                        <Font name="Tahoma" size="20.0" />
+                    </font>
+                </Label>
+                <Button fx:id="cancel" layoutX="781.0" layoutY="29.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="66.0" stylesheets="@style.css" text="Logout">
+                    <styleClass>
+                        <String fx:value="cancelBtn" />
+                        <String fx:value="animated-button" />
+                    </styleClass></Button>
+                <Label fx:id="userNameLabel1" alignment="CENTER" layoutX="698.0" layoutY="24.0" prefHeight="38.0" prefWidth="82.0" text="Ravi" textFill="#f4eeee">
+                    <font>
+                        <Font size="21.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Pane fx:id="pane12" layoutX="234.0" layoutY="97.0" prefHeight="536.0" prefWidth="350.0" style="-fx-background-color: #000000;" styleClass="pane123" stylesheets="@style.css">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" prefHeight="47.0" prefWidth="284.0" text="User Profile" textFill="#faefef">
+                    <font>
+                        <Font size="36.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="userImageView" fitHeight="82.0" fitWidth="88.0" layoutX="126.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../../../images/image6.png" />
+                    </image>
+                </ImageView>
+                <Pane fx:id="pane1" layoutX="80.0" layoutY="135.0" prefHeight="54.0" prefWidth="178.0" style="-fx-background-color: #F3EEEA;" styleClass="pane1" stylesheets="@style.css">
+                    <children>
+                        <Label fx:id="userNameLabel" alignment="CENTER" layoutX="12.0" layoutY="8.0" prefHeight="38.0" prefWidth="154.0" text="Ravi">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+                <Pane fx:id="pane11" layoutX="55.0" layoutY="203.0" prefHeight="294.0" prefWidth="231.0" style="-fx-background-color: #F3EEEA;" styleClass="pane1" stylesheets="@style.css">
+                    <children>
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="16.0" prefHeight="38.0" prefWidth="102.0" text="First Name:">
+                            <font>
+                                <Font name="Tahoma" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="54.0" prefHeight="38.0" prefWidth="102.0" text="Last Name:">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="92.0" prefHeight="38.0" prefWidth="102.0" text="UserName:">
+                            <font>
+                                <Font name="Tahoma" size="15.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="firstNameLabel" alignment="CENTER" layoutX="110.0" layoutY="16.0" prefHeight="38.0" prefWidth="102.0" text="RAVI">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lastNameLabel" alignment="CENTER" layoutX="110.0" layoutY="54.0" prefHeight="38.0" prefWidth="102.0" text="KUMAR">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="userName1Label" alignment="CENTER" layoutX="110.0" layoutY="86.0" prefHeight="38.0" prefWidth="102.0" text="RAVI">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="cancel1" layoutX="83.0" layoutY="254.0" mnemonicParsing="false" onAction="#cancel1" prefHeight="26.0" prefWidth="66.0" stylesheets="@style.css" text="Back">
+                            <styleClass>
+                                <String fx:value="cancelBtn" />
+                                <String fx:value="animated-button" />
+                            </styleClass></Button>
+                  <Pane fx:id="pane13" layoutX="1.0" layoutY="130.0" prefHeight="116.0" prefWidth="231.0" style="-fx-background-color: #CCD3CA;" styleClass="pane1" stylesheets="@style.css">
+                     <children>
+                              <Label alignment="CENTER" layoutX="55.0" layoutY="9.0" prefHeight="38.0" prefWidth="119.0" text="Subscribed Feed">
+                                  <font>
+                                      <Font size="15.0" />
+                                  </font>
+                              </Label>
+                              <Label fx:id="techFeedLabel" alignment="CENTER" layoutX="6.0" layoutY="50.0" prefHeight="38.0" prefWidth="102.0" text="TechFeed">
+                                  <font>
+                                      <Font size="15.0" />
+                                  </font>
+                              </Label>
+                              <Label fx:id="healthFeedLabel" alignment="CENTER" layoutX="114.0" layoutY="47.0" prefHeight="38.0" prefWidth="102.0" text="HealthFeed">
+                                  <font>
+                                      <Font size="15.0" />
+                                  </font>
+                              </Label>
+                     </children>
+                  </Pane>
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
     </children>
 </AnchorPane>

@@ -22,8 +22,7 @@ public class HelloApplication extends Application  {
 
 public static final Logger logger = LogManager.getLogger(HelloApplication.class);
 
-    @FXML
-    private ImageView logoImageView;
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {

@@ -1,61 +1,56 @@
 package org.rss.rssfeed.controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.util.converter.DefaultStringConverter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.rss.rssfeed.Exceptions.switchSceneException;
 import org.rss.rssfeed.HelloApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
-
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import static org.rss.rssfeed.HelloApplication.logger;
 
 public class HtmlContent  implements Initializable {
+    public static final Logger logger = LogManager.getLogger(HtmlContent.class);
 
     @FXML
     private ImageView logoImageview;
 
     @FXML
+    private Label userNameLabel1;
+
+
+    @FXML
     private ImageView userImageView;
+    @FXML
+    private ImageView techImageView;
+
+    @FXML
+    private ImageView healthImageView;
+    @FXML
+    private ImageView techImageView1;
+
+    @FXML
+    private ImageView healthImageView1;
     @FXML
     private Button cancel;
 
@@ -83,24 +78,26 @@ public class HtmlContent  implements Initializable {
 
     public void initialize(String username1,String techfeed,String healthfeed) {
         username=username1;
+        System.out.println(username);
         tech1=techfeed;
+        System.out.println(tech1);
         medi1=healthfeed;
 
         System.out.println(username + "feedhtml");
 
-       if(!techfeed.isEmpty()&&healthfeed.isEmpty()) {
+        if(!techfeed.isEmpty()&&healthfeed.isEmpty()) {
 
-                displayTechnews("https://arstechnica.com");
+            displayTechnews("https://arstechnica.com");
 
         }
         else if(!healthfeed.isEmpty()&&techfeed.isEmpty()){
 
-                displayMedinews("http://www.medicalnewstoday.com");
+            displayMedinews("http://www.medicalnewstoday.com");
         }
         else{
 
-           displayrandomnews();
-       }
+            displayrandomnews();
+        }
 
     }
 
@@ -124,12 +121,13 @@ public class HtmlContent  implements Initializable {
                         String articleLink = anch.attr("href");
                         fetchArticleData(articleLink);
                     }
-                    if(cnt==2) break;
+                    if(cnt==3) break;
 
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+            logger.error("displaying random news",e);
         }
 
         int cnt1=0;
@@ -144,13 +142,19 @@ public class HtmlContent  implements Initializable {
                     String href = anchor.attr("href");
                     h.put(anchorText, href);
                 }
-                if(cnt1==2) break;
+                if(cnt1==3) break;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         titleColumn.setCellValueFactory(data -> data.getValue().titleProperty());
 //        descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
+        tableView.setRowFactory(tv -> {
+            TableRow<ArticleData> row = new TableRow<>();
+            row.setPrefHeight(60); // Set the preferred height for each row
+            return row;
+        });
+
 
 
         titleColumn.setCellFactory(col -> {
@@ -158,11 +162,22 @@ public class HtmlContent  implements Initializable {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
-                    if (item != null) {
+                    if (item != null && !empty) {
                         setText(item);
+                        setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #f2f2f2;"); // Customize font size and weight
+                    } else {
+                        setText(null);
                     }
                 }
+
             };
+            cell.setOnMousePressed(event -> {
+                if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
+                    // Set blue background color when the mouse is pressed
+                    cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
+                }
+
+            });
 
 
             cell.setOnMouseClicked(event -> {
@@ -174,6 +189,7 @@ public class HtmlContent  implements Initializable {
                         webViewSample.loadURL(ogUrl);
                     }
                 }
+
             });
 
             return cell;
@@ -186,6 +202,7 @@ public class HtmlContent  implements Initializable {
             articleList.add(new ArticleData(title));
         });
         tableView.setItems(articleList);
+
     }
 
 
@@ -203,7 +220,7 @@ public class HtmlContent  implements Initializable {
                     String anchorText = anchor.text();
                     String href = anchor.attr("href");
                     h.put(anchorText, href);
-                    if(cnt==2) break;
+                    if(cnt==3) break;
 
                 }
             }
@@ -214,16 +231,33 @@ public class HtmlContent  implements Initializable {
 //        descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
 
 
+        tableView.setRowFactory(tv -> {
+            TableRow<ArticleData> row = new TableRow<>();
+            row.setPrefHeight(60); // Set the preferred height for each row
+            return row;
+        });
+
+
+
         titleColumn.setCellFactory(col -> {
             TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
-                    if (item != null) {
+                    if (item != null && !empty) {
                         setText(item);
+                        setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #f2f2f2;"); // Customize font size and weight
+                    } else {
+                        setText(null);
                     }
                 }
             };
+            cell.setOnMousePressed(event -> {
+                if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
+                    // Set blue background color when the mouse is pressed
+                    cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
+                }
+            });
 
 
             cell.setOnMouseClicked(event -> {
@@ -234,6 +268,7 @@ public class HtmlContent  implements Initializable {
                         Webview webViewSample = new Webview();
                         webViewSample.loadURL(ogUrl);
                     }
+
                 }
             });
 
@@ -268,7 +303,7 @@ public class HtmlContent  implements Initializable {
                         String articleLink = anch.attr("href");
                         fetchArticleData(articleLink);
                     }
-                    if(cnt==2) break;
+                    if(cnt==3) break;
 
                 }
             }
@@ -279,17 +314,33 @@ public class HtmlContent  implements Initializable {
 //        descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
 
 
+        tableView.setRowFactory(tv -> {
+            TableRow<ArticleData> row = new TableRow<>();
+            row.setPrefHeight(60); // Set the preferred height for each row
+            return row;
+        });
+
+
+
         titleColumn.setCellFactory(col -> {
             TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
-                    if (item != null) {
+                    if (item != null && !empty) {
                         setText(item);
-                        setTextFill(Color.BLACK);
+                        setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #f2f2f2;"); // Customize font size and weight
+                    } else {
+                        setText(null);
                     }
                 }
             };
+            cell.setOnMousePressed(event -> {
+                if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
+
+                    cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
+                }
+            });
 
 
             cell.setOnMouseClicked(event -> {
@@ -344,6 +395,7 @@ public class HtmlContent  implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            logger.error("fetching article data");
         }
     }
 
@@ -360,13 +412,13 @@ public class HtmlContent  implements Initializable {
     public void handleTechBtn(ActionEvent event) {
         System.out.println("start");
 
-      saveFeedChoice(username,"technology",medi1);
+        saveFeedChoice(username,"technology",medi1);
         retrieveFeedsByUsername(username);
         System.out.println("techBtnClicked");
         initialize(username,techFeed1,healthFeed1);
 
     }
-//    loginController logincontroller=new loginController();
+
 
 
 
@@ -427,6 +479,42 @@ public class HtmlContent  implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        try {
+            File brandingFile = new File("images/techFeed.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            techImageView.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/healthfeed.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            healthImageView.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/techFeed.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            techImageView1.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File brandingFile = new File("images/healthfeed.png");
+            Image branding2 = new Image(brandingFile.toURI().toString());
+            healthImageView1.setImage(branding2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        loginController logincontroller=new loginController();
+        String username=logincontroller.getUsername();
+        fetchDataFromDatabase(username);
     }
 
     public void handleRemoveTech(ActionEvent event) {
@@ -477,7 +565,7 @@ public class HtmlContent  implements Initializable {
 
             if (resultSet.next()) {
                 techFeed1 = resultSet.getString("techFeed");
-                 healthFeed1 = resultSet.getString("healthFeed");
+                healthFeed1 = resultSet.getString("healthFeed");
 
                 System.out.println("Tech Feed: " + techFeed1);
                 System.out.println("Health Feed: " + healthFeed1);
@@ -519,7 +607,37 @@ public class HtmlContent  implements Initializable {
             throw new switchSceneException("Error in switching to register from loginController signup", ex);
         }
     }
+
+    private void fetchDataFromDatabase(String username) {
+        try {
+            // Connect to the database
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            String query = "SELECT firstName, lastName, userName, techFeed, healthFeed FROM user WHERE userName = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+
+            // Execute the query
+            ResultSet resultSet = statement.executeQuery();
+
+            // If a user with the given username is found
+            if (resultSet.next()) {
+                // Retrieve data from the result set
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+                String userName = resultSet.getString("userName");
+                String techFeed = resultSet.getString("techFeed");
+                String healthFeed = resultSet.getString("healthFeed");
+
+                userNameLabel1.setText(userName);
+            }
+
+            // Close the all opened resources
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
-
-
-

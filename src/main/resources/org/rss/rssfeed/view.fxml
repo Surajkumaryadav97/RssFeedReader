@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,49 +15,104 @@
 <AnchorPane layoutY="108.0" prefHeight="650.0" prefWidth="850.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.HtmlContent">
 
     <VBox layoutX="171.0">
-        <TableView fx:id="tableView" layoutX="171.0" layoutY="108.0" prefHeight="650.0" prefWidth="670.0" stylesheets="@style.css">
+        <TableView fx:id="tableView" layoutX="171.0" layoutY="108.0" prefHeight="650.0" prefWidth="730.0" style="-fx-background-color: #F0EDCF;" stylesheets="@style.css">
             <columns>
-                <TableColumn fx:id="titleColumn" prefWidth="750.0" text="Description">
+                <TableColumn fx:id="titleColumn" prefWidth="750.0" text="Latest News ">
                     <cellValueFactory>
                         <PropertyValueFactory property="title" />
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="descriptionColumn" prefWidth="401.0" text="">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="description" />
                     </cellValueFactory>
                 </TableColumn>
             </columns>
         </TableView>
     </VBox>
-   <ImageView fx:id="logoImageview" fitHeight="102.0" fitWidth="129.0" layoutY="-108.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../../../../../../images/logo_.png" />
-      </image>
+    <ImageView fx:id="logoImageview" fitHeight="102.0" fitWidth="129.0" layoutY="-108.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../../../../images/logo_.png" />
+        </image>
 
-   </ImageView>
-   <Label layoutX="97.0" layoutY="-104.0" prefHeight="87.0" prefWidth="206.0" text="RSS Feed Reader" textFill="#2d6bdd">
+    </ImageView>
+    <Label layoutX="97.0" layoutY="-104.0" prefHeight="87.0" prefWidth="206.0" text="RSS Feed Reader" textFill="#2d6bdd">
+        <font>
+            <Font name="Tahoma" size="24.0" />
+        </font>
+    </Label>
+    <Button fx:id="techbtn" layoutX="64.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleTechBtn" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #002B5B;" stylesheets="@style.css" text="Tech Feed" textFill="#e4e2e2">
+        <styleClass>
+            <String fx:value="techBtn" />
+            <String fx:value="animated-button" />
+        </styleClass></Button>
+    <Button fx:id="healthbtn" layoutX="64.0" layoutY="121.0" mnemonicParsing="false" onAction="#handleHealthBtn" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #1F8A70;" stylesheets="@style.css" text="Health Feed" textFill="#f8f3f3">
+        <styleClass>
+            <String fx:value="healthBtn" />
+            <String fx:value="animated-button" />
+        </styleClass></Button>
+    <Button fx:id="cancel" layoutX="53.0" layoutY="567.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #820000;" text="Logout" textFill="#ebe7e7" />
+    <Label alignment="CENTER" layoutX="-1.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" text="Choose Your Feed!" textFill="#eee9e9">
+        <font>
+            <Font name="Tahoma" size="16.0" />
+        </font></Label>
+    <Button fx:id="removeTechBtn" layoutX="60.0" layoutY="242.0" mnemonicParsing="false" onAction="#handleRemoveTech" prefHeight="26.0" prefWidth="98.0" stylesheets="@style.css" text="Tech Feed">
+        <styleClass>
+            <String fx:value="techBtn" />
+            <String fx:value="animated-button" />
+        </styleClass></Button>
+    <Button fx:id="removeHealthBtn" layoutX="60.0" layoutY="298.0" mnemonicParsing="false" onAction="#removeHandlehealth" prefHeight="26.0" prefWidth="98.0" stylesheets="@style.css" text="Health feed ">
+        <styleClass>
+            <String fx:value="healthBtn" />
+            <String fx:value="animated-button" />
+        </styleClass></Button>
+    <Label alignment="CENTER" layoutX="-4.0" layoutY="199.0" prefHeight="25.0" prefWidth="174.0" text="Remove Your Feed!" textFill="#eee9e9">
+        <font>
+            <Font name="Tahoma" size="15.0" />
+        </font></Label>
+    <AnchorPane layoutX="667.0" layoutY="-84.0" onMouseClicked="#handleProfileBtn" prefHeight="55.0" prefWidth="75.0">
+        <children>
+            <Label fx:id="userNameLabel1" alignment="CENTER" layoutX="15.0" layoutY="-5.0" prefHeight="38.0" prefWidth="82.0" text="Ravi" textFill="#360404">
+                <font>
+                    <Font size="21.0" />
+                </font>
+            </Label>
+        </children>
+    </AnchorPane>
+    <Button fx:id="profile" layoutX="751.0" layoutY="-42.0" mnemonicParsing="false" onAction="#handleProfileBtn" prefHeight="25.0" prefWidth="85.0" stylesheets="@style.css" text="View Profile">
+        <styleClass>
+            <String fx:value="loginBtn" />
+            <String fx:value="animated-button" />
+        </styleClass></Button>
+    <ImageView fx:id="userImageView" fitHeight="60.0" fitWidth="46.0" layoutX="771.0" layoutY="-95.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../../../../images/User.png" />
+        </image>
+
+    </ImageView>
+    <ImageView fx:id="techImageView" fitHeight="38.0" fitWidth="46.0" layoutX="15.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../../../../images/techfeed.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="healthImageView" fitHeight="38.0" fitWidth="37.0" layoutX="15.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../../../../images/healthfeed.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="techImageView1" fitHeight="38.0" fitWidth="46.0" layoutX="12.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../../../../images/techfeed.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="healthImageView1" fitHeight="38.0" fitWidth="46.0" layoutX="12.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../../../../images/healthfeed.png" />
+        </image>
+    </ImageView>
+   <Button fx:id="cancel1" layoutX="836.0" layoutY="-84.0" mnemonicParsing="false" onAction="#cancel" stylesheets="@style.css" text="Logout">
       <font>
-         <Font name="Tahoma" size="24.0" />
+         <Font name="Tahoma" size="12.0" />
       </font>
-   </Label>
-   <Button fx:id="techbtn" layoutX="7.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleTechBtn" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #002B5B;" styleClass="techBtn" stylesheets="@style.css" text="Tech Feed" textFill="#e4e2e2" />
-   <Button fx:id="healthbtn" layoutX="6.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleHealthBtn" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #1F8A70;" styleClass="healthBtn" stylesheets="@style.css" text="Health Feed" textFill="#f8f3f3" />
-   <Button fx:id="cancel" layoutX="763.0" layoutY="-69.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #820000;" text="Logout" textFill="#ebe7e7" />
-   <Label alignment="CENTER" layoutX="-1.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" text="Choose Your Feed!" textFill="#eee9e9" />
-   <Button fx:id="removeTechBtn" layoutX="8.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleRemoveTech" prefHeight="25.0" prefWidth="151.0" styleClass="techBtn" stylesheets="@style.css" text="Tech Feed" />
-   <Button fx:id="removeHealthBtn" layoutX="8.0" layoutY="235.0" mnemonicParsing="false" onAction="#removeHandlehealth" prefHeight="25.0" prefWidth="151.0" styleClass="healthBtn" stylesheets="@style.css" text="Health feed " />
-   <Label alignment="CENTER" layoutY="147.0" prefHeight="25.0" prefWidth="174.0" text="Remove Your Feed!" textFill="#eee9e9" />
-   <AnchorPane  layoutX="667.0" layoutY="-84.0" onMouseClicked="#handleProfileBtn" prefHeight="55.0" prefWidth="75.0">
-      <children>
-         <ImageView fx:id="userImageView" fitHeight="60.0" fitWidth="46.0" layoutX="15.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../../../../../../images/User.png" />
-            </image>
-
-         </ImageView>
-      </children>
-   </AnchorPane>
-<!--   <Button fx:id="profile" layoutX="662.0" layoutY="-41.0" onAction="#handleProfileBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="View Profile" />-->
+      <styleClass>
+         <String fx:value="cancelBtn" />
+         <String fx:value="animated-button" />
+      </styleClass>
+   </Button>
 
 </AnchorPane>
