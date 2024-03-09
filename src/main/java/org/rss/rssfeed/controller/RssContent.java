@@ -10,7 +10,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,14 +29,13 @@ import org.rss.rssfeed.model.NewsModel;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.ResourceBundle;
 
 
-public class HtmlContent  implements Initializable {
-    public static final Logger logger = LogManager.getLogger(HtmlContent.class);
+public class RssContent implements Initializable {
+    public static final Logger logger = LogManager.getLogger(RssContent.class);
 
     @FXML
     private ImageView logoImageview;
@@ -116,6 +114,7 @@ public class HtmlContent  implements Initializable {
 //        }catch(Exception e){}
 //    }
 
+
     public void initialize(String username1, String techfeed, String healthfeed) {
 
         username = username1;
@@ -126,15 +125,29 @@ public class HtmlContent  implements Initializable {
 
             displayTechnews(techurl);
 
+
+
+
+
         } else if (!healthfeed.isEmpty() && techfeed.isEmpty()) {
 
             displayMedinews(healthurl);
+
+
+
         } else if(!healthfeed.isEmpty() && !techfeed.isEmpty()){
 
             displaybothnews(techurl,healthurl);
+
+
+
         }
         else{
             displayrandomnews(topnewsurl,techurl,healthurl);
+
+
+
+
         }
 
     }
@@ -592,11 +605,9 @@ public class HtmlContent  implements Initializable {
             };
             return cell;
         });
-//
-//
         tableView.setRowFactory(tv -> {
             TableRow<ArticleData> row = new TableRow<>();
-            row.setPrefHeight(60); // Set the preferred height for each row
+            row.setPrefHeight(60);
             return row;
         });
 
@@ -616,7 +627,7 @@ public class HtmlContent  implements Initializable {
             };
             cell.setOnMousePressed(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
-                    // Set blue background color when the mouse is pressed
+
                     cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
                 }
             });
@@ -627,13 +638,12 @@ public class HtmlContent  implements Initializable {
                     String desc = cell.getItem();
                     String ogUrl = null;
 
-                    // Find the NewsModel object with the matching description
+
                     for (NewsModel news : newsarraylist) {
                         if (news.getDesc().equals(desc)) {
-                            // Found the matching NewsModel object
-                            // Retrieve the ogUrl attribute
+
                             ogUrl = news.getLink();
-                            break; // Exit the loop since we found the match
+                            break;
                         }
                     }
 
@@ -667,22 +677,22 @@ public class HtmlContent  implements Initializable {
         newsarraylist.clear();
 
         try {
-            // Load XML file
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             org.w3c.dom.Document doc = dBuilder.parse(url);
 
-            // Normalize XML structure
+
             doc.getDocumentElement().normalize();
 
-            // Get item elements
+
             NodeList itemList = doc.getElementsByTagName("item");
 
             for (int i = 0; i < itemList.getLength(); i++) {
                 if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
 
-                    // Get description
+
                     String title = item.getElementsByTagName("title").item(0).getTextContent();
 
 
@@ -707,8 +717,6 @@ public class HtmlContent  implements Initializable {
         }
 
         descriptionColumn.setCellValueFactory(data -> data.getValue().titleProperty());
-       // imageColumn.setCellValueFactory(data -> data.getValue().titleProperty());
-//        imageColumn.setCellFactory(column -> new CustomImageTableCell());
 
        imageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
         imageColumn.setCellFactory(col -> {
@@ -720,8 +728,8 @@ public class HtmlContent  implements Initializable {
 
                         ImageView imageView = new ImageView(new Image(imageUrl));
 
-                        imageView.setFitWidth(50); // Set width of the image
-                        imageView.setPreserveRatio(true); // Preserve the aspect ratio of the image
+                        imageView.setFitWidth(50);
+                        imageView.setPreserveRatio(true);
                         setGraphic(imageView);
                     } else {
                         setGraphic(null);

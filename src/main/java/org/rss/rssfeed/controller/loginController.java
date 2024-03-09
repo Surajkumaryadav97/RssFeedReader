@@ -2,18 +2,23 @@ package org.rss.rssfeed.controller;
 
 
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -24,13 +29,10 @@ import org.rss.rssfeed.HelloApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
@@ -94,18 +96,63 @@ public class loginController implements Initializable {
 
     }
 
-    public void start(String userName1,String techfeed, String healthfeed) throws switchSceneException {
+    public void start(String userName1, String techfeed, String healthfeed) throws switchSceneException {
         try {
+            // Create loader for the new scene
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
-            Scene newScene = new Scene(fxmlLoader.load());
-            HtmlContent htmlContent = fxmlLoader.getController();
-            htmlContent.initialize(userName1,techfeed,healthfeed);
-            switchScene(newScene);
-        }
-        catch(Exception ex){
+            ProgressIndicator progressIndicator = new ProgressIndicator();
+            progressIndicator.setStyle("-fx-progress-color: green; -fx-min-width: 150px; -fx-min-height: 150px;-fx-background-color: black;");
+
+
+
+
+
+
+
+
+
+
+            Stage loaderStage = new Stage();
+            loaderStage.initStyle(StageStyle.TRANSPARENT); // Set stage style to transparent
+            loaderStage.setResizable(false); // Disable resizing
+            loaderStage.initModality(Modality.APPLICATION_MODAL); // Make the loader stage modal
+            loaderStage.setScene(new Scene(new StackPane(progressIndicator), Color.TRANSPARENT));
+            loaderStage.show();
+            Rectangle overlay = new Rectangle();
+            overlay.setFill(Color.rgb(0, 0, 0, 0.8)); // Set the color and transparency
+            overlay.widthProperty().bind(loginButton.getScene().widthProperty()); // Set the width to match the scene
+            overlay.heightProperty().bind(loginButton.getScene().heightProperty()); // Set the height to match the scene
+            ((Pane) loginButton.getScene().getRoot()).getChildren().add(overlay);
+
+            // Load the new scene in a background thread
+            new Thread(() -> {
+                try {
+                    // Load the new scene
+                    Scene newScene = new Scene(fxmlLoader.load());
+
+                    // Access the controller of the new scene
+                    RssContent htmlContent = fxmlLoader.getController();
+                    htmlContent.initialize(userName1, techfeed, healthfeed);
+
+                    // Switch to the new scene on the JavaFX Application Thread
+                    Platform.runLater(() -> {
+                        switchScene(newScene);
+                        loaderStage.close(); // Close the loader stage after switching
+                    });
+                } catch (Exception ex) {
+                    // Handle any exceptions
+                    ex.printStackTrace(); // Print the stack trace for debugging purposes
+                    // Optionally, show an error message to the user
+                    loaderStage.close(); // Close the loader stage in case of an error
+                }
+            }).start();
+        } catch (Exception ex) {
+            // Throw switchSceneException or handle the exception as needed
             throw new switchSceneException("Error in loginController start method switch to Homepage", ex);
         }
     }
+
+
 
     public void switchScene(Scene newScene) {
         Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -145,6 +192,12 @@ public class loginController implements Initializable {
             loginMessageLabel.setText("Enter username or password");
             return;
         }
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        StackPane rootPane = new StackPane();
+
+        // Show loader before starting login process
+        rootPane.getChildren().add(progressIndicator);
+        progressIndicator.setVisible(true);
 
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();

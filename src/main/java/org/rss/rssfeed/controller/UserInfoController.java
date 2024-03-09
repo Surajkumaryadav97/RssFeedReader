@@ -136,7 +136,7 @@ public class UserInfoController implements Initializable {
             Stage stage = (Stage) cancel.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
             Scene scene=new Scene(fxmlLoader.load());
-            HtmlContent htmlContent = fxmlLoader.getController();
+            RssContent htmlContent = fxmlLoader.getController();
 
             htmlContent.initialize(userName1,techFeed,healthFeed);
 
