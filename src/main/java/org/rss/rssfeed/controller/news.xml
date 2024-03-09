@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<links>
+    <link>
+        <category>tech</category>
+        <url>https://timesofindia.indiatimes.com/rssfeeds/66949542.cms</url>
+    </link>
+    <link>
+        <category>Sports</category>
+        <url>https://example.com/sports</url>
+    </link>
+    <link>
+        <category>Technology</category>
+        <url>https://example.com/technology</url>
+    </link>
+</links>

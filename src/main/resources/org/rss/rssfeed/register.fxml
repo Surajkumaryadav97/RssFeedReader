@@ -19,7 +19,7 @@
                 <TextField fx:id="reg_Fname" layoutX="89.0" layoutY="154.0" prefHeight="27.0" prefWidth="174.0" promptText="John" stylesheets="@style.css" />
                 <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="188.0" text="Last Name *" textFill="#f5efef" />
                 <TextField fx:id="reg_Lname" layoutX="89.0" layoutY="212.0" prefHeight="27.0" prefWidth="174.0" promptText="David" stylesheets="@style.css" />
-                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="251.0" text="Email *" textFill="#f5efef" />
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="251.0" text="Username *" textFill="#f5efef" />
                 <TextField fx:id="reg_Uname" layoutX="89.0" layoutY="275.0" prefHeight="27.0" prefWidth="174.0" promptText="John@" stylesheets="@style.css" />
                 <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="92.0" layoutY="313.0" text="Password *" textFill="#f2ebeb" />
                 <Button fx:id="regButton" alignment="CENTER" layoutX="89.0" layoutY="390.0" mnemonicParsing="false" onAction="#register" prefHeight="23.0" prefWidth="86.0" stylesheets="@style.css" text="Register">

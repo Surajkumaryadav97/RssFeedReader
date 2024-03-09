@@ -63,7 +63,7 @@ public class registerController implements Initializable {
         String userName = reg_Uname.getText();
         String password = reg_password.getText();
         String role = "NORMAL";
-        String tech = "technology";
+
 
 
         if(firstName.isEmpty() || lastName.isEmpty() || userName.isEmpty()

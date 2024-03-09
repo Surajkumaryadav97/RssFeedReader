@@ -12,14 +12,14 @@ import java.io.IOException;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception{
         try {
             // Load the FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/rss/rssfeed/view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/rss/rssfeed/Main.fxml"));
             Parent root = loader.load();
 
             // Set the FXML controller
-            HtmlContent controller = loader.getController();
+           MainController controller = loader.getController();
 
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

@@ -171,7 +171,7 @@ public class loginController implements Initializable {
                         loginMessageLabel.setText("Login successful");
                         UserInfoController userInfoController=new UserInfoController();
                         System.out.println(userName1);
-                   userInfoController.initializeUserInfo(userName1,username,techFeed,healthFeed);
+                        userInfoController.initializeUserInfo(userName1,username,techFeed,healthFeed);
                         start(userName1,techFeed,healthFeed);
 
 

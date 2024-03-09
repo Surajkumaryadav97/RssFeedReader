@@ -6,26 +6,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.HashMap;
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.rss.rssfeed.Exceptions.switchSceneException;
 import org.rss.rssfeed.HelloApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
+import org.rss.rssfeed.model.ArticleData;
+import org.rss.rssfeed.model.NewsModel;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import javax.swing.plaf.synth.SynthTextAreaUI;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.ResourceBundle;
 
 
@@ -58,106 +65,234 @@ public class HtmlContent  implements Initializable {
     private Button profile;
 
     @FXML
-    private TableView<ArticleData> tableView;
+    private Label descriptionLabel;
 
     @FXML
-    private TableColumn<ArticleData, String> titleColumn;
+    private Label linkLabel;
+
+    @FXML
+    private TableView<ArticleData> tableView;
 
     @FXML
     private TableColumn<ArticleData, String> descriptionColumn;
 
-    private HashMap<String, String> h = new HashMap<>();
+    @FXML
+    private TableColumn<ArticleData, String> imageColumn;
+
+    private ArrayList<NewsModel> newsarraylist = new ArrayList<>();
     int cnt = 0;
     String username;
     String tech1;
     String medi1;
 
     static String techFeed1;
-    static  String healthFeed1;
+    static String healthFeed1;
+    static String techurl="https://timesofindia.indiatimes.com/rssfeeds/66949542.cms";
+    static String healthurl="https://health.economictimes.indiatimes.com/rss/topstories";
+    static String topnewsurl="https://timesofindia.indiatimes.com/rssfeedstopstories.cms";
 
 
-    public void initialize(String username1,String techfeed,String healthfeed) {
-        username=username1;
+
+//    public void parse() {
+//        try {
+//            // Load XML file
+//            File xmlFile = new File("C:\\Users\\91704\\Downloads\\RssFeedReader\\RssFeedReader\\src\\main\\java\\org\\rss\\rssfeed\\controller\\news.xml");
+//            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+//            org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
+//            // Normalize XML structure
+//            doc.getDocumentElement().normalize();
+//
+//            // Get item elements
+//            NodeList linkList = doc.getElementsByTagName("link");
+//            for (int i = 0; i < linkList.getLength(); i++) {
+//                org.w3c.dom.Element linkElement = (org.w3c.dom.Element) linkList.item(i);
+//                String category = linkElement.getElementsByTagName("category").item(0).getTextContent();
+//                String url = linkElement.getElementsByTagName("url").item(0).getTextContent();
+//                System.out.println("Category: " + category);
+//                System.out.println("URL:1 " + url);
+//
+//            }
+//        }catch(Exception e){}
+//    }
+
+    public void initialize(String username1, String techfeed, String healthfeed) {
+
+        username = username1;
         System.out.println(username);
-        tech1=techfeed;
-        System.out.println(tech1);
-        medi1=healthfeed;
+        tech1 = techfeed;
+        medi1 = healthfeed;
+        if (!techfeed.isEmpty() && healthfeed.isEmpty()) {
 
-        System.out.println(username + "feedhtml");
+            displayTechnews(techurl);
 
-        if(!techfeed.isEmpty()&&healthfeed.isEmpty()) {
+        } else if (!healthfeed.isEmpty() && techfeed.isEmpty()) {
 
-            displayTechnews("https://arstechnica.com");
+            displayMedinews(healthurl);
+        } else if(!healthfeed.isEmpty() && !techfeed.isEmpty()){
 
-        }
-        else if(!healthfeed.isEmpty()&&techfeed.isEmpty()){
-
-            displayMedinews("http://www.medicalnewstoday.com");
+            displaybothnews(techurl,healthurl);
         }
         else{
-
-            displayrandomnews();
+            displayrandomnews(topnewsurl,techurl,healthurl);
         }
 
     }
 
-    private void displayrandomnews() {
-        h.clear();
-        int cnt=0;
-        String techurl="https://arstechnica.com";
-        String mediurl="http://www.medicalnewstoday.com";
+    private void displayrandomnews(String topnewsurl,String techurl,String healthurl) {
+        newsarraylist.clear();
+
+
         try {
-            Document doc = Jsoup.connect(techurl).get();
+            // Load XML file
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            org.w3c.dom.Document doc = dBuilder.parse(topnewsurl);
+
+            // Normalize XML structure
+            doc.getDocumentElement().normalize();
+
+            // Get item elements
+            NodeList itemList = doc.getElementsByTagName("item");
+
+            for (int i = 0; i < itemList.getLength(); i++) {
+                if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                    org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
+
+                    // Get description
+                    String title = item.getElementsByTagName("title").item(0).getTextContent();
 
 
-            Elements articles = doc.select("li.tease.article");
-            if (articles != null) {
-                for (Element article : articles) {
-                    Elements header = article.select("header");
-                    for (Element headers : header) {
-                        cnt++;
+                    // Get link
+                    String link = item.getElementsByTagName("link").item(0).getTextContent();
+//                    linkLabel.setText("Link: " + link);
+                    NodeList enclosureList = item.getElementsByTagName("enclosure");
 
-                        Elements anch = headers.select("h2 a");
-                        String articleLink = anch.attr("href");
-                        fetchArticleData(articleLink);
+                    if (enclosureList.getLength() > 0) {
+                        Element enclosureElement = (Element) enclosureList.item(0);
+                        String imageUrl = enclosureElement.getAttribute("url");
+                        newsarraylist.add(new NewsModel(title, link, imageUrl));
                     }
-                    if(cnt==3) break;
+
+
 
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error("displaying random news",e);
-        }
 
-        int cnt1=0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
-            Document doc = Jsoup.connect(mediurl).get();
-            Elements listItems = doc.select("ul.css-1q1zlz3 li.css-1ib8oek");
-            for (Element listItem : listItems) {
-                cnt1++;
-                Element anchor = listItem.selectFirst("a.css-1xlgwie");
-                if (anchor != null) {
-                    String anchorText = anchor.text();
-                    String href = anchor.attr("href");
-                    h.put(anchorText, href);
+            // Load XML file
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            org.w3c.dom.Document doc = dBuilder.parse(healthurl);
+
+            // Normalize XML structure
+            doc.getDocumentElement().normalize();
+
+            // Get item elements
+            NodeList itemList = doc.getElementsByTagName("item");
+
+            for (int i = 0; i < itemList.getLength(); i++) {
+                if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                    org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
+
+                    // Get description
+                    String title = item.getElementsByTagName("title").item(0).getTextContent();
+
+
+                    // Get link
+                    String link = item.getElementsByTagName("link").item(0).getTextContent();
+
+                    String imageUrl = item.getElementsByTagName("image").item(0).getTextContent();
+                    newsarraylist.add(new NewsModel(title, link, imageUrl));
+
+
+
                 }
-                if(cnt1==3) break;
             }
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        titleColumn.setCellValueFactory(data -> data.getValue().titleProperty());
-//        descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
+        try {
+            // Load XML file
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            org.w3c.dom.Document doc = dBuilder.parse(techurl);
+
+            // Normalize XML structure
+            doc.getDocumentElement().normalize();
+
+            // Get item elements
+            NodeList itemList = doc.getElementsByTagName("item");
+
+            for (int i = 0; i < itemList.getLength(); i++) {
+                if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                    org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
+
+                    // Get description
+                    String title = item.getElementsByTagName("title").item(0).getTextContent();
+
+
+                    // Get link
+                    String link = item.getElementsByTagName("link").item(0).getTextContent();
+//                    linkLabel.setText("Link: " + link);
+
+                    NodeList enclosureList = item.getElementsByTagName("enclosure");
+
+                    if (enclosureList.getLength() > 0) {
+                        Element enclosureElement = (Element) enclosureList.item(0);
+                        String imageUrl = enclosureElement.getAttribute("url");
+
+                        newsarraylist.add(new NewsModel(title, link, imageUrl));
+                    }
+
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        descriptionColumn.setCellValueFactory(data -> data.getValue().titleProperty());
+
+
+
+
         tableView.setRowFactory(tv -> {
             TableRow<ArticleData> row = new TableRow<>();
             row.setPrefHeight(60); // Set the preferred height for each row
             return row;
         });
+//        descriptionColumn.setCellValueFactory(data -> data.getValue().imageUrlProperty());
+
+        imageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
+        imageColumn.setCellFactory(col -> {
+            TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
+                @Override
+                protected void updateItem(String imageUrl, boolean empty) {
+                    super.updateItem(imageUrl, empty);
+                    if (imageUrl != null && !empty) {
+                        ImageView imageView = new ImageView(new Image(imageUrl));
+
+                        imageView.setFitWidth(50); // Set width of the image
+                        imageView.setPreserveRatio(true); // Preserve the aspect ratio of the image
+                        setGraphic(imageView);
+                    } else {
+                        setGraphic(null);
+                    }
+                }
+            };
+            return cell;
+        });
+//
 
 
 
-        titleColumn.setCellFactory(col -> {
+        descriptionColumn.setCellFactory(col -> {
             TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -169,27 +304,38 @@ public class HtmlContent  implements Initializable {
                         setText(null);
                     }
                 }
-
             };
+
             cell.setOnMousePressed(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     // Set blue background color when the mouse is pressed
                     cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
                 }
-
             });
 
 
             cell.setOnMouseClicked(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     String desc = cell.getItem();
-                    String ogUrl = h.get(desc);
+                    String ogUrl = null;
+
+                    // Find the NewsModel object with the matching description
+                    for (NewsModel news : newsarraylist) {
+                        if (news.getDesc().equals(desc)) {
+                            // Found the matching NewsModel object
+                            // Retrieve the ogUrl attribute
+                            ogUrl = news.getLink();
+                            break; // Exit the loop since we found the match
+                        }
+                    }
+
                     if (ogUrl != null && !ogUrl.isEmpty()) {
+                        // Load the URL into the WebView
                         Webview webViewSample = new Webview();
                         webViewSample.loadURL(ogUrl);
                     }
-                }
 
+                }
             });
 
             return cell;
@@ -197,40 +343,87 @@ public class HtmlContent  implements Initializable {
 
 
         ObservableList<ArticleData> articleList = FXCollections.observableArrayList();
-        h.forEach((title, description) -> {
+        newsarraylist.forEach(news -> {
+            String image = news.getImage();
+            String description = news.getDesc();
+            // Assuming the third value is stored in a field called thirdValue in NewsModel class
+            // String thirdValue = news.getThirdValue();
 
-            articleList.add(new ArticleData(title));
+            // Create ArticleData object using title, description, and thirdValue
+            // Change ArticleData constructor accordingly if needed
+            articleList.add(new ArticleData(image, description));
         });
         tableView.setItems(articleList);
-
     }
+
+
 
 
 
     private void displayMedinews(String url) {
-        h.clear();
-        int cnt=0;
+        newsarraylist.clear();
+
         try {
-            Document doc = Jsoup.connect(url).get();
-            Elements listItems = doc.select("ul.css-1q1zlz3 li.css-1ib8oek");
-            for (Element listItem : listItems) {
-                cnt++;
-                Element anchor = listItem.selectFirst("a.css-1xlgwie");
-                if (anchor != null) {
-                    String anchorText = anchor.text();
-                    String href = anchor.attr("href");
-                    h.put(anchorText, href);
-                    if(cnt==3) break;
+            // Load XML file
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            org.w3c.dom.Document doc = dBuilder.parse(url);
+
+            // Normalize XML structure
+            doc.getDocumentElement().normalize();
+
+            // Get item elements
+            NodeList itemList = doc.getElementsByTagName("item");
+
+            for (int i = 0; i < itemList.getLength(); i++) {
+                if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                    org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
+
+                    // Get description
+                    String title = item.getElementsByTagName("title").item(0).getTextContent();
+//                    descriptionLabel.setText("Description: " + description);
+
+                    // Get link
+                    String link = item.getElementsByTagName("link").item(0).getTextContent();
+//                    linkLabel.setText("Link: " + link);
+
+                    String imageUrl = item.getElementsByTagName("image").item(0).getTextContent();
+
+//                    linkLabel.setText("Link: " + link);
+
+                    newsarraylist.add(new NewsModel(title, link, imageUrl));
+
 
                 }
             }
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        titleColumn.setCellValueFactory(data -> data.getValue().titleProperty());
-//        descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
 
+        descriptionColumn.setCellValueFactory(data -> data.getValue().titleProperty());
+        imageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
+        imageColumn.setCellFactory(col -> {
+            TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
+                @Override
+                protected void updateItem(String imageUrl, boolean empty) {
+                    super.updateItem(imageUrl, empty);
+                    if (imageUrl != null && !empty) {
 
+                        ImageView imageView = new ImageView(new Image(imageUrl));
+
+                        imageView.setFitWidth(50); // Set width of the image
+                        imageView.setPreserveRatio(true); // Preserve the aspect ratio of the image
+                        setGraphic(imageView);
+                    } else {
+                        setGraphic(null);
+                    }
+                }
+            };
+            return cell;
+        });
+//
+//
         tableView.setRowFactory(tv -> {
             TableRow<ArticleData> row = new TableRow<>();
             row.setPrefHeight(60); // Set the preferred height for each row
@@ -238,8 +431,177 @@ public class HtmlContent  implements Initializable {
         });
 
 
+        descriptionColumn.setCellFactory(col -> {
+            TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item != null && !empty) {
+                        setText(item);
+                        setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #f2f2f2;"); // Customize font size and weight
+                    } else {
+                        setText(null);
+                    }
+                }
+            };
+            cell.setOnMousePressed(event -> {
+                if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
+                    // Set blue background color when the mouse is pressed
+                    cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
+                }
+            });
 
-        titleColumn.setCellFactory(col -> {
+
+
+            cell.setOnMouseClicked(event -> {
+                if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
+                    String desc = cell.getItem();
+                    String ogUrl = null;
+
+                    // Find the NewsModel object with the matching description
+                    for (NewsModel news : newsarraylist) {
+                        if (news.getDesc().equals(desc)) {
+                            // Found the matching NewsModel object
+                            // Retrieve the ogUrl attribute
+                            ogUrl = news.getLink();
+                            break; // Exit the loop since we found the match
+                        }
+                    }
+
+                    if (ogUrl != null && !ogUrl.isEmpty()) {
+                        // Load the URL into the WebView
+                        Webview webViewSample = new Webview();
+                        webViewSample.loadURL(ogUrl);
+                    }
+
+                }
+            });
+
+            return cell;
+        });
+
+
+        ObservableList<ArticleData> articleList = FXCollections.observableArrayList();
+        newsarraylist.forEach(news -> {
+            String image = news.getImage();
+            String description = news.getDesc();
+            articleList.add(new ArticleData(image,description));
+        });
+        tableView.setItems(articleList);
+    }
+    private void displaybothnews(String techurl, String healthurl) {
+        newsarraylist.clear();
+
+        try {
+            // Load XML file
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            org.w3c.dom.Document doc = dBuilder.parse(techurl);
+
+            // Normalize XML structure
+            doc.getDocumentElement().normalize();
+
+            // Get item elements
+            NodeList itemList = doc.getElementsByTagName("item");
+
+            for (int i = 0; i < itemList.getLength(); i++) {
+                if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                    org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
+
+                    // Get description
+                    String title = item.getElementsByTagName("title").item(0).getTextContent();
+
+
+                    // Get link
+                    String link = item.getElementsByTagName("link").item(0).getTextContent();
+//                    linkLabel.setText("Link: " + link);
+
+                    NodeList enclosureList = item.getElementsByTagName("enclosure");
+
+                    if (enclosureList.getLength() > 0) {
+                        Element enclosureElement = (Element) enclosureList.item(0);
+                        String imageUrl = enclosureElement.getAttribute("url");
+
+                        newsarraylist.add(new NewsModel(title, link, imageUrl));
+                    }
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            // Load XML file
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            org.w3c.dom.Document doc = dBuilder.parse(healthurl);
+
+            // Normalize XML structure
+            doc.getDocumentElement().normalize();
+
+            // Get item elements
+            NodeList itemList = doc.getElementsByTagName("item");
+
+            for (int i = 0; i < itemList.getLength(); i++) {
+                if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                    org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
+
+                    // Get description
+                    String title = item.getElementsByTagName("title").item(0).getTextContent();
+
+
+                    // Get link
+                    String link = item.getElementsByTagName("link").item(0).getTextContent();
+//                    linkLabel.setText("Link: " + link);
+
+                    String imageUrl = item.getElementsByTagName("image").item(0).getTextContent();
+
+                    newsarraylist.add(new NewsModel(title, link, imageUrl));
+
+
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        descriptionColumn.setCellValueFactory(data -> data.getValue().titleProperty());
+//        imageColumn.setCellValueFactory(data -> data.getValue().imageUrlProperty());
+
+
+
+        imageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
+        imageColumn.setCellFactory(col -> {
+            TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
+                @Override
+                protected void updateItem(String imageUrl, boolean empty) {
+                    super.updateItem(imageUrl, empty);
+                    if (imageUrl != null && !empty) {
+                        ImageView imageView = new ImageView(new Image(imageUrl));
+
+                        imageView.setFitWidth(50); // Set width of the image
+                        imageView.setPreserveRatio(true); // Preserve the aspect ratio of the image
+                        setGraphic(imageView);
+                    } else {
+                        setGraphic(null);
+                    }
+                }
+            };
+            return cell;
+        });
+//
+//
+        tableView.setRowFactory(tv -> {
+            TableRow<ArticleData> row = new TableRow<>();
+            row.setPrefHeight(60); // Set the preferred height for each row
+            return row;
+        });
+
+
+        descriptionColumn.setCellFactory(col -> {
             TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -263,8 +625,20 @@ public class HtmlContent  implements Initializable {
             cell.setOnMouseClicked(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     String desc = cell.getItem();
-                    String ogUrl = h.get(desc);
+                    String ogUrl = null;
+
+                    // Find the NewsModel object with the matching description
+                    for (NewsModel news : newsarraylist) {
+                        if (news.getDesc().equals(desc)) {
+                            // Found the matching NewsModel object
+                            // Retrieve the ogUrl attribute
+                            ogUrl = news.getLink();
+                            break; // Exit the loop since we found the match
+                        }
+                    }
+
                     if (ogUrl != null && !ogUrl.isEmpty()) {
+
                         Webview webViewSample = new Webview();
                         webViewSample.loadURL(ogUrl);
                     }
@@ -277,43 +651,85 @@ public class HtmlContent  implements Initializable {
 
 
         ObservableList<ArticleData> articleList = FXCollections.observableArrayList();
-        h.forEach((title, description) -> {
-
-            articleList.add(new ArticleData(title));
+        newsarraylist.forEach(news -> {
+            String image = news.getImage();
+            String description = news.getDesc();
+            articleList.add(new ArticleData(image,description));
         });
         tableView.setItems(articleList);
     }
 
 
+
+
+
     private void displayTechnews(String url) {
-        h.clear();
-        int cnt=0;
+        newsarraylist.clear();
+
         try {
-            Document doc = Jsoup.connect(url).get();
+            // Load XML file
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            org.w3c.dom.Document doc = dBuilder.parse(url);
+
+            // Normalize XML structure
+            doc.getDocumentElement().normalize();
+
+            // Get item elements
+            NodeList itemList = doc.getElementsByTagName("item");
+
+            for (int i = 0; i < itemList.getLength(); i++) {
+                if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                    org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
+
+                    // Get description
+                    String title = item.getElementsByTagName("title").item(0).getTextContent();
 
 
-            Elements articles = doc.select("li.tease.article");
-            if (articles != null) {
-                for (Element article : articles) {
-                    Elements header = article.select("header");
-                    for (Element headers : header) {
-                        cnt++;
+                    // Get link
+                    String link = item.getElementsByTagName("link").item(0).getTextContent();
 
-                        Elements anch = headers.select("h2 a");
-                        String articleLink = anch.attr("href");
-                        fetchArticleData(articleLink);
+                    NodeList enclosureList = item.getElementsByTagName("enclosure");
+
+                    if (enclosureList.getLength() > 0) {
+                        Element enclosureElement = (Element) enclosureList.item(0);
+                        String imageUrl = enclosureElement.getAttribute("url");
+
+                        newsarraylist.add(new NewsModel(title, link, imageUrl));
                     }
-                    if(cnt==3) break;
+
 
                 }
             }
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        titleColumn.setCellValueFactory(data -> data.getValue().titleProperty());
-//        descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
 
+        descriptionColumn.setCellValueFactory(data -> data.getValue().titleProperty());
+       // imageColumn.setCellValueFactory(data -> data.getValue().titleProperty());
+//        imageColumn.setCellFactory(column -> new CustomImageTableCell());
 
+       imageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
+        imageColumn.setCellFactory(col -> {
+            TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
+                @Override
+                protected void updateItem(String imageUrl, boolean empty) {
+                    super.updateItem(imageUrl, empty);
+                    if (imageUrl != null && !empty) {
+
+                        ImageView imageView = new ImageView(new Image(imageUrl));
+
+                        imageView.setFitWidth(50); // Set width of the image
+                        imageView.setPreserveRatio(true); // Preserve the aspect ratio of the image
+                        setGraphic(imageView);
+                    } else {
+                        setGraphic(null);
+                    }
+                }
+            };
+            return cell;
+        });
         tableView.setRowFactory(tv -> {
             TableRow<ArticleData> row = new TableRow<>();
             row.setPrefHeight(60); // Set the preferred height for each row
@@ -321,8 +737,7 @@ public class HtmlContent  implements Initializable {
         });
 
 
-
-        titleColumn.setCellFactory(col -> {
+        descriptionColumn.setCellFactory(col -> {
             TableCell<ArticleData, String> cell = new TableCell<ArticleData, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -337,7 +752,7 @@ public class HtmlContent  implements Initializable {
             };
             cell.setOnMousePressed(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
-
+                    // Set blue background color when the mouse is pressed
                     cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
                 }
             });
@@ -346,11 +761,25 @@ public class HtmlContent  implements Initializable {
             cell.setOnMouseClicked(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     String desc = cell.getItem();
-                    String ogUrl = h.get(desc);
+                    String ogUrl = null;
+
+                    // Find the NewsModel object with the matching description
+                    for (NewsModel news : newsarraylist) {
+                        if (news.getDesc().equals(desc)) {
+                            // Found the matching NewsModel object
+                            // Retrieve the ogUrl attribute
+                            ogUrl = news.getLink();
+
+                            break; // Exit the loop since we found the match
+                        }
+                    }
+
                     if (ogUrl != null && !ogUrl.isEmpty()) {
+                        // Load the URL into the WebView
                         Webview webViewSample = new Webview();
                         webViewSample.loadURL(ogUrl);
                     }
+
                 }
             });
 
@@ -359,49 +788,22 @@ public class HtmlContent  implements Initializable {
 
 
         ObservableList<ArticleData> articleList = FXCollections.observableArrayList();
-        h.forEach((title, description) -> {
+        newsarraylist.forEach(news -> {
+            String image = news.getImage();
 
-            articleList.add(new ArticleData(title));
+            String description = news.getDesc();
+            articleList.add(new ArticleData(image,description));
         });
         tableView.setItems(articleList);
     }
 
 
-    private void fetchArticleData(String url) {
-        try {
-            Document doc = Jsoup.connect(url).get();
 
 
-            String ogurl = doc.select("meta[property=og:url]").attr("content");
-
-            String ogTitle = doc.select("meta[property=og:title]").attr("content");
-            String ogDescription = doc.select("meta[property=og:description]").attr("content");
-            String twitterTitle = doc.select("meta[name=twitter:title]").attr("content");
-            String twitterDescription = doc.select("meta[name=twitter:description]").attr("content");
-            String twitterurl = doc.select("meta[name=twitter:description]").attr("content");
-
-
-            if (ogTitle.isEmpty()) {
-                ogTitle = twitterTitle;
-            }
-            if (ogDescription.isEmpty()) {
-                ogDescription = twitterDescription;
-            }
-            if (ogurl.isEmpty()) {
-                ogurl = twitterurl;
-            }
-
-            h.put(ogDescription, ogurl);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error("fetching article data");
-        }
-    }
 
     public void handleHealthBtn(ActionEvent event) {
 
-        System.out.println(username);
+
         saveFeedChoice(username,tech1,"health");
         retrieveFeedsByUsername(username);
         System.out.println("healthBtnClicked");
@@ -463,6 +865,7 @@ public class HtmlContent  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+//        titleColumn.setCellFactory(column -> new ImageTableCell<>());
         try {
             File brandingFile = new File("images/logo_.png");
             Image branding2 = new Image(brandingFile.toURI().toString());

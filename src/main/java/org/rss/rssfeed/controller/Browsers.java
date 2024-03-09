@@ -24,7 +24,10 @@ public class Browsers extends BorderPane {
 
 
         getStyleClass().add("browser");
-
+//        webEngine.load("about:blank");
+//
+//        java.net.CookieHandler.setDefault(new java.net.CookieManager());
+        clearBrowser();
         webEngine.load(url);
 
 
@@ -88,6 +91,10 @@ public class Browsers extends BorderPane {
         reloadButton.setOnAction(event -> {
             webEngine.reload();
         });
+    }
+    private void clearBrowser() {
+        // Clear cache, history, cookies, etc.
+        webEngine.loadContent(""); // Clear the content
     }
 
     @Override

@@ -170,14 +170,14 @@ public class UserInfoController implements Initializable {
 
             // If a user with the given username is found
             if (resultSet.next()) {
-                // Retrieve data from the result set
+                // get data from the result set to assign the variables
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 userName1 = resultSet.getString("userName");
                  techFeed = resultSet.getString("techFeed");
                 healthFeed = resultSet.getString("healthFeed");
 
-                // Populate the labels with the fetched data
+                // set the values to the labels with the fetched data
                 firstNameLabel.setText(firstName);
                 lastNameLabel.setText(lastName);
                 userName1Label.setText(userName1);
@@ -187,7 +187,7 @@ public class UserInfoController implements Initializable {
                 userNameLabel1.setText(userName1);
             }
 
-            // Close the resources
+            // Close the all opening resources
             resultSet.close();
             statement.close();
             connection.close();
@@ -196,7 +196,6 @@ public class UserInfoController implements Initializable {
         }
     }
 
-    // Additional methods can be added here if needed
 
 
 

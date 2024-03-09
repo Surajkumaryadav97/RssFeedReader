@@ -15,4 +15,6 @@ module org.rss.rssfeed {
     exports org.rss.rssfeed;
     exports org.rss.rssfeed.controller;
     opens org.rss.rssfeed.controller to javafx.fxml;
+    exports org.rss.rssfeed.model;
+    opens org.rss.rssfeed.model to javafx.fxml;
 }
