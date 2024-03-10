@@ -5,11 +5,11 @@
         <url>https://timesofindia.indiatimes.com/rssfeeds/66949542.cms</url>
     </link>
     <link>
-        <category>Sports</category>
-        <url>https://example.com/sports</url>
+        <category>health</category>
+        <url>https://health.economictimes.indiatimes.com/rss/topstories</url>
     </link>
     <link>
-        <category>Technology</category>
-        <url>https://example.com/technology</url>
+        <category>Topnews</category>
+        <url>https://timesofindia.indiatimes.com/rssfeedstopstories.cms</url>
     </link>
 </links>

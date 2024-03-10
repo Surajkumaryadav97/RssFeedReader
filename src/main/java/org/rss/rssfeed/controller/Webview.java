@@ -19,7 +19,7 @@ public class Webview extends Application {
         scene = new Scene(new Browsers(), 850, 650, Color.web("#666970"));
         stage.setScene(scene);
         scene.getStylesheets().add("webviewsample/BrowserToolbar.css");
-        Platform.setImplicitExit(false);
+
         stage.show();
 
     }

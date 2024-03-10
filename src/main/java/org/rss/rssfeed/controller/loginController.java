@@ -96,22 +96,12 @@ public class loginController implements Initializable {
 
     }
 
-    public void start(String userName1, String techfeed, String healthfeed) throws switchSceneException {
+    public void start(String userName1, String techfeed, String healthfeed,String layout) throws switchSceneException {
         try {
             // Create loader for the new scene
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
             ProgressIndicator progressIndicator = new ProgressIndicator();
             progressIndicator.setStyle("-fx-progress-color: green; -fx-min-width: 150px; -fx-min-height: 150px;-fx-background-color: black;");
-
-
-
-
-
-
-
-
-
-
             Stage loaderStage = new Stage();
             loaderStage.initStyle(StageStyle.TRANSPARENT); // Set stage style to transparent
             loaderStage.setResizable(false); // Disable resizing
@@ -132,7 +122,7 @@ public class loginController implements Initializable {
 
                     // Access the controller of the new scene
                     RssContent htmlContent = fxmlLoader.getController();
-                    htmlContent.initialize(userName1, techfeed, healthfeed);
+                    htmlContent.initialize(userName1, techfeed, healthfeed,layout);
 
                     // Switch to the new scene on the JavaFX Application Thread
                     Platform.runLater(() -> {
@@ -225,7 +215,7 @@ public class loginController implements Initializable {
                         UserInfoController userInfoController=new UserInfoController();
                         System.out.println(userName1);
                         userInfoController.initializeUserInfo(userName1,username,techFeed,healthFeed);
-                        start(userName1,techFeed,healthFeed);
+                        start(userName1,techFeed,healthFeed,"");
 
 
                     } else {

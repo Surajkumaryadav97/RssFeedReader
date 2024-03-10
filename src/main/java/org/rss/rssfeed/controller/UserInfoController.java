@@ -1,5 +1,6 @@
 package org.rss.rssfeed.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,9 +8,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.rss.rssfeed.Exceptions.switchSceneException;
 import org.rss.rssfeed.HelloApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
@@ -132,21 +140,76 @@ public class UserInfoController implements Initializable {
 
     public void cancel1(ActionEvent actionEvent) throws switchSceneException {
 
+//        try {
+//            Stage stage = (Stage) cancel.getScene().getWindow();
+//            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
+//            Scene scene=new Scene(fxmlLoader.load());
+//            RssContent htmlContent = fxmlLoader.getController();
+//
+//            htmlContent.initialize(userName1,techFeed,healthFeed);
+//
+//            stage.setScene(scene);
+//            stage.show();
+//            logger.info("Switching to Homepage");
+//        } catch (IOException ex) {
+//            System.out.println(ex);
+//            logger.error("Error in switching homepage" + ex);
+//            throw new switchSceneException("Error in NewspageContoller switching to Homepage in cancellayoutButton",ex);
+//        }
         try {
+            // Create loader for the new scene
             Stage stage = (Stage) cancel.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
-            Scene scene=new Scene(fxmlLoader.load());
-            RssContent htmlContent = fxmlLoader.getController();
+            ProgressIndicator progressIndicator = new ProgressIndicator();
+            progressIndicator.setStyle("-fx-progress-color: green; -fx-min-width: 150px; -fx-min-height: 150px;-fx-background-color: black;");
 
-            htmlContent.initialize(userName1,techFeed,healthFeed);
 
-            stage.setScene(scene);
-            stage.show();
-            logger.info("Switching to Homepage");
-        } catch (IOException ex) {
-            System.out.println(ex);
-            logger.error("Error in switching homepage" + ex);
-            throw new switchSceneException("Error in NewspageContoller switching to Homepage in cancellayoutButton",ex);
+
+
+
+
+
+
+
+
+            Stage loaderStage = new Stage();
+            loaderStage.initStyle(StageStyle.TRANSPARENT); // Set stage style to transparent
+            loaderStage.setResizable(false); // Disable resizing
+            loaderStage.initModality(Modality.APPLICATION_MODAL); // Make the loader stage modal
+            loaderStage.setScene(new Scene(new StackPane(progressIndicator), Color.TRANSPARENT));
+            loaderStage.show();
+            Rectangle overlay = new Rectangle();
+            overlay.setFill(Color.rgb(0, 0, 0, 0.8)); // Set the color and transparency
+            overlay.widthProperty().bind(cancel.getScene().widthProperty()); // Set the width to match the scene
+            overlay.heightProperty().bind(cancel.getScene().heightProperty()); // Set the height to match the scene
+            ((Pane) cancel.getScene().getRoot()).getChildren().add(overlay);
+
+            // Load the new scene in a background thread
+            new Thread(() -> {
+                try {
+                    // Load the new scene
+                    Scene newScene = new Scene(fxmlLoader.load());
+
+                    // Access the controller of the new scene
+                    RssContent htmlContent = fxmlLoader.getController();
+                    htmlContent.initialize(userName1,techFeed,healthFeed,"");
+
+                    // Switch to the new scene on the JavaFX Application Thread
+                    Platform.runLater(() -> {
+                        stage.setScene(newScene);
+                        stage.show();
+                        loaderStage.close(); // Close the loader stage after switching
+                    });
+                } catch (Exception ex) {
+                    // Handle any exceptions
+                    ex.printStackTrace(); // Print the stack trace for debugging purposes
+                    // Optionally, show an error message to the user
+                    loaderStage.close(); // Close the loader stage in case of an error
+                }
+            }).start();
+        } catch (Exception ex) {
+            // Throw switchSceneException or handle the exception as needed
+            throw new switchSceneException("Error in loginController start method switch to Homepage", ex);
         }
 
 
