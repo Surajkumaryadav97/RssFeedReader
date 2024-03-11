@@ -22,7 +22,7 @@
                 <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="89.0" layoutY="251.0" text="Username *" textFill="#f5efef" />
                 <TextField fx:id="reg_Uname" layoutX="89.0" layoutY="275.0" prefHeight="27.0" prefWidth="174.0" promptText="John@" stylesheets="@style.css" />
                 <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="92.0" layoutY="313.0" text="Password *" textFill="#f2ebeb" />
-                <Button fx:id="regButton" alignment="CENTER" layoutX="89.0" layoutY="390.0" mnemonicParsing="false" onAction="#register" prefHeight="23.0" prefWidth="86.0" stylesheets="@style.css" text="Register">
+                <Button fx:id="regButton" alignment="CENTER" layoutX="89.0" layoutY="390.0" mnemonicParsing="false" onAction="#register" prefHeight="23.0" prefWidth="86.0" style="-fx-background-radius: 5;" stylesheets="@style.css" text="Register">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -32,12 +32,12 @@
                     </styleClass>
                 </Button>
                 <PasswordField fx:id="reg_password" layoutX="89.0" layoutY="337.0" prefHeight="27.0" prefWidth="174.0" promptText="John****" stylesheets="@style.css" />
-                <Button fx:id="cancelButton" alignment="CENTER" layoutX="183.0" layoutY="390.0" mnemonicParsing="false" onAction="#returnBack" prefHeight="27.0" prefWidth="86.0" stylesheets="@style.css" text="Cancel" textFill="WHITE">
+                <Button fx:id="cancelButton" alignment="CENTER" layoutX="183.0" layoutY="390.0" mnemonicParsing="false" onAction="#returnBack" prefHeight="27.0" prefWidth="86.0" stylesheets="@style.css" text="Cancel" textFill="#1b0101">
                     <font>
                         <Font size="16.0" />
                     </font>
                     <styleClass>
-                        <String fx:value="cancelBtn" />
+                        <String fx:value="registerCancel" />
                         <String fx:value="animated-button" />
                     </styleClass>
                 </Button>
@@ -52,7 +52,7 @@
                     </font>
                 </Label>
                 <AnchorPane layoutX="89.0" layoutY="92.0" prefHeight="6.0" prefWidth="174.0" style="-fx-background-color: #76ff03;" />
-            <Button fx:id="login" layoutX="153.0" layoutY="440.0" mnemonicParsing="false" onAction="#Login" stylesheets="@style.css" text="Login" textFill="#f5eeee">
+            <Button fx:id="login" layoutX="144.0" layoutY="439.0" mnemonicParsing="false" onAction="#Login" prefHeight="27.0" prefWidth="86.0" stylesheets="@style.css" text="Login" textFill="#f5eeee">
                <font>
                   <Font name="Tahoma" size="12.0" />
                </font>
@@ -65,7 +65,7 @@
 
         </AnchorPane>
 
-        <AnchorPane layoutX="400.0" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #F0EDCF;">
+        <AnchorPane fx:id="registerCancel" layoutX="400.0" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #F0EDCF;">
             <children>
                 <ImageView fx:id="registerImageView" fitHeight="330.0" fitWidth="354.0" layoutX="32.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                     <image>

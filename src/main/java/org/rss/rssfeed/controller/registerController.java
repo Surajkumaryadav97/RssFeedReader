@@ -54,7 +54,7 @@ public class registerController implements Initializable {
     @FXML
     private Button cancelButton;
 
-    private final HelloApplication helloApplication = new HelloApplication();
+   //This method is used to register the new user and saving the credentials to Database
 
     @FXML
     public void register() throws sqlException {
@@ -79,7 +79,7 @@ public class registerController implements Initializable {
             return;
         }
 
-        // Hash the password using bcrypt
+
         String Password = hashPassword(password);
 
         DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -96,12 +96,12 @@ public class registerController implements Initializable {
             preparedStatement.setString(6, "");
             preparedStatement.setString(7, "");
 
-//            preparedStatement.setString(6, tech);
+
 
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-              //check user has registered successfully
+
                 System.out.println("User registered successfully!");
                 reg_Fname.clear();
                 reg_Lname.clear();
@@ -134,7 +134,7 @@ public class registerController implements Initializable {
         }
 
     }
-
+    //this function is used to switch to mainPage
     @FXML
     public void returnBack(ActionEvent event) throws IOException {
 
@@ -151,11 +151,15 @@ public class registerController implements Initializable {
         }
 
     }
-
+     //This function is used to store Password in Encrypted form
     private String hashPassword(String password) {
 
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
+
+    //This function runs initially and loading all images to show on page, without this you cant load image
+    //So,it is necessary to load images in Intialize method.
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -169,7 +173,7 @@ public class registerController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    //This function is used to go back to Login Page
     public void Login(ActionEvent event) throws switchSceneException {
         try {
             Stage stage = (Stage) login.getScene().getWindow();

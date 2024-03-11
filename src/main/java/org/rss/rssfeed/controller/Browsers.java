@@ -15,23 +15,25 @@ public class Browsers extends BorderPane {
     final Button reloadButton = new Button("Reload");
 
     public Browsers() {
-        this(Webview.Url); // Default URL or about:blank
+        this(Webview.Url);
     }
 
+
+    //this method is opening url getting from webview and also adding buttons like reload,back and scrollbar
     public Browsers(String url) {
         getStyleClass().add("browser");
 
-        // Wrap the browser WebView inside a ScrollPane
+
         ScrollPane scrollPane = new ScrollPane(browser);
         scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true); // Ensure the scrollbars are enabled from the start
+        scrollPane.setFitToHeight(true);
 
-        // Set minimum width and height for WebView
+
         browser.setMinWidth(750);
         browser.setMinHeight(500);
 
-        // Load the URL
-        clearBrowser();
+
+
         webEngine.load(url);
 
         backButton.getStyleClass().add("navigation-button");
@@ -62,10 +64,7 @@ public class Browsers extends BorderPane {
         setCenter(scrollPane);
     }
 
-    private void clearBrowser() {
-        // Clear cache, history, cookies, etc.
-        webEngine.loadContent(""); // Clear the content
-    }
+
 
     @Override
     protected double computePrefWidth(double height) {

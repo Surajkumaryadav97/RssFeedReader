@@ -62,6 +62,9 @@ public class loginController implements Initializable {
     @FXML
     private ImageView loginImageVeiw;
 
+    //This function runs initially and loading all images to show on page, without this you cant load image
+    //So,it is necessary to load images in Intialize method.
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -77,7 +80,7 @@ public class loginController implements Initializable {
 
 
 
-
+    //This function is used to go back to Homepage
     @FXML
     public void cancel(ActionEvent event) throws switchSceneException {
 
@@ -96,60 +99,63 @@ public class loginController implements Initializable {
 
     }
 
+
+    //This function is used to switch to RssContent page where all data are coming from given feed like tech,health etc.
+    //it is also handling Loader whentil data is not coming
+    //
     public void start(String userName1, String techfeed, String healthfeed,String layout) throws switchSceneException {
         try {
             // Create loader for the new scene
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
             ProgressIndicator progressIndicator = new ProgressIndicator();
-            progressIndicator.setStyle("-fx-progress-color: green; -fx-min-width: 150px; -fx-min-height: 150px;-fx-background-color: black;");
+            progressIndicator.setStyle("-fx-progress-color: #0D9276; -fx-min-width: 150px; -fx-min-height: 150px; -fx-background-color:#333333;");
             Stage loaderStage = new Stage();
-            loaderStage.initStyle(StageStyle.TRANSPARENT); // Set stage style to transparent
-            loaderStage.setResizable(false); // Disable resizing
-            loaderStage.initModality(Modality.APPLICATION_MODAL); // Make the loader stage modal
+            loaderStage.initStyle(StageStyle.TRANSPARENT);
+            loaderStage.setResizable(false);
+            loaderStage.initModality(Modality.APPLICATION_MODAL);
             loaderStage.setScene(new Scene(new StackPane(progressIndicator), Color.TRANSPARENT));
             loaderStage.show();
             Rectangle overlay = new Rectangle();
-            overlay.setFill(Color.rgb(0, 0, 0, 0.8)); // Set the color and transparency
-            overlay.widthProperty().bind(loginButton.getScene().widthProperty()); // Set the width to match the scene
-            overlay.heightProperty().bind(loginButton.getScene().heightProperty()); // Set the height to match the scene
+            overlay.setFill(Color.rgb(0, 0, 0, 0.8));
+            overlay.widthProperty().bind(loginButton.getScene().widthProperty());
+            overlay.heightProperty().bind(loginButton.getScene().heightProperty());
             ((Pane) loginButton.getScene().getRoot()).getChildren().add(overlay);
 
-            // Load the new scene in a background thread
+
             new Thread(() -> {
                 try {
-                    // Load the new scene
+
                     Scene newScene = new Scene(fxmlLoader.load());
 
-                    // Access the controller of the new scene
+
                     RssContent htmlContent = fxmlLoader.getController();
                     htmlContent.initialize(userName1, techfeed, healthfeed,layout);
 
-                    // Switch to the new scene on the JavaFX Application Thread
+
                     Platform.runLater(() -> {
                         switchScene(newScene);
-                        loaderStage.close(); // Close the loader stage after switching
+                        loaderStage.close();
                     });
                 } catch (Exception ex) {
-                    // Handle any exceptions
-                    ex.printStackTrace(); // Print the stack trace for debugging purposes
-                    // Optionally, show an error message to the user
-                    loaderStage.close(); // Close the loader stage in case of an error
+
+                    ex.printStackTrace();
+                    loaderStage.close();
                 }
             }).start();
         } catch (Exception ex) {
-            // Throw switchSceneException or handle the exception as needed
+
             throw new switchSceneException("Error in loginController start method switch to Homepage", ex);
         }
     }
 
 
-
+    //This is method to switch to rssContent page called from start method
     public void switchScene(Scene newScene) {
         Stage stage = (Stage) loginButton.getScene().getWindow();
         stage.setScene(newScene);
       logger.debug("Switching scene");
     }
-
+  //This function is used to switch to Registerpage.
     @FXML
     void signup(ActionEvent event) throws switchSceneException {
         try {
@@ -171,7 +177,7 @@ public class loginController implements Initializable {
     static String techFeed;
     static String healthFeed;
 
-
+     //This function is handling User Credentials and if correct then invoking start method.
     @FXML
     void loginButtonOnAction(ActionEvent actionEvent) throws sqlException, userNotFoundException {
         String userName = usernameTextField.getText();
@@ -185,7 +191,7 @@ public class loginController implements Initializable {
         ProgressIndicator progressIndicator = new ProgressIndicator();
         StackPane rootPane = new StackPane();
 
-        // Show loader before starting login process
+
         rootPane.getChildren().add(progressIndicator);
         progressIndicator.setVisible(true);
 
@@ -207,10 +213,10 @@ public class loginController implements Initializable {
 
                     System.out.println(userName1);
 
-                    // Verify the entered password with the hashed password from the database
+
                     if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
 
-                        // Authentication of user has done successfully
+
                         loginMessageLabel.setText("Login successful");
                         UserInfoController userInfoController=new UserInfoController();
                         System.out.println(userName1);
@@ -234,7 +240,7 @@ public class loginController implements Initializable {
             logger.error(e);
             throw new userNotFoundException("No User Found", e);
         } finally {
-            // Close the DB connection ,it is good practice
+
             try {
                 connection.close();
             }catch(Exception e){
@@ -242,7 +248,7 @@ public class loginController implements Initializable {
             }
         }
     }
-
+    //This method is usedto return username So that other functions can get username from Database
     public String getUsername() {
         return userName1;
     }

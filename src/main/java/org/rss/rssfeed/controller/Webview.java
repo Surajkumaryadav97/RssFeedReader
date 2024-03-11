@@ -11,6 +11,7 @@ public class Webview extends Application {
     static String Url;
 
 
+    //This function is used to switch scene from webview to browser to open Url.
     @Override
     public void start(Stage stage) {
 
@@ -23,7 +24,7 @@ public class Webview extends Application {
         stage.show();
 
     }
-
+    //This function is used to pass the url to start method
     public void loadURL(String url) {
 
 

@@ -5,8 +5,7 @@ import javafx.beans.property.StringProperty;
 
 public class ArticleData {
     private final StringProperty title;
-    private final StringProperty imageUrl; // New property for image URL
-
+    private final StringProperty imageUrl;
     public ArticleData(String imageUrl, String title) {
         this.title = new SimpleStringProperty(title);
         this.imageUrl = new SimpleStringProperty(imageUrl);

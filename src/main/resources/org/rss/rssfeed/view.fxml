@@ -12,14 +12,14 @@
     <VBox fx:id="parentContainer" layoutX="171.0">
         <TableView fx:id="tableView" layoutX="171.0" layoutY="108.0" prefHeight="650.0" prefWidth="730.0" style="-fx-background-color: #F0EDCF;" stylesheets="@style.css">
             <columns>
-                <TableColumn fx:id="imageColumn" maxWidth="130.0" prefWidth="850.0" text=" ">
+                <TableColumn fx:id="imageColumn" maxWidth="130.0" prefWidth="115.0" text=" ">
                     <cellValueFactory>
                         <PropertyValueFactory property="title" />
                     </cellValueFactory>
 
                 </TableColumn>
 
-                <TableColumn fx:id="descriptionColumn" maxWidth="620.0" prefWidth="750.0" text="Latest News ">
+                <TableColumn fx:id="descriptionColumn" maxWidth="635.0" prefWidth="635.0" text="Latest News ">
                     <cellValueFactory>
                         <PropertyValueFactory property="title" />
                     </cellValueFactory>
@@ -32,7 +32,7 @@
             </styleClass>
         </TableView>
     </VBox>
-    <Button fx:id="removeTechBtn" layoutX="41.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleRemoveTech" prefHeight="30.0" prefWidth="133.0" stylesheets="@style.css" text="Tech Feed">
+    <Button fx:id="removeTechBtn" alignment="CENTER" layoutX="54.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleRemoveTech" prefHeight="45.0" prefWidth="120.0" stylesheets="@style.css" text="Tech Feed">
         <styleClass>
             <String fx:value="removeTechBtn" />
             <String fx:value="animated-button" />
@@ -40,7 +40,7 @@
         <font>
             <Font name="Tahoma Bold" size="15.0" />
         </font></Button>
-    <Button fx:id="removeHealthBtn" layoutX="44.0" layoutY="214.0" mnemonicParsing="false" onAction="#removeHandlehealth" prefHeight="30.0" prefWidth="127.0" stylesheets="@style.css" text="Health feed ">
+    <Button fx:id="removeHealthBtn" alignment="CENTER" layoutX="51.0" layoutY="214.0" mnemonicParsing="false" onAction="#removeHandlehealth" prefHeight="45.0" prefWidth="120.0" stylesheets="@style.css" text="Health feed ">
         <styleClass>
             <String fx:value="removeHealthBtn" />
             <String fx:value="animated-button" />
@@ -52,7 +52,7 @@
         <font>
             <Font name="Tahoma" size="15.0" />
         </font></Label>
-    <AnchorPane layoutY="-120.0" prefHeight="111.0" prefWidth="901.0" style="-fx-background-color: #000000;">
+    <AnchorPane layoutY="-120.0" prefHeight="121.0" prefWidth="901.0" style="-fx-background-color: #000000;">
         <children>
             <ImageView fx:id="logoImageview" fitHeight="102.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -128,17 +128,7 @@
         </image>
 
     </ImageView>
-    <ImageView fx:id="iconImageView" fitHeight="38.0" fitWidth="37.0" layoutX="14.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@../../../../../../images/icon.png" />
-        </image>
-    </ImageView>
-    <ImageView fx:id="iconImageView1" fitHeight="38.0" fitWidth="37.0" layoutX="14.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@../../../../../../images/icon.png" />
-        </image>
-    </ImageView>
-    <Button fx:id="magazineview" layoutX="21.0" layoutY="393.0" mnemonicParsing="false" onAction="#Magazineview" stylesheets="@style.css" text="layoutMagazine">
+    <Button fx:id="magazineview" alignment="CENTER" layoutX="-3.0" layoutY="265.0" mnemonicParsing="false" onAction="#Magazineview" prefHeight="37.0" prefWidth="174.0" stylesheets="@style.css" text="layoutMagazine">
         <font>
             <Font name="Tahoma Bold" size="15.0" />
         </font>
@@ -147,5 +137,15 @@
             <String fx:value="animated-button" />
         </styleClass>
     </Button>
+   <ImageView fx:id="icon1" fitHeight="45.0" fitWidth="64.0" layoutX="7.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../../../../images/icon.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="icon2" fitHeight="45.0" fitWidth="64.0" layoutX="7.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../../../../images/icon.png" />
+      </image>
+   </ImageView>
 
 </AnchorPane>

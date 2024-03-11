@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.Spinner?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="850.0" style="-fx-background-color: #F0EDCF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.loginController">
     <children>
         <AnchorPane layoutX="410.0" layoutY="25.0" prefHeight="600.0" prefWidth="393.0" style="-fx-background-color: #000000; -fx-background-radius: 50;">
@@ -49,11 +48,11 @@
                 </Button>
                 <Button fx:id="cancelButton" layoutX="196.0" layoutY="288.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="78.0" stylesheets="@style.css" text="Cancel" textFill="WHITE">
                     <styleClass>
-                        <String fx:value="cancelBtn" />
+                        <String fx:value="cancelButton" />
                         <String fx:value="animated-button" />
                     </styleClass>
                 </Button>
-                <Label  fx:id="loginMessageLabel" alignment="CENTER" layoutX="68.0" layoutY="362.0" prefHeight="19.0" prefWidth="239.0" text="New User ? SignUp" textAlignment="CENTER" textFill="#fcf6f6">
+                <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="68.0" layoutY="362.0" prefHeight="19.0" prefWidth="239.0" text="New User ? SignUp" textAlignment="CENTER" textFill="#fcf6f6">
                     <font>
                         <Font name="Tahoma" size="16.0" />
                     </font>

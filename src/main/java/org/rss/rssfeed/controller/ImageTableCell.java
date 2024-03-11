@@ -10,7 +10,7 @@ public class ImageTableCell<S> extends TableCell<S, String> {
 
     public ImageTableCell() {
         this.imageView = new ImageView();
-        this.imageView.setFitHeight(100); // Adjust the height as needed
+        this.imageView.setFitHeight(100);
         this.imageView.setPreserveRatio(true);
     }
 

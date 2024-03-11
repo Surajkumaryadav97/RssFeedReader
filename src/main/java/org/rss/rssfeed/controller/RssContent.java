@@ -56,15 +56,17 @@ public class RssContent implements Initializable {
 
     @FXML
     private ImageView iconImageView;
+    @FXML
+    private ImageView icon1;
+    @FXML
+    private ImageView icon2;
 
     @FXML
-    private  ImageView iconImageView1;
+    private ImageView iconImageView1;
 
     @FXML
     private Button cancel1;
 
-    @FXML
-    private Button cardview;
 
     @FXML
     private Button profile;
@@ -79,19 +81,18 @@ public class RssContent implements Initializable {
     private TableColumn<ArticleData, String> imageColumn;
 
     private ArrayList<NewsModel> newsarraylist = new ArrayList<>();
-    int cnt = 0;
+
     String username;
     String tech1;
     String medi1;
 
     static String techFeed1;
     static String healthFeed1;
-    static String techurl="";
-    static String healthurl="";
-    static String topnewsurl="";
+    static String techurl = "";
+    static String healthurl = "";
+    static String topnewsurl = "";
 
-    static String layoutview="";
-
+    static String layoutview = "";
 
 
     public void parse() {
@@ -100,10 +101,10 @@ public class RssContent implements Initializable {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
-            // Normalize XML structure
+
             doc.getDocumentElement().normalize();
 
-            // Get item elements
+
             NodeList linkList = doc.getElementsByTagName("link");
             for (int i = 0; i < linkList.getLength(); i++) {
                 org.w3c.dom.Element linkElement = (org.w3c.dom.Element) linkList.item(i);
@@ -123,13 +124,14 @@ public class RssContent implements Initializable {
                 }
 
             }
-        }catch(Exception e){}
+        } catch (Exception e) {
+        }
     }
 
 
-    public void initialize(String username1, String techfeed, String healthfeed,String layout) {
+    public void initialize(String username1, String techfeed, String healthfeed, String layout) {
         parse();
-        layoutview=layout;
+        layoutview = layout;
         username = username1;
         System.out.println(username);
         tech1 = techfeed;
@@ -138,60 +140,43 @@ public class RssContent implements Initializable {
 
             displayTechnews(techurl);
 
-
-
-
-
         } else if (!healthfeed.isEmpty() && techfeed.isEmpty()) {
 
             displayMedinews(healthurl);
 
+        } else if (!healthfeed.isEmpty() && !techfeed.isEmpty()) {
 
+            displaybothnews(techurl, healthurl);
+        } else {
 
-        } else if(!healthfeed.isEmpty() && !techfeed.isEmpty()){
-
-            displaybothnews(techurl,healthurl);
-
-
-
-        }
-        else{
-            displayrandomnews(topnewsurl,techurl,healthurl);
-
-
-
-
+            displayrandomnews(topnewsurl, techurl, healthurl);
         }
 
     }
 
-    private void displayrandomnews(String topnewsurl,String techurl,String healthurl) {
+    private void displayrandomnews(String topnewsurl, String techurl, String healthurl) {
         newsarraylist.clear();
 
-
         try {
-            // Load XML file
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             org.w3c.dom.Document doc = dBuilder.parse(topnewsurl);
 
-            // Normalize XML structure
+
             doc.getDocumentElement().normalize();
 
-            // Get item elements
+
             NodeList itemList = doc.getElementsByTagName("item");
 
             for (int i = 0; i < itemList.getLength(); i++) {
                 if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
 
-                    // Get description
                     String title = item.getElementsByTagName("title").item(0).getTextContent();
 
-
-                    // Get link
                     String link = item.getElementsByTagName("link").item(0).getTextContent();
-//                    linkLabel.setText("Link: " + link);
+
                     NodeList enclosureList = item.getElementsByTagName("enclosure");
 
                     if (enclosureList.getLength() > 0) {
@@ -200,8 +185,6 @@ public class RssContent implements Initializable {
                         newsarraylist.add(new NewsModel(title, link, imageUrl));
                     }
 
-
-
                 }
             }
 
@@ -209,62 +192,56 @@ public class RssContent implements Initializable {
             e.printStackTrace();
         }
         try {
-            // Load XML file
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+
             org.w3c.dom.Document doc = dBuilder.parse(healthurl);
 
-            // Normalize XML structure
             doc.getDocumentElement().normalize();
 
-            // Get item elements
             NodeList itemList = doc.getElementsByTagName("item");
 
             for (int i = 0; i < itemList.getLength(); i++) {
                 if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
 
-                    // Get description
                     String title = item.getElementsByTagName("title").item(0).getTextContent();
 
-
-                    // Get link
                     String link = item.getElementsByTagName("link").item(0).getTextContent();
 
                     String imageUrl = item.getElementsByTagName("image").item(0).getTextContent();
+
                     newsarraylist.add(new NewsModel(title, link, imageUrl));
-
-
 
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            // Load XML file
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+
             org.w3c.dom.Document doc = dBuilder.parse(techurl);
 
-            // Normalize XML structure
+
             doc.getDocumentElement().normalize();
 
-            // Get item elements
+
             NodeList itemList = doc.getElementsByTagName("item");
 
             for (int i = 0; i < itemList.getLength(); i++) {
                 if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
 
-                    // Get description
+
                     String title = item.getElementsByTagName("title").item(0).getTextContent();
 
 
-                    // Get link
                     String link = item.getElementsByTagName("link").item(0).getTextContent();
-//                    linkLabel.setText("Link: " + link);
+
 
                     NodeList enclosureList = item.getElementsByTagName("enclosure");
 
@@ -282,7 +259,7 @@ public class RssContent implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-       if("magazineview".equals(layoutview)){
+        if ("magazineview".equals(layoutview)) {
             LayoutView layout = new LayoutView();
             Parent cardView = layout.createMagazineView(newsarraylist);
 
@@ -306,14 +283,12 @@ public class RssContent implements Initializable {
         descriptionColumn.setCellValueFactory(data -> data.getValue().titleProperty());
 
 
-
-
         tableView.setRowFactory(tv -> {
             TableRow<ArticleData> row = new TableRow<>();
-            row.setPrefHeight(60); // Set the preferred height for each row
+            row.setPrefHeight(60);
             return row;
         });
-//        descriptionColumn.setCellValueFactory(data -> data.getValue().imageUrlProperty());
+
 
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
         imageColumn.setCellFactory(col -> {
@@ -324,8 +299,8 @@ public class RssContent implements Initializable {
                     if (imageUrl != null && !empty) {
                         ImageView imageView = new ImageView(new Image(imageUrl));
 
-                        imageView.setFitWidth(120); // Set width of the image
-                        imageView.setPreserveRatio(true); // Preserve the aspect ratio of the image
+                        imageView.setFitWidth(90);
+                        imageView.setPreserveRatio(true);
                         setGraphic(imageView);
                     } else {
                         setGraphic(null);
@@ -334,8 +309,6 @@ public class RssContent implements Initializable {
             };
             return cell;
         });
-//
-
 
 
         descriptionColumn.setCellFactory(col -> {
@@ -354,7 +327,7 @@ public class RssContent implements Initializable {
 
             cell.setOnMousePressed(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
-                    // Set blue background color when the mouse is pressed
+
                     cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
                 }
             });
@@ -365,18 +338,17 @@ public class RssContent implements Initializable {
                     String desc = cell.getItem();
                     String ogUrl = null;
 
-                    // Find the NewsModel object with the matching description
+
                     for (NewsModel news : newsarraylist) {
                         if (news.getDesc().equals(desc)) {
-                            // Found the matching NewsModel object
-                            // Retrieve the ogUrl attribute
+
                             ogUrl = news.getLink();
-                            break; // Exit the loop since we found the match
+                            break;
                         }
                     }
 
                     if (ogUrl != null && !ogUrl.isEmpty()) {
-                        // Load the URL into the WebView
+
                         Webview webViewSample = new Webview();
                         webViewSample.loadURL(ogUrl);
                     }
@@ -392,50 +364,42 @@ public class RssContent implements Initializable {
         newsarraylist.forEach(news -> {
             String image = news.getImage();
             String description = news.getDesc();
-            // Assuming the third value is stored in a field called thirdValue in NewsModel class
-            // String thirdValue = news.getThirdValue();
 
-            // Create ArticleData object using title, description, and thirdValue
-            // Change ArticleData constructor accordingly if needed
             articleList.add(new ArticleData(image, description));
         });
         tableView.setItems(articleList);
     }
 
 
-
-
-
     private void displayMedinews(String url) {
         newsarraylist.clear();
 
         try {
-            // Load XML file
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             org.w3c.dom.Document doc = dBuilder.parse(url);
 
-            // Normalize XML structure
+
             doc.getDocumentElement().normalize();
 
-            // Get item elements
+
             NodeList itemList = doc.getElementsByTagName("item");
 
             for (int i = 0; i < itemList.getLength(); i++) {
                 if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
 
-                    // Get description
-                    String title = item.getElementsByTagName("title").item(0).getTextContent();
-//                    descriptionLabel.setText("Description: " + description);
 
-                    // Get link
+                    String title = item.getElementsByTagName("title").item(0).getTextContent();
+//
+
                     String link = item.getElementsByTagName("link").item(0).getTextContent();
-//                    linkLabel.setText("Link: " + link);
+//
 
                     String imageUrl = item.getElementsByTagName("image").item(0).getTextContent();
 
-//                    linkLabel.setText("Link: " + link);
+//
 
                     newsarraylist.add(new NewsModel(title, link, imageUrl));
 
@@ -446,7 +410,7 @@ public class RssContent implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if("magazineview".equals(layoutview)){
+        if ("magazineview".equals(layoutview)) {
             LayoutView layout = new LayoutView();
             Parent cardView = layout.createMagazineView(newsarraylist);
 
@@ -475,8 +439,8 @@ public class RssContent implements Initializable {
 
                         ImageView imageView = new ImageView(new Image(imageUrl));
 
-                        imageView.setFitWidth(120); // Set width of the image
-                        imageView.setPreserveRatio(true); // Preserve the aspect ratio of the image
+                        imageView.setFitWidth(90);
+                        imageView.setPreserveRatio(true);
                         setGraphic(imageView);
                     } else {
                         setGraphic(null);
@@ -485,11 +449,10 @@ public class RssContent implements Initializable {
             };
             return cell;
         });
-//
-//
+
         tableView.setRowFactory(tv -> {
             TableRow<ArticleData> row = new TableRow<>();
-            row.setPrefHeight(60); // Set the preferred height for each row
+            row.setPrefHeight(60);
             return row;
         });
 
@@ -509,11 +472,10 @@ public class RssContent implements Initializable {
             };
             cell.setOnMousePressed(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
-                    // Set blue background color when the mouse is pressed
+
                     cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
                 }
             });
-
 
 
             cell.setOnMouseClicked(event -> {
@@ -521,18 +483,17 @@ public class RssContent implements Initializable {
                     String desc = cell.getItem();
                     String ogUrl = null;
 
-                    // Find the NewsModel object with the matching description
+
                     for (NewsModel news : newsarraylist) {
                         if (news.getDesc().equals(desc)) {
-                            // Found the matching NewsModel object
-                            // Retrieve the ogUrl attribute
+
                             ogUrl = news.getLink();
-                            break; // Exit the loop since we found the match
+                            break;
                         }
                     }
 
                     if (ogUrl != null && !ogUrl.isEmpty()) {
-                        // Load the URL into the WebView
+
                         Webview webViewSample = new Webview();
                         webViewSample.loadURL(ogUrl);
                     }
@@ -548,36 +509,36 @@ public class RssContent implements Initializable {
         newsarraylist.forEach(news -> {
             String image = news.getImage();
             String description = news.getDesc();
-            articleList.add(new ArticleData(image,description));
+            articleList.add(new ArticleData(image, description));
         });
         tableView.setItems(articleList);
     }
+
     private void displaybothnews(String techurl, String healthurl) {
         newsarraylist.clear();
 
         try {
-            // Load XML file
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             org.w3c.dom.Document doc = dBuilder.parse(techurl);
 
-            // Normalize XML structure
+
             doc.getDocumentElement().normalize();
 
-            // Get item elements
+
             NodeList itemList = doc.getElementsByTagName("item");
 
             for (int i = 0; i < itemList.getLength(); i++) {
                 if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
 
-                    // Get description
+
                     String title = item.getElementsByTagName("title").item(0).getTextContent();
 
 
-                    // Get link
                     String link = item.getElementsByTagName("link").item(0).getTextContent();
-//                    linkLabel.setText("Link: " + link);
+
 
                     NodeList enclosureList = item.getElementsByTagName("enclosure");
 
@@ -595,28 +556,26 @@ public class RssContent implements Initializable {
             e.printStackTrace();
         }
         try {
-            // Load XML file
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             org.w3c.dom.Document doc = dBuilder.parse(healthurl);
 
-            // Normalize XML structure
+
             doc.getDocumentElement().normalize();
 
-            // Get item elements
             NodeList itemList = doc.getElementsByTagName("item");
 
             for (int i = 0; i < itemList.getLength(); i++) {
                 if (itemList.item(i).getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
                     org.w3c.dom.Element item = (org.w3c.dom.Element) itemList.item(i);
 
-                    // Get description
+
                     String title = item.getElementsByTagName("title").item(0).getTextContent();
 
 
-                    // Get link
                     String link = item.getElementsByTagName("link").item(0).getTextContent();
-//                    linkLabel.setText("Link: " + link);
+
 
                     String imageUrl = item.getElementsByTagName("image").item(0).getTextContent();
 
@@ -632,8 +591,6 @@ public class RssContent implements Initializable {
 
 
         descriptionColumn.setCellValueFactory(data -> data.getValue().titleProperty());
-//        imageColumn.setCellValueFactory(data -> data.getValue().imageUrlProperty());
-
 
 
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
@@ -645,8 +602,8 @@ public class RssContent implements Initializable {
                     if (imageUrl != null && !empty) {
                         ImageView imageView = new ImageView(new Image(imageUrl));
 
-                        imageView.setFitWidth(120); // Set width of the image
-                        imageView.setPreserveRatio(true); // Preserve the aspect ratio of the image
+                        imageView.setFitWidth(90);
+                        imageView.setPreserveRatio(true);
                         setGraphic(imageView);
                     } else {
                         setGraphic(null);
@@ -708,7 +665,7 @@ public class RssContent implements Initializable {
 
             return cell;
         });
-          if("magazineview".equals(layoutview)) {
+        if ("magazineview".equals(layoutview)) {
             LayoutView layout = new LayoutView();
             Parent cardView = layout.createMagazineView(newsarraylist);
 
@@ -716,7 +673,7 @@ public class RssContent implements Initializable {
             scrollPane.setContent(cardView);
             scrollPane.setFitToWidth(true);
             scrollPane.setFitToHeight(true);
-           scrollPane.setPrefViewportHeight(parentContainer.getHeight());
+            scrollPane.setPrefViewportHeight(parentContainer.getHeight());
 
             parentContainer.getChildren().clear();
 
@@ -734,13 +691,10 @@ public class RssContent implements Initializable {
         newsarraylist.forEach(news -> {
             String image = news.getImage();
             String description = news.getDesc();
-            articleList.add(new ArticleData(image,description));
+            articleList.add(new ArticleData(image, description));
         });
         tableView.setItems(articleList);
     }
-
-
-
 
 
     private void displayTechnews(String url) {
@@ -766,7 +720,6 @@ public class RssContent implements Initializable {
                     String title = item.getElementsByTagName("title").item(0).getTextContent();
 
 
-                    // Get link
                     String link = item.getElementsByTagName("link").item(0).getTextContent();
 
                     NodeList enclosureList = item.getElementsByTagName("enclosure");
@@ -786,7 +739,7 @@ public class RssContent implements Initializable {
             e.printStackTrace();
         }
 
-        if("magazineview".equals(layoutview)){
+        if ("magazineview".equals(layoutview)) {
             LayoutView layout = new LayoutView();
             Parent cardView = layout.createMagazineView(newsarraylist);
 
@@ -818,7 +771,7 @@ public class RssContent implements Initializable {
 
                         ImageView imageView = new ImageView(new Image(imageUrl));
 
-                        imageView.setFitWidth(120);
+                        imageView.setFitWidth(90);
                         imageView.setPreserveRatio(true);
                         setGraphic(imageView);
                     } else {
@@ -830,7 +783,7 @@ public class RssContent implements Initializable {
         });
         tableView.setRowFactory(tv -> {
             TableRow<ArticleData> row = new TableRow<>();
-            row.setPrefHeight(60); // Set the preferred height for each row
+            row.setPrefHeight(60);
             return row;
         });
 
@@ -850,7 +803,7 @@ public class RssContent implements Initializable {
             };
             cell.setOnMousePressed(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
-                    // Set blue background color when the mouse is pressed
+
                     cell.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #ADD8E6;");
                 }
             });
@@ -861,19 +814,18 @@ public class RssContent implements Initializable {
                     String desc = cell.getItem();
                     String ogUrl = null;
 
-                    // Find the NewsModel object with the matching description
+
                     for (NewsModel news : newsarraylist) {
                         if (news.getDesc().equals(desc)) {
-                            // Found the matching NewsModel object
-                            // Retrieve the ogUrl attribute
+
                             ogUrl = news.getLink();
 
-                            break; // Exit the loop since we found the match
+                            break;
                         }
                     }
 
                     if (ogUrl != null && !ogUrl.isEmpty()) {
-                        // Load the URL into the WebView
+
                         Webview webViewSample = new Webview();
                         webViewSample.loadURL(ogUrl);
                     }
@@ -890,42 +842,33 @@ public class RssContent implements Initializable {
             String image = news.getImage();
 
             String description = news.getDesc();
-            articleList.add(new ArticleData(image,description));
+            articleList.add(new ArticleData(image, description));
         });
         tableView.setItems(articleList);
     }
 
 
-
-
-
     public void handleHealthBtn(ActionEvent event) {
 
 
-        saveFeedChoice(username,tech1,"health");
+        saveFeedChoice(username, tech1, "health");
         retrieveFeedsByUsername(username);
         System.out.println("healthBtnClicked");
 
-        initialize(username,techFeed1,healthFeed1,layoutview);
+        initialize(username, techFeed1, healthFeed1, layoutview);
 
     }
 
     public void handleTechBtn(ActionEvent event) {
         System.out.println("start");
 
-        saveFeedChoice(username,"technology",medi1);
+        saveFeedChoice(username, "technology", medi1);
         retrieveFeedsByUsername(username);
         System.out.println("techBtnClicked");
         System.out.println(layoutview + "intechbtn");
-        initialize(username,techFeed1,healthFeed1,layoutview);
+        initialize(username, techFeed1, healthFeed1, layoutview);
 
     }
-
-
-
-
-
-
 
 
     public void saveFeedChoice(String username, String techFeed, String healthFeed) {
@@ -958,14 +901,14 @@ public class RssContent implements Initializable {
         } catch (Exception ex) {
             System.out.println(ex);
             logger.error("Error in switching to login" + ex);
-            throw new switchSceneException("Error in Homepage cancel button" , ex);
+            throw new switchSceneException("Error in Homepage cancel button", ex);
         }
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        titleColumn.setCellFactory(column -> new ImageTableCell<>());
+//
         parentContainer = (VBox) tableView.getParent();
         try {
             File brandingFile = new File("images/logo_.png");
@@ -984,10 +927,12 @@ public class RssContent implements Initializable {
             e.printStackTrace();
         }
 
+
+
         try {
             File brandingFile = new File("images/icon.png");
             Image branding2 = new Image(brandingFile.toURI().toString());
-            iconImageView.setImage(branding2);
+            icon1.setImage(branding2);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -996,31 +941,31 @@ public class RssContent implements Initializable {
         try {
             File brandingFile = new File("images/icon.png");
             Image branding2 = new Image(brandingFile.toURI().toString());
-            iconImageView1.setImage(branding2);
+            icon2.setImage(branding2);
 
         } catch (Exception e) {
             e.printStackTrace();
 
         }
 
-        loginController logincontroller=new loginController();
-        String username=logincontroller.getUsername();
+        loginController logincontroller = new loginController();
+        String username = logincontroller.getUsername();
         fetchDataFromDatabase(username);
     }
 
     public void handleRemoveTech(ActionEvent event) {
-        removeFeedChoice(username,"",medi1);
+        removeFeedChoice(username, "", medi1);
         retrieveFeedsByUsername(username);
         System.out.println("techBtnremove");
-        initialize(username,techFeed1,healthFeed1,layoutview);
+        initialize(username, techFeed1, healthFeed1, layoutview);
 
     }
 
     public void removeHandlehealth(ActionEvent event) {
-        removeFeedChoice(username,tech1,"");
+        removeFeedChoice(username, tech1, "");
         retrieveFeedsByUsername(username);
         System.out.println("healthBtnremove");
-        initialize(username,techFeed1,healthFeed1,layoutview);
+        initialize(username, techFeed1, healthFeed1, layoutview);
     }
 
     public void removeFeedChoice(String username, String techFeed, String healthFeed) {
@@ -1101,19 +1046,19 @@ public class RssContent implements Initializable {
 
     private void fetchDataFromDatabase(String username) {
         try {
-            // Connect to the database
+
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             String query = "SELECT firstName, lastName, userName, techFeed, healthFeed FROM user WHERE userName = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
 
-            // Execute the query
+
             ResultSet resultSet = statement.executeQuery();
 
-            // If a user with the given username is found
+
             if (resultSet.next()) {
-                // Retrieve data from the result set
+
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 String userName = resultSet.getString("userName");
@@ -1123,7 +1068,7 @@ public class RssContent implements Initializable {
                 userNameLabel1.setText(userName);
             }
 
-            // Close the all opened resources
+
             resultSet.close();
             statement.close();
             connection.close();
@@ -1133,52 +1078,37 @@ public class RssContent implements Initializable {
     }
 
     public void allCategories(ActionEvent actionEvent) {
-        displayrandomnews(topnewsurl,techurl,healthurl);
+        removeFeedChoice(username, "", "");
+        displayrandomnews(topnewsurl, techurl, healthurl);
     }
-
-    // Inside your method where you handle the button action
-
-
 
 
     public void Magazineview(ActionEvent event) {
         layoutview = "magazineview";
         LayoutView layout = new LayoutView();
 
-        // Call the createCardView method to generate the card view UI component
+
         Parent cardView = layout.createMagazineView(newsarraylist);
 
-        // Create a ScrollPane
+
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(cardView);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
 
 
-
-//        scrollPane.setPrefViewportHeight(parentContainer.getHeight()); // Set preferred viewport height
-
-        // Get the parent container of the TableView
-        // Replace "tableViewParent" with the actual parent container ID in your FXML file
         parentContainer = (VBox) tableView.getParent();
 
 
-//        if (parentContainer == null) {
-//            parentContainer = (VBox) scrollPane.getContent().getParent(); // Get the parent of the content of the ScrollPane
-//            scrollPane.setPrefViewportHeight(parentContainer.getHeight());
-//        }
-
         scrollPane.setPrefViewportHeight(parentContainer.getHeight());
-//
-//        // Remove the TableView from the parent container
-////        scrollPane.setPrefViewportHeight(parentContainer.getHeight());
-//
+
         parentContainer.getChildren().clear();
-//
-//        // Add the ScrollPane containing the card views to the parent container
+
         parentContainer.getChildren().add(scrollPane);
 
-        // Set the VBox containing the card views to be resizable and fill its parent container
+
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
     }
+
+
 }

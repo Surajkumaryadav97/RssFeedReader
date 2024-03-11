@@ -58,8 +58,7 @@ public class UserInfoController implements Initializable {
 
     @FXML
     private Button cancel;
-    @FXML
-    private Label usernameLabel;
+
 
     @FXML
     private ImageView logoImageView;
@@ -68,7 +67,10 @@ public class UserInfoController implements Initializable {
     private ImageView userImageView;
 
 
-    // Method to initialize user information
+
+
+
+
     String userName;
     String firstname;
     String techfeedName;
@@ -83,45 +85,45 @@ public class UserInfoController implements Initializable {
         userName=username;
         techfeedName=techFeed;
         healthfeedName=healthFeed;
-//        firstNameLabel.setText("Suraj Suraj Suraj");
+
 
 
 
     }
 
+    //This function runs initially and loading all images to show on page, without this you cant load image
+    //So,it is necessary to load images in Intialize method.
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         try {
             File brandingFile = new File("images/logo_.png");
             Image branding = new Image(brandingFile.toURI().toString());
             logoImageView.setImage(branding);
-//            logger.info("Image loading");
+
 
         } catch (Exception e) {
-//            logger.error("Image loading error" + e);
+
         }
         try {
             File brandingFile = new File("images/image6.png");
             Image branding = new Image(brandingFile.toURI().toString());
             userImageView.setImage(branding);
-//            logger.info("Image loading");
+
 
         } catch (Exception e) {
-//            logger.error("Image loading error" + e);
+
         }
         loginController logincontroller=new loginController();
         String username=logincontroller.getUsername();
                 fetchDataFromDatabase(username);
 
 
-//        firstNameLabel.setText("Ravi Singh Suraj");
-
-//        lastNameLabel.setText(userName);
-//        usernameLabel.setText("Suraj");
-//        techFeedLabel.setText(techfeedName);
-//        healthFeedLabel.setText(healthfeedName);
     }
 
+    //This function is used to switch to Login Page on Clicking to Logout button
     public void cancel(ActionEvent actionEvent) throws switchSceneException {
 
         try {
@@ -137,78 +139,52 @@ public class UserInfoController implements Initializable {
             throw new switchSceneException("Error in Homepage cancel button" , ex);
         }
     }
-
+   //This function is used to go back to rssContent(where all data is rendering)
+    //Also handling Loader.
     public void cancel1(ActionEvent actionEvent) throws switchSceneException {
 
-//        try {
-//            Stage stage = (Stage) cancel.getScene().getWindow();
-//            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
-//            Scene scene=new Scene(fxmlLoader.load());
-//            RssContent htmlContent = fxmlLoader.getController();
-//
-//            htmlContent.initialize(userName1,techFeed,healthFeed);
-//
-//            stage.setScene(scene);
-//            stage.show();
-//            logger.info("Switching to Homepage");
-//        } catch (IOException ex) {
-//            System.out.println(ex);
-//            logger.error("Error in switching homepage" + ex);
-//            throw new switchSceneException("Error in NewspageContoller switching to Homepage in cancellayoutButton",ex);
-//        }
+
         try {
-            // Create loader for the new scene
+
             Stage stage = (Stage) cancel.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
             ProgressIndicator progressIndicator = new ProgressIndicator();
             progressIndicator.setStyle("-fx-progress-color: green; -fx-min-width: 150px; -fx-min-height: 150px;-fx-background-color: black;");
-
-
-
-
-
-
-
-
-
-
             Stage loaderStage = new Stage();
-            loaderStage.initStyle(StageStyle.TRANSPARENT); // Set stage style to transparent
-            loaderStage.setResizable(false); // Disable resizing
-            loaderStage.initModality(Modality.APPLICATION_MODAL); // Make the loader stage modal
+            loaderStage.initStyle(StageStyle.TRANSPARENT);
+            loaderStage.setResizable(false);
+            loaderStage.initModality(Modality.APPLICATION_MODAL);
             loaderStage.setScene(new Scene(new StackPane(progressIndicator), Color.TRANSPARENT));
             loaderStage.show();
             Rectangle overlay = new Rectangle();
-            overlay.setFill(Color.rgb(0, 0, 0, 0.8)); // Set the color and transparency
-            overlay.widthProperty().bind(cancel.getScene().widthProperty()); // Set the width to match the scene
-            overlay.heightProperty().bind(cancel.getScene().heightProperty()); // Set the height to match the scene
+            overlay.setFill(Color.rgb(0, 0, 0, 0.8));
+            overlay.widthProperty().bind(cancel.getScene().widthProperty());
+            overlay.heightProperty().bind(cancel.getScene().heightProperty());
             ((Pane) cancel.getScene().getRoot()).getChildren().add(overlay);
 
-            // Load the new scene in a background thread
+
             new Thread(() -> {
                 try {
-                    // Load the new scene
+
                     Scene newScene = new Scene(fxmlLoader.load());
 
-                    // Access the controller of the new scene
                     RssContent htmlContent = fxmlLoader.getController();
                     htmlContent.initialize(userName1,techFeed,healthFeed,"");
 
-                    // Switch to the new scene on the JavaFX Application Thread
+
                     Platform.runLater(() -> {
                         stage.setScene(newScene);
                         stage.show();
-                        loaderStage.close(); // Close the loader stage after switching
+                        loaderStage.close();
                     });
                 } catch (Exception ex) {
-                    // Handle any exceptions
-                    ex.printStackTrace(); // Print the stack trace for debugging purposes
-                    // Optionally, show an error message to the user
-                    loaderStage.close(); // Close the loader stage in case of an error
+
+                    ex.printStackTrace();
+                    loaderStage.close();
                 }
             }).start();
         } catch (Exception ex) {
-            // Throw switchSceneException or handle the exception as needed
+
             throw new switchSceneException("Error in loginController start method switch to Homepage", ex);
         }
 
@@ -218,29 +194,31 @@ public class UserInfoController implements Initializable {
     String userName1;
     String techFeed;
     String healthFeed;
+
+    //This function is fetching user Crendentials from its userName
     private void fetchDataFromDatabase(String userName) {
         try {
-            // Connect to the database
+
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             String query = "SELECT firstName, lastName, userName, techFeed, healthFeed FROM user WHERE userName = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             System.out.println(userName+"in user profile");
-            statement.setString(1, userName); // Set the username
+            statement.setString(1, userName);
 
-            // Execute the query
+
             ResultSet resultSet = statement.executeQuery();
 
-            // If a user with the given username is found
+
             if (resultSet.next()) {
-                // get data from the result set to assign the variables
+
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 userName1 = resultSet.getString("userName");
                  techFeed = resultSet.getString("techFeed");
                 healthFeed = resultSet.getString("healthFeed");
 
-                // set the values to the labels with the fetched data
+
                 firstNameLabel.setText(firstName);
                 lastNameLabel.setText(lastName);
                 userName1Label.setText(userName1);
@@ -250,7 +228,7 @@ public class UserInfoController implements Initializable {
                 userNameLabel1.setText(userName1);
             }
 
-            // Close the all opening resources
+
             resultSet.close();
             statement.close();
             connection.close();
