@@ -5,22 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d547c38-4a76-49d9-9e0c-a04238287265" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/RssApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/RssController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/LayoutView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/LayoutView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/RssContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/RssContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/UserInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/UserInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/loginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/news.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/registerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rss/rssfeed/controller/registerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/logs/logfile.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logs/logfile.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/rss/rssfeed/BrowserToolbar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/rss/rssfeed/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/rss/rssfeed/hello-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/rss/rssfeed/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/rss/rssfeed/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/rss/rssfeed/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/rss/rssfeed/view.fxml" afterDir="false" />
     </list>

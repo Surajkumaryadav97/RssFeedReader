@@ -18,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -48,6 +49,9 @@ public class RssContent implements Initializable {
 
     @FXML
     private VBox parentContainer;
+
+    @FXML
+    private VBox mainContainer;
 
     @FXML
     private ImageView userImageView;
@@ -367,6 +371,9 @@ public class RssContent implements Initializable {
             articleList.add(new ArticleData(image, description));
         });
         tableView.setItems(articleList);
+        mainContainer.getChildren().clear();
+        mainContainer.getChildren().add(tableView);
+
     }
 
 
@@ -511,6 +518,9 @@ public class RssContent implements Initializable {
             articleList.add(new ArticleData(image, description));
         });
         tableView.setItems(articleList);
+        mainContainer.getChildren().clear();
+        mainContainer.getChildren().add(tableView);
+
     }
 
     private void displaybothnews(String techurl, String healthurl) {
@@ -693,6 +703,8 @@ public class RssContent implements Initializable {
             articleList.add(new ArticleData(image, description));
         });
         tableView.setItems(articleList);
+        mainContainer.getChildren().clear();
+        mainContainer.getChildren().add(tableView);
     }
 
 
@@ -844,6 +856,9 @@ public class RssContent implements Initializable {
             articleList.add(new ArticleData(image, description));
         });
         tableView.setItems(articleList);
+        mainContainer.getChildren().clear();
+        mainContainer.getChildren().add(tableView);
+
     }
 
 
@@ -909,6 +924,7 @@ public class RssContent implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         parentContainer = (VBox) tableView.getParent();
+        mainContainer=(VBox) parentContainer.getParent();
         try {
             File brandingFile = new File("images/logo_.png");
             Image branding2 = new Image(brandingFile.toURI().toString());
@@ -1110,5 +1126,14 @@ public class RssContent implements Initializable {
     }
 
 
+    public void Defaultview(ActionEvent event) throws IOException {
 
+        retrieveFeedsByUsername(username);
+        System.out.println("defaultBtnClicked");
+//        System.out.println(layoutview + "indefaultbtn");
+        parentContainer.getChildren().clear();
+        layoutview="";
+        System.out.println(layoutview + "indefaultbtn");
+        initialize(username, techFeed1, healthFeed1, layoutview);
+    }
 }

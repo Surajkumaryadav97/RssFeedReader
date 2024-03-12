@@ -1,5 +1,7 @@
 package org.rss.rssfeed.controller;
 
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,9 +16,17 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import org.rss.rssfeed.model.NewsModel;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class LayoutView {
+
+
+
+
+
+
 
     //This function is adding magazineItem in magazineContainer
     public static ScrollPane createMagazineView(ArrayList<NewsModel> newsList) {
@@ -40,7 +50,7 @@ public class LayoutView {
 
 
         magazineContainer.setMaxWidth(screenWidth * 0.5);
-        magazineContainer.setMaxHeight(screenHeight * 0.3);
+        magazineContainer.setMaxHeight(screenHeight * 0.7);
         magazineContainer.setPrefTileWidth(itemWidth);
         magazineContainer.setPrefTileHeight(itemHeight);
 
@@ -86,5 +96,8 @@ public class LayoutView {
         Image image = new Image(imageUrl, true);
         imageView.setImage(image);
     }
+
+
+
 }
 
