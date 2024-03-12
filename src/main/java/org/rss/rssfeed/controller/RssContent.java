@@ -11,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -26,12 +25,11 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.rss.rssfeed.Exceptions.switchSceneException;
-import org.rss.rssfeed.HelloApplication;
+import org.rss.rssfeed.RssApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
 import org.rss.rssfeed.model.ArticleData;
 import org.rss.rssfeed.model.NewsModel;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -97,7 +95,7 @@ public class RssContent implements Initializable {
 
     public void parse() {
         try {
-            File xmlFile = new File("C:\\Users\\91704\\Downloads\\RssFeedReader\\RssFeedReader\\src\\main\\java\\org\\rss\\rssfeed\\controller\\news.xml");
+            File xmlFile = new File("C:\\Users\\91704\\Downloads\\RssFeedReader\\RssFeedReader\\src\\main\\resources\\news.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
@@ -122,6 +120,7 @@ public class RssContent implements Initializable {
                     topnewsurl = url;
                     System.out.println("URL:topnewsurl " + topnewsurl);
                 }
+
 
             }
         } catch (Exception e) {
@@ -643,21 +642,21 @@ public class RssContent implements Initializable {
             cell.setOnMouseClicked(event -> {
                 if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     String desc = cell.getItem();
-                    String ogUrl = null;
+                    String contentUrl = null;
 
 
                     for (NewsModel news : newsarraylist) {
                         if (news.getDesc().equals(desc)) {
 
-                            ogUrl = news.getLink();
+                            contentUrl = news.getLink();
                             break;
                         }
                     }
 
-                    if (ogUrl != null && !ogUrl.isEmpty()) {
+                    if (contentUrl != null && !contentUrl.isEmpty()) {
 
                         Webview webViewSample = new Webview();
-                        webViewSample.loadURL(ogUrl);
+                        webViewSample.loadURL(contentUrl);
                     }
 
                 }
@@ -893,7 +892,7 @@ public class RssContent implements Initializable {
 
         try {
             Stage stage = (Stage) cancel1.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(RssApplication.class.getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
@@ -908,7 +907,7 @@ public class RssContent implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//
+
         parentContainer = (VBox) tableView.getParent();
         try {
             File brandingFile = new File("images/logo_.png");
@@ -1032,7 +1031,7 @@ public class RssContent implements Initializable {
     public void handleProfileBtn(ActionEvent event) throws switchSceneException {
         try {
             Stage stage = (Stage) profile.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("UserInfo.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(RssApplication.class.getResource("UserInfo.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
@@ -1109,6 +1108,7 @@ public class RssContent implements Initializable {
 
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
     }
+
 
 
 }

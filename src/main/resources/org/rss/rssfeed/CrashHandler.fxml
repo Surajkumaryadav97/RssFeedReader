@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane layoutX="171.0" layoutY="108.0" prefHeight="656.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.rss.rssfeed.controller.RssContent">
+    <children>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="alertImageVeiw" fitHeight="150.0" fitWidth="200.0" layoutX="279.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../../../../images/alert.png" />
+            </image>
+        </ImageView>
+        <Label alignment="CENTER" layoutX="173.0" layoutY="180.0" prefHeight="81.0" prefWidth="402.0" text="Unable to load the data. ">
+            <font>
+                <Font name="Tahoma Bold" size="22.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="78.0" layoutY="233.0" prefHeight="82.0" prefWidth="543.0" text="This can happen if you are not connected to the internet, or if an">
+            <font>
+                <Font name="Tahoma Bold" size="12.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="78.0" layoutY="253.0" prefHeight="82.0" prefWidth="543.0" text="underlying system or component is not available.">
+            <font>
+                <Font name="Tahoma Bold" size="12.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

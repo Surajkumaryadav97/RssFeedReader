@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -25,10 +24,11 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.rss.rssfeed.Exceptions.sqlException;
 import org.rss.rssfeed.Exceptions.switchSceneException;
 import org.rss.rssfeed.Exceptions.userNotFoundException;
-import org.rss.rssfeed.HelloApplication;
+import org.rss.rssfeed.RssApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
 
 import java.io.File;
+import java.net.InetAddress;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -86,7 +86,7 @@ public class loginController implements Initializable {
 
         try {
             Stage stage = (Stage) cancelButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(RssApplication.class.getResource("hello-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
@@ -106,7 +106,7 @@ public class loginController implements Initializable {
     public void start(String userName1, String techfeed, String healthfeed,String layout) throws switchSceneException {
         try {
             // Create loader for the new scene
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(RssApplication.class.getResource("view.fxml"));
             ProgressIndicator progressIndicator = new ProgressIndicator();
             progressIndicator.setStyle("-fx-progress-color: #0D9276; -fx-min-width: 150px; -fx-min-height: 150px; -fx-background-color:#333333;");
             Stage loaderStage = new Stage();
@@ -124,22 +124,47 @@ public class loginController implements Initializable {
 
             new Thread(() -> {
                 try {
+                    if (!isInternetReachable()) {
+                        Platform.runLater(() -> {
+                            // Show an alert if there's no internet connectivity
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("No Internet Connection");
+                            alert.setContentText("Please check your internet connection and try again.");
+                            alert.setOnHidden(event -> {
+                                ((Pane) loginButton.getScene().getRoot()).getChildren().remove(overlay);
+                            });
+                            alert.showAndWait();
+                            loaderStage.close();
+                        });
+                        return;
+                    }
 
                     Scene newScene = new Scene(fxmlLoader.load());
 
 
-                    RssContent htmlContent = fxmlLoader.getController();
-                    htmlContent.initialize(userName1, techfeed, healthfeed,layout);
+                    RssContent rssContent = fxmlLoader.getController();
+                    rssContent.initialize(userName1, techfeed, healthfeed,layout);
 
-
+                    //Asynchronous task is happening
                     Platform.runLater(() -> {
                         switchScene(newScene);
                         loaderStage.close();
                     });
                 } catch (Exception ex) {
-
                     ex.printStackTrace();
-                    loaderStage.close();
+                    Platform.runLater(() -> {
+                        // Display an alert if there's an error loading the data
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Unable to load data");
+                        alert.setContentText("This can be happen if you are not connected to the internet. Please try again later.");
+                        alert.setOnHidden(event -> {
+                            ((Pane) loginButton.getScene().getRoot()).getChildren().remove(overlay);
+                        });
+                        alert.showAndWait();
+                        loaderStage.close();
+                    });
                 }
             }).start();
         } catch (Exception ex) {
@@ -160,7 +185,7 @@ public class loginController implements Initializable {
     void signup(ActionEvent event) throws switchSceneException {
         try {
             Stage stage = (Stage) userSignup.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(RssApplication.class.getResource("register.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
@@ -184,7 +209,7 @@ public class loginController implements Initializable {
         String password = enterPasswordField.getText();
 
         if (userName.isEmpty() || password.isEmpty()) {
-            logger.debug("Some fields are Empty");
+            logger.error("Some fields are Empty");
             loginMessageLabel.setText("Enter username or password");
             return;
         }
@@ -251,6 +276,14 @@ public class loginController implements Initializable {
     //This method is usedto return username So that other functions can get username from Database
     public String getUsername() {
         return userName1;
+    }
+    private boolean isInternetReachable() {
+        try {
+            InetAddress address = InetAddress.getByName("www.google.com");
+            return address.isReachable(5000); // 5 second timeout
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
 

@@ -19,11 +19,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.rss.rssfeed.Exceptions.switchSceneException;
-import org.rss.rssfeed.HelloApplication;
+import org.rss.rssfeed.RssApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +30,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import static org.rss.rssfeed.HelloApplication.logger;
+import static org.rss.rssfeed.RssApplication.logger;
 
 public class UserInfoController implements Initializable {
 
@@ -118,7 +117,7 @@ public class UserInfoController implements Initializable {
         }
         loginController logincontroller=new loginController();
         String username=logincontroller.getUsername();
-                fetchDataFromDatabase(username);
+        fetchDataFromDatabase(username);
 
 
     }
@@ -128,7 +127,7 @@ public class UserInfoController implements Initializable {
 
         try {
             Stage stage = (Stage) cancel.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(RssApplication.class.getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
@@ -147,7 +146,7 @@ public class UserInfoController implements Initializable {
         try {
 
             Stage stage = (Stage) cancel.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(RssApplication.class.getResource("view.fxml"));
             ProgressIndicator progressIndicator = new ProgressIndicator();
             progressIndicator.setStyle("-fx-progress-color: green; -fx-min-width: 150px; -fx-min-height: 150px;-fx-background-color: black;");
             Stage loaderStage = new Stage();

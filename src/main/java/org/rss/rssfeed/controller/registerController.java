@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 import org.rss.rssfeed.Exceptions.sqlException;
 import org.rss.rssfeed.Exceptions.switchSceneException;
-import org.rss.rssfeed.HelloApplication;
+import org.rss.rssfeed.RssApplication;
 import org.rss.rssfeed.db.DatabaseConnection;
 
 import java.io.File;
@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class registerController implements Initializable {
@@ -140,7 +139,7 @@ public class registerController implements Initializable {
 
         try {
             Stage stage = (Stage) cancelButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(RssApplication.class.getResource("hello-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
@@ -177,7 +176,7 @@ public class registerController implements Initializable {
     public void Login(ActionEvent event) throws switchSceneException {
         try {
             Stage stage = (Stage) login.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(RssApplication.class.getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
